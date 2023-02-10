@@ -61,7 +61,7 @@ export default function ProductMini() {
                     ))}
                 </div>
                 <div className="flex justify-center mt-16">
-                    <Button full href='/'>See More</Button>
+                    <Button full href='/products'>See More</Button>
                 </div>
             </div>
         </div>

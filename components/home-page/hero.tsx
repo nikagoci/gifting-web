@@ -12,7 +12,7 @@ export default function Hero() {
             </p>
             <div className="max-w-md mx-auto mt-5 sm:flex sm:justify-center md:mt-8">
               <div className="rounded-md shadow">
-                <Button full href='/' padding="py-3 px-12">See Products</Button>
+                <Button full href='/products' padding="py-3 px-12">See Products</Button>
               </div>
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                 <Button href='/' padding="py-3 px-12">Add Products</Button>

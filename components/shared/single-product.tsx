@@ -1,4 +1,5 @@
 import { LocationMarkerIcon } from "@heroicons/react/outline";
+import Link from "next/link";
 
 interface Props {
     product: {
@@ -12,8 +13,9 @@ interface Props {
 
 
 export default function SingleProduct({ product }: Props) {
+    console.log(product)
     return (
-        <a key={product.id} href={product.href} className="group">
+        <Link key={product.id} href={`/products/${product.id}`} className="group">
             <div className="w-full overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
                 <img
                     src={product.imageSrc}
@@ -28,6 +30,6 @@ export default function SingleProduct({ product }: Props) {
                     {product.city}
                 </p>
             </div>
-        </a>
+        </Link>
     )
 }
