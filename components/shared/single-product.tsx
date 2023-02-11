@@ -3,11 +3,12 @@ import Link from "next/link";
 
 interface Props {
     product: {
-        id: number;
+        id: string;
         name: string;
         href: string;
         city: string;
         imageSrc: string;
+        description?: string
     }
 }
 
