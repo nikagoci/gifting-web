@@ -58,7 +58,6 @@ const products = [
 const user = {
   userName: 'Zaza',
   phone: '577-77-99-66',
-  city: 'Kutaisi'
 }
 
 function classNames(...classes: any) {
@@ -73,7 +72,7 @@ export default function ProductOverview() {
     let element = products.find(el => el.id === router.query.productId)
     if(!element) {
       router.replace('/404')
-      return
+      return <h1>Error</h1>
     }
     if (element) {
       product = element
@@ -138,7 +137,7 @@ export default function ProductOverview() {
                       </div>
                       <div className='flex items-center mb-6 text-xl gap-x-3'>
                         <LocationMarkerIcon className='w-8 h-auto text-emerald-500' />
-                        <h6>{user.city}</h6>
+                        <h6>{product.city}</h6>
                       </div>
                     </div>
                   </div>

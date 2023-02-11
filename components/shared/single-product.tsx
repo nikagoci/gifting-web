@@ -14,7 +14,6 @@ interface Props {
 
 
 export default function SingleProduct({ product }: Props) {
-    console.log(product)
     return (
         <Link key={product.id} href={`/products/${product.id}`} className="group">
             <div className="w-full overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
