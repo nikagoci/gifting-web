@@ -6,6 +6,7 @@ interface Props {
     full?: boolean;
     padding?: string;
     href: string;
+    type?: string
 }
 
 export default function Button({ children, full, padding, href }: Props) {
