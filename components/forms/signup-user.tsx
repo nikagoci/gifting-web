@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Input from "@/components/shared/ui/input"; 
+import Input from "../shared/ui/input"; 
 
 export default function SignpUser() {
     return (
