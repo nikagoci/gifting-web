@@ -1,20 +1,20 @@
-import AddPost from "@/components/post/add-post";
+import PostOverview from "@/components/post/post-overview";
 import PostSteps from "@/components/post/post-steps";
 
-export default function AddProductPage() {
+export default function ProductOverviewPage() {
   return (
     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="py-8">
         <PostSteps
           status={{
-            addProduct: "current",
-            productOverview: "upcoming",
-            submitProduct: "upcoming",
+            addProduct: "complete",
+            productOverview: "complete",
+            submitProduct: "current",
           }}
         />
       </div>
       <div className="py-8">
-        <AddPost />
+        <PostOverview />
       </div>
     </div>
   );

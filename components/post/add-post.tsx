@@ -1,12 +1,26 @@
+import { useRouter } from 'next/router';
+import {FormEvent} from 'react'
+
 import Input from "../shared/ui/input";
 import Radio from "../shared/ui/radio";
 import Select from "../shared/ui/select";
 
+
 export default function AddPost() {
+  const router = useRouter();
+
+  function submitHandler(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    // Get Data First
+
+    router.push('/post/product-overview')
+  }
+
   return (
     <div className="flex flex-col items-center">
       <h3 className="mb-8 text-3xl font-bold">Add Product</h3>
-      <form className="flex flex-col w-4/5 md:w-3/5 xl:w-2/5 gap-y-12">
+      <form onSubmit={submitHandler} className="flex flex-col w-4/5 md:w-3/5 xl:w-2/5 gap-y-10">
         <Input id="product-name" label="Product name" required type="text" />
         <Input id="product-image" label="Product image" required type="text" />
         <Select

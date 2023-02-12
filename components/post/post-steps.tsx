@@ -3,13 +3,23 @@ import { CheckIcon } from '@heroicons/react/solid'
 
 // statuses: complete, current, upcoming 
 
-const steps = [
-  { id: '01', name: 'Add Product', href: '#', status: 'current' },
-  { id: '02', name: 'Product Overview', href: '#', status: 'upcoming' },
-  { id: '03', name: 'Submit Product', href: '#', status: 'upcoming' },
-]
 
-export default function PostSteps() {
+interface Props {
+  status: {
+    addProduct: string;
+    productOverview: string;
+    submitProduct: string;
+  }
+}
+
+export default function PostSteps({status}: Props) {
+  const steps = [
+    { id: '01', name: 'Add Product', href: '#', status: status.addProduct },
+    { id: '02', name: 'Product Overview', href: '#', status: status.productOverview },
+    { id: '03', name: 'Submit Product', href: '#', status: status.submitProduct },
+  ]
+
+
   return (
     <nav aria-label="Progress">
       <ol role="list" className="border border-gray-300 divide-y divide-gray-300 rounded-md md:flex md:divide-y-0">
