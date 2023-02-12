@@ -29,6 +29,12 @@ export default function AddPost() {
           label="City"
           options={["Kutaisi", "Tbilisi", "Zestafoni"]}
         />
+        <Select 
+          id='category'
+          defaultValue='All New Arrivals'
+          label='Category'
+          options={['All New Arrivals', 'Household Items', 'Electronics', 'Clothes', 'Other']}
+        />
         <div className="flex flex-col">
           <legend className="block mb-3 text-sm font-medium text-gray-700">
             Choose Gender

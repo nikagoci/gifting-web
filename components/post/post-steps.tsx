@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { CheckIcon } from '@heroicons/react/solid'
+import Link from 'next/link';
 
 // statuses: complete, current, upcoming 
 
@@ -14,9 +15,9 @@ interface Props {
 
 export default function PostSteps({status}: Props) {
   const steps = [
-    { id: '01', name: 'Add Product', href: '#', status: status.addProduct },
-    { id: '02', name: 'Product Overview', href: '#', status: status.productOverview },
-    { id: '03', name: 'Submit Product', href: '#', status: status.submitProduct },
+    { id: '01', name: 'Add Product', status: status.addProduct },
+    { id: '02', name: 'Product Overview', status: status.productOverview },
+    { id: '03', name: 'Submit Product',  status: status.submitProduct },
   ]
 
 
@@ -26,30 +27,30 @@ export default function PostSteps({status}: Props) {
         {steps.map((step, stepIdx) => (
           <li key={step.name} className="relative md:flex-1 md:flex">
             {step.status === 'complete' ? (
-              <a href={step.href} className="flex items-center w-full group">
+              <div className="flex items-center w-full cursor-pointer group">
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-full group-hover:bg-indigo-800">
                     <CheckIcon className="w-6 h-6 text-white" aria-hidden="true" />
                   </span>
                   <span className="ml-4 text-sm font-medium text-gray-900">{step.name}</span>
                 </span>
-              </a>
+              </div>
             ) : step.status === 'current' ? (
-              <a href={step.href} className="flex items-center px-6 py-4 text-sm font-medium" aria-current="step">
+              <div className="flex items-center px-6 py-4 text-sm font-medium cursor-pointer" aria-current="step">
                 <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 border-2 border-indigo-600 rounded-full">
                   <span className="text-indigo-600">{step.id}</span>
                 </span>
                 <span className="ml-4 text-sm font-medium text-indigo-600">{step.name}</span>
-              </a>
+              </div>
             ) : (
-              <a href={step.href} className="flex items-center group">
+              <div className="flex items-center cursor-pointer group">
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 border-2 border-gray-300 rounded-full group-hover:border-gray-400">
                     <span className="text-gray-500 group-hover:text-gray-900">{step.id}</span>
                   </span>
                   <span className="ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900">{step.name}</span>
                 </span>
-              </a>
+              </div>
             )}
 
             {stepIdx !== steps.length - 1 ? (
