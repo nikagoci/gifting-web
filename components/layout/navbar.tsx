@@ -51,8 +51,8 @@ export default function Navbar() {
 
 
               <div className="hidden sm:ml-6 sm:flex sm:items-center gap-x-4">
-                <Button href='/'>Sing Up</Button>
-                <Button full href='/'>Log In</Button>
+                <Button href='/signup'>Sing Up</Button>
+                <Button full href='/login'>Log In</Button>
               </div>
 
 
