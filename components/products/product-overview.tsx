@@ -1,4 +1,3 @@
-import { Tab } from '@headlessui/react'
 import { BsPhone } from 'react-icons/bs'
 import { AiOutlineUser } from 'react-icons/ai'
 import { LocationMarkerIcon } from "@heroicons/react/outline";

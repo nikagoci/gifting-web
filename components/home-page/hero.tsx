@@ -15,7 +15,7 @@ export default function Hero() {
                 <Button full href='/products' padding="py-3 px-12">See Products</Button>
               </div>
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <Button href='/' padding="py-3 px-12">Add Products</Button>
+                <Button href='/post/add-product' padding="py-3 px-12">Add Products</Button>
               </div>
             </div>
         </header>

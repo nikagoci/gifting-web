@@ -1,5 +1,5 @@
-import PostOverview from "@/components/post/post-overview";
 import PostSteps from "@/components/post/post-steps";
+import SubmitPost from "@/components/post/submit-post";
 
 export default function ProductOverviewPage() {
   return (
@@ -14,7 +14,7 @@ export default function ProductOverviewPage() {
         />
       </div>
       <div className="py-8">
-        <PostOverview />
+        <SubmitPost />
       </div>
     </div>
   );

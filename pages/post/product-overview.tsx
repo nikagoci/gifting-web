@@ -13,7 +13,11 @@ export default function ProductOverviewPage() {
           }}
         />
       </div>
+
       <div className="py-8">
+      <h1 className="text-2xl font-bold text-center">
+          How your post will be shown
+      </h1>
         <PostOverview />
       </div>
     </div>
