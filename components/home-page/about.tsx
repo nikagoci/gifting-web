@@ -28,9 +28,9 @@ const features = [
   },
 ]
 
-export default function Feature() {
+export default function About() {
   return (
-    <div className="py-20 bg-gray-100">
+    <div className="py-20 bg-gray-100" id='about'>
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base font-semibold tracking-wide text-indigo-600 uppercase">Transactions</h2>

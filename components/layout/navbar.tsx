@@ -1,13 +1,24 @@
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import Link from 'next/link'
-import Button from '../shared/ui/button'
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import Button from "../shared/ui/button";
 
 function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const router = useRouter();
+
+  if (router.pathname === "/") {
+  }
+
+  const active = "border-indigo-500 text-gray-900";
+  const notActive =
+    "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700";
+
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -15,7 +26,7 @@ export default function Navbar() {
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
-                <Link href='/' className="flex items-center flex-shrink-0">
+                <Link href="/" className="flex items-center flex-shrink-0">
                   <img
                     className="block w-auto h-8 lg:hidden"
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
@@ -31,35 +42,40 @@ export default function Navbar() {
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <Link
                     href="/"
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-indigo-500"
+                    className={`
+                    inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 ${
+                      router.pathname === "/" ? active : notActive
+                    }
+                    `}
                   >
                     Home
                   </Link>
-                  <a
-                    href="#"
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+                  <Link
+                    href="/#about"
+                    scroll={false}
+                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700"
                   >
                     About
-                  </a>
-                  <Link href='/products'
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
+                  </Link>
+                  <Link
+                    href="/products"
+                    className={`
+                    inline-flex items-center px-1 pt-1 text-sm font-medium  border-b-2 ${
+                      router.pathname === "/products" ? active : notActive
+                    }
+                    `}
                   >
                     Products
                   </Link>
                 </div>
               </div>
 
-
               <div className="hidden sm:ml-6 sm:flex sm:items-center gap-x-4">
-                <Button href='/signup'>Sing Up</Button>
-                <Button full href='/login'>Log In</Button>
+                <Button href="/signup">Sing Up</Button>
+                <Button full href="/login">
+                  Log In
+                </Button>
               </div>
-
-
-              {/* Profile dropdown if User Is Registered 2) */}
-
-
-
 
               <div className="flex items-center -mr-2 sm:hidden">
                 {/* Mobile menu button */}
@@ -78,48 +94,48 @@ export default function Navbar() {
           <Disclosure.Panel className="sm:hidden">
             <div className="pt-2 pb-3 space-y-1">
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-base font-medium text-indigo-700 border-l-4 border-indigo-500 bg-indigo-50"
+              <Link
+                href="/"
+                className={`
+                    inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 ${
+                      router.pathname === "/" ? active : notActive
+                    }
+                    `}
               >
                 Home
-              </a>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              </Link>
+              <Link
+                href="/#about"
+                scroll={false}
+                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700"
               >
                 About
-              </a>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"
+              </Link>
+              <Link
+                href="/products"
+                className={`
+                    inline-flex items-center px-1 pt-1 text-sm font-medium  border-b-2 ${
+                      router.pathname === "/products" ? active : notActive
+                    }
+                    `}
               >
                 Products
-              </a>
+              </Link>
             </div>
 
-
-
             {/* There Should Be Mob Nav if User Is Register 1) */}
-
-
-
           </Disclosure.Panel>
         </>
       )}
     </Disclosure>
-  )
+  );
 }
 
-
-
-
-
-
-
-
-{/* 1) Mobile Nav if User Is Regiser  */ }
-{/* <div className="pt-4 pb-3 border-t border-gray-200">
+{
+  /* 1) Mobile Nav if User Is Regiser  */
+}
+{
+  /* <div className="pt-4 pb-3 border-t border-gray-200">
 <div className="flex items-center px-4">
 <div className="flex-shrink-0">
   <img
@@ -160,20 +176,15 @@ export default function Navbar() {
   Sign out
 </a>
 </div>
-</div> */}
+</div> */
+}
 
+{
+  /* 2) Profile Dropdown if User is Registered */
+}
 
-
-
-
-
-
-
-
-
-{/* 2) Profile Dropdown if User is Registered */ }
-
-{/* <div className="hidden sm:ml-6 sm:flex sm:items-center">
+{
+  /* <div className="hidden sm:ml-6 sm:flex sm:items-center">
                  <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -228,4 +239,5 @@ export default function Navbar() {
                     </Menu.Items>
                   </Transition>
                 </Menu>
-                </div> */}
+                </div> */
+}
