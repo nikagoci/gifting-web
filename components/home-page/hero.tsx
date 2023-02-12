@@ -1,4 +1,4 @@
-import Button from "../shared/button";
+import Button from "../shared/UI/button";
 
 export default function Hero() {
   return (
