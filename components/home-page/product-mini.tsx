@@ -1,4 +1,4 @@
-import Button from "../shared/button"
+import Button from "../shared/UI/button"
 import SingleProduct from "../shared/single-product"
 
 /*
@@ -19,7 +19,6 @@ const products = [{
     id: '1',
     rating: 4,
     name: 'Earthen Bottle',
-    href: '#',
     city: 'Zestafoni',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
@@ -27,7 +26,6 @@ const products = [{
   {
     id: '2',
     name: 'Nomad Tumbler',
-    href: '#',
     city: 'Batumi',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
@@ -35,7 +33,6 @@ const products = [{
   {
     id: '3',
     name: 'Focus Paper Refill',
-    href: '#',
     city: 'Kutaisi',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
@@ -43,7 +40,6 @@ const products = [{
   {
     id: '4',
     name: 'Machined Mechanical Pencil',
-    href: '#',
     city: 'Tbilisi',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'

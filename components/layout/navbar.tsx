@@ -1,8 +1,7 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import Button from '../shared/button'
+import Link from 'next/link'
+import Button from '../shared/UI/button'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -16,7 +15,7 @@ export default function Navbar() {
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
-                <div className="flex items-center flex-shrink-0">
+                <Link href='/' className="flex items-center flex-shrink-0">
                   <img
                     className="block w-auto h-8 lg:hidden"
                     src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
@@ -27,27 +26,26 @@ export default function Navbar() {
                     src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
                     alt="Workflow"
                   />
-                </div>
+                </Link>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
-                    href="#"
+                  <Link
+                    href="/"
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 border-b-2 border-indigo-500"
                   >
                     Home
-                  </a>
+                  </Link>
                   <a
                     href="#"
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
                   >
                     About
                   </a>
-                  <a
-                    href="#"
+                  <Link href='/products'
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700"
                   >
                     Products
-                  </a>
+                  </Link>
                 </div>
               </div>
 

@@ -1,3 +1,7 @@
+import ProductFilter from "@/components/products/product-filter";
+
 export default function ProductsPage() {
-    return <h1>red</h1>
+    return(
+        <ProductFilter />
+    )
 }

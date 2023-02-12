@@ -5,7 +5,6 @@ interface Props {
     product: {
         id: string;
         name: string;
-        href: string;
         city: string;
         imageSrc: string;
         description?: string
