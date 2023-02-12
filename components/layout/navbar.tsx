@@ -1,7 +1,7 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-import Button from '../shared/UI/button'
+import Button from '../shared/ui/button'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')

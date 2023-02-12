@@ -1,4 +1,4 @@
-import Button from "../shared/UI/button"
+import Button from "../shared/ui/button"
 import SingleProduct from "../shared/single-product"
 
 /*

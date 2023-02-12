@@ -14,22 +14,30 @@
   }
   ```
 */
-export default function Select() {
+
+interface Props {
+  label: string;
+  options: string[];
+  defaultValue: string;
+  id: string;
+}
+
+export default function Select({label, options, defaultValue, id } : Props) {
   return (
-    <>
+    <div className="w-full">
       <legend className="block mb-3 text-sm font-medium text-gray-900">
-        City
+        {label}
       </legend>
       <select
-        id="city"
-        name="city"
+        id={id}
+        name={id}
         className="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        defaultValue="Canada"
+        defaultValue={defaultValue}
       >
-        <option>USA</option>
-        <option>Canada</option>
-        <option>EU</option>
+        {options.map(option => (
+          <option key={option}>{option}</option>
+        ))}
       </select>
-    </>
+    </div>
   );
 }

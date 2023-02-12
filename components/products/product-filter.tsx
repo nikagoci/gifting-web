@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
-import Select from "../shared/UI/Select";
+import Select from "../shared/ui/select";
 import ProductFull from "./product-full";
 
 const filters = [
@@ -202,7 +202,7 @@ export default function ProductFilter() {
                     </div>
                   ))}
                   <div className="flex flex-col items-start w-full pt-10">
-                    <Select />
+                    <Select id="city" defaultValue="Kutaisi" label="City" options={['Kutaisi', 'Tbilisi', 'Zestafoni']} />
                   </div>
                 </form>
               </div>

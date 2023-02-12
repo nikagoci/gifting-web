@@ -9,7 +9,7 @@ interface Props {
     type?: string
 }
 
-export default function Button({ children, full, padding, href }: Props) {
+export default function Button({ children, full, padding, href, }: Props) {
 
     if (full) {
         return <Link href={href}
