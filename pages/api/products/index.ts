@@ -3,12 +3,14 @@ import Product from "@/database/model/productModel";
 import { NextApiRequest, NextApiResponse } from "next";
 
 function pagination(req: NextApiRequest) {
-    let limit: number = 10;
+    let limit: number = 100;
     let skip: number = 0;
     if(req.query.page && req.query.limit){
         const page =  +req.query.page || 1;
         limit = +req.query.limit;
         skip = (page - 1) * limit;
+    } else {
+        limit = 0;
     }
 
     return {skip, limit}

@@ -1,20 +1,10 @@
+import { ProductInterface } from "@/utils/interfaces";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 
-interface Props {
-    product: {
-        id: string;
-        name: string;
-        city: string;
-        imageSrc: string;
-        description?: string
-    }
-}
-
-
-export default function SingleProduct({ product }: Props) {
+export default function SingleProduct({ product }: {product: ProductInterface}) {
     return (
-        <Link key={product.id} href={`/products/${product.id}`} className="group">
+        <Link key={product._id} href={`/products/${product._id}`} className="group">
             <div className="w-full overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
                 <img
                     src={product.imageSrc}
