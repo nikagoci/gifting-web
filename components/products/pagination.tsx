@@ -26,7 +26,7 @@ export default function Pagination() {
 
   useEffect(() => {
     if (productQuantity) {
-      const total = Math.ceil(productQuantity / 1);
+      const total = Math.ceil(productQuantity / 8);
 
       for (let i = 1; i <= total; i++) {
         setTotalPages((prev: number[]) => [...prev, i]);
@@ -39,7 +39,7 @@ export default function Pagination() {
   }
 
   function handlePageInc() {
-    const total = Math.ceil(productQuantity / 1);
+    const total = Math.ceil(productQuantity / 8);
     setCurPage((prev) => prev + 1);
 
     if (curPage >= total) {
