@@ -3,6 +3,7 @@ import { AiOutlineUser } from 'react-icons/ai'
 import { LocationMarkerIcon } from "@heroicons/react/outline";
 import { StarIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router';
+import { ProductInterface } from '@/utils/interfaces';
 
 
 interface Product {
@@ -14,72 +15,72 @@ interface Product {
   description: string;
 }
 
-const products = [
-  {
-    id: '1',
-    rating: 4,
-    name: 'Earthen Bottle',
-    city: 'Zestafoni',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-  {
-    id: '2',
-    rating: 4,
-    name: 'Nomad Tumbler',
-    city: 'Batumi',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-  {
-    id: '3',
-    rating: 4,
-    name: 'Focus Paper Refill',
-    city: 'Kutaisi',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-  {
-    id: '4',
-    rating: 4,
-    name: 'Machined Mechanical Pencil',
-    city: 'Tbilisi',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-  {
-    id: '5',
-    rating: 4,
-    name: 'Machined Mechanical Pencil',
-    city: 'Tbilisi',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-  {
-    id: '6',
-    rating: 4,
-    name: 'Machined Mechanical Pencil',
-    city: 'Tbilisi',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-  {
-    id: '7',
-    rating: 4,
-    name: 'Machined Mechanical Pencil',
-    city: 'Tbilisi',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-  {
-    id: '8',
-    rating: 4,
-    name: 'Machined Mechanical Pencil',
-    city: 'Tbilisi',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-    description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-  },
-]
+// const products = [
+//   {
+//     id: '1',
+//     rating: 4,
+//     name: 'Earthen Bottle',
+//     city: 'Zestafoni',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+//   {
+//     id: '2',
+//     rating: 4,
+//     name: 'Nomad Tumbler',
+//     city: 'Batumi',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+//   {
+//     id: '3',
+//     rating: 4,
+//     name: 'Focus Paper Refill',
+//     city: 'Kutaisi',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+//   {
+//     id: '4',
+//     rating: 4,
+//     name: 'Machined Mechanical Pencil',
+//     city: 'Tbilisi',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+//   {
+//     id: '5',
+//     rating: 4,
+//     name: 'Machined Mechanical Pencil',
+//     city: 'Tbilisi',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+//   {
+//     id: '6',
+//     rating: 4,
+//     name: 'Machined Mechanical Pencil',
+//     city: 'Tbilisi',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+//   {
+//     id: '7',
+//     rating: 4,
+//     name: 'Machined Mechanical Pencil',
+//     city: 'Tbilisi',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+//   {
+//     id: '8',
+//     rating: 4,
+//     name: 'Machined Mechanical Pencil',
+//     city: 'Tbilisi',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+//     description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
+//   },
+// ]
 
 const user = {
   userName: 'Zaza',
@@ -90,20 +91,20 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductOverview() {
-  const router = useRouter();
-  let product: Product | null = null;
+export default function ProductOverview({product}: {product: ProductInterface}) {
+  // const router = useRouter();
+  // let product: Product | null = null;
 
-  if (router.query.productId) {
-    let element = products.find(el => el.id === router.query.productId)
-    if(!element) {
-      router.replace('/404')
-      return <h1>Error</h1>
-    }
-    if (element) {
-      product = element
-    }
-  }
+  // if (router.query.productId) {
+  //   let element = products.find(el => el.id === router.query.productId)
+  //   // if(!element) {
+  //   //   router.replace('/404')
+  //   //   return <h1>Error</h1>
+  //   // }
+  //   if (element) {
+  //     product = element
+  //   }
+  // }
 
 
   return (
@@ -119,27 +120,9 @@ export default function ProductOverview() {
               <img src={product.imageSrc} alt={product.name} className="object-cover object-center w-full h-full" />
 
               {/* Product info */}
-              <div className="px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
+              <div className="flex flex-col justify-center h-full px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
                 <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{product.name}</h1>
-
-                {/* Reviews */}
-                <div className="mt-3">
-                  <div className="flex items-center">
-                    <div className="flex items-center">
-                      {[0, 1, 2, 3, 4].map((rating) => (
-                        <StarIcon
-                          key={rating}
-                          className={classNames(
-                            product && product.rating > rating ? 'text-indigo-500' : 'text-gray-300',
-                            'h-5 w-5 flex-shrink-0'
-                          )}
-                          aria-hidden="true"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
+                
                 <div className="mt-6">
                   <div
                     className="space-y-6 text-base text-gray-700"
