@@ -17,7 +17,11 @@ export const getStaticProps: GetStaticProps = async () => {
   try {
     await connectToDatabase();
 
-    products = await Product.find();
+    const page = 1;
+    const limit = 8;
+    const skip = (page-1) * limit;
+
+    products = await Product.find().skip(skip).limit(limit);
   } catch (err: any) {
     throw new Error(err);
   }
