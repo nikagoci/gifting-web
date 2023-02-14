@@ -4,6 +4,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
 import Select from "../shared/ui/select";
 import ProductFull from "./product-full";
+import { ProductInterface } from "@/utils/interfaces";
 
 const filters = [
   {
@@ -39,7 +40,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductFilter() {
+export default function ProductFilter({products}: {products: ProductInterface[]}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
@@ -211,7 +212,7 @@ export default function ProductFilter() {
             {/* Product grid */}
             <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
               {/* Replace with your content */}
-              <ProductFull />
+              <ProductFull products={products} />
             </div>
           </div>
         </main>
