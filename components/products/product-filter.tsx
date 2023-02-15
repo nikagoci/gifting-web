@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState, useEffect, useContext } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
@@ -43,8 +43,7 @@ function classNames(...classes: any) {
 
 export default function ProductFilter({products}: {products: ProductInterface[]}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const prodCtx = useContext(ProductContext);
-  console.log(prodCtx)
+  const productCtx = useContext(ProductContext)
 
   return (
     <div className="bg-white">
