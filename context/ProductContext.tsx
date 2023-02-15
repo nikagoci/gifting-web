@@ -32,6 +32,17 @@ export const ProductContextProvider = ({children}: {children: ReactNode}) => {
         dispatch({type: 'CHANGE_CITY', payload: city})
     }
 
+    const removeCategory = (value: string) => {
+        dispatch({type: 'REMOVE_CATEGORY', payload: value})
+    }
+
+    const removeGender = (value: string) => {
+        dispatch({type: 'REMOVE_GENDER', payload: value})
+    }
+    const removeCondition = (value: string) => {
+        dispatch({type: 'REMOVE_CONDITION', payload: value})
+    }
+
     const value: productValueInterface = {
         categories: state.categories,
         genders: state.genders,
@@ -40,7 +51,10 @@ export const ProductContextProvider = ({children}: {children: ReactNode}) => {
         changeCategories,
         changeConditions,
         changeGenders,
-        changeCity
+        changeCity,
+        removeCategory,
+        removeGender,
+        removeCondition
     }
 
     return (

@@ -15,9 +15,9 @@ export interface ProductInterface {
 }
 
 export interface productContextInterface {
-  categories: string[] | [];
-  genders: string[] | [];
-  conditions: string[] | [];
+  categories: string[]
+  genders: string[]
+  conditions: string[]
   city: string;
 }
 
@@ -26,4 +26,7 @@ export interface productValueInterface extends productContextInterface {
   changeCity: (city: string) => void;
   changeGenders: (gender: string) => void;
   changeConditions: (condition: string) => void;
+  removeCategory: (value: string) => void;
+  removeCondition: (value: string) => void;
+  removeGender: (value: string) => void;
 }

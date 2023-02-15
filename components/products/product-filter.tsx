@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, useContext } from "react";
+import { Fragment, useState, useContext } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
@@ -44,6 +44,26 @@ function classNames(...classes: any) {
 export default function ProductFilter({products}: {products: ProductInterface[]}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const productCtx = useContext(ProductContext)
+
+  function handleInputChange(id: string, value: string) {
+    if(productCtx && !productCtx.categories.includes(value) && !productCtx.conditions.includes(value) && !productCtx.genders.includes(value)){
+      if(id === 'category' ){
+        productCtx?.changeCategories(value)
+      } else if(id === 'condition'){
+        productCtx?.changeConditions(value)
+      } else if(id === 'gender'){
+        productCtx?.changeGenders(value)
+      }
+    } else if(productCtx){
+      if(id === 'category') {
+        productCtx.removeCategory(value)
+      } else if(id === 'condition'){
+        productCtx.removeCondition(value)
+      } else if(id === 'gender'){
+        productCtx.removeGender(value)
+      }
+    }
+  }
 
   return (
     <div className="bg-white">
@@ -188,9 +208,11 @@ export default function ProductFilter({products}: {products: ProductInterface[]}
                               <input
                                 id={`${section.id}-${optionIdx}`}
                                 name={`${section.id}[]`}
+                                // checked={inputChecked}
                                 defaultValue={option.value}
                                 type="checkbox"
                                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                                onClick={() => handleInputChange(section.id, option.value)}
                               />
                               <label
                                 htmlFor={`${section.id}-${optionIdx}`}
