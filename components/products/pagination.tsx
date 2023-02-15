@@ -6,13 +6,17 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+const PAGE_RANGE = 2;
+const totalPageCalc = (productQuantity: number):number => {
+  return Math.ceil(productQuantity / 8)
+}
+
 export default function Pagination() {
   const [curPage, setCurPage] = useState(1);
   const [productQuantity, setProductQuantity] = useState(0);
   const [totalPages, setTotalPages] = useState<number[]>([]);
   const router = useRouter();
 
-  const PAGE_RANGE = 2;
 
   useEffect(() => {
     async function fetchData() {
@@ -48,7 +52,7 @@ export default function Pagination() {
 
   useEffect(() => {
     if (productQuantity) {
-      const total = Math.ceil(productQuantity / 1);
+      const total = totalPageCalc(productQuantity)
 
       for (let i = 1; i <= total; i++) {
         setTotalPages((prev: number[]) => [...prev, i]);
@@ -65,7 +69,7 @@ export default function Pagination() {
   }
 
   function handlePageInc() {
-    const total = Math.ceil(productQuantity / 1);
+    const total = totalPageCalc(productQuantity)
     setCurPage((prev) => prev + 1);
 
     if (router.query.page && +router.query.page >= totalPages.length) {
