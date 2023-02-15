@@ -1,10 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
 import Select from "../shared/ui/select";
 import ProductFull from "./product-full";
 import { ProductInterface } from "@/utils/interfaces";
+import { ProductContext } from "@/context/ProductContext";
 
 const filters = [
   {
@@ -42,6 +43,8 @@ function classNames(...classes: any) {
 
 export default function ProductFilter({products}: {products: ProductInterface[]}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const prodCtx = useContext(ProductContext);
+  console.log(prodCtx)
 
   return (
     <div className="bg-white">
