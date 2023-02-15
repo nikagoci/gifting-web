@@ -3,12 +3,14 @@ import {
   ArrowNarrowLeftIcon,
   ArrowNarrowRightIcon,
 } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Pagination() {
   const [curPage, setCurPage] = useState(1);
   const [productQuantity, setProductQuantity] = useState(0);
   const [totalPages, setTotalPages] = useState<number[]>([]);
+  const router = useRouter();
 
   const PAGE_RANGE = 2;
 
@@ -18,15 +20,26 @@ export default function Pagination() {
       const data = await res.json();
 
       setProductQuantity(data.quantity);
-      setCurPage(1);
+      if (
+        (router.query.page && +router.query.page <= 1) ||
+        (router.query.page && +router.query.page > totalPages.length)
+      ) {
+        setCurPage(1);
+        router.push({
+          pathname: "/products",
+          query: { page: 1 },
+        });
+      } else if (router.query.page) {
+        setCurPage(+router.query.page);
+      }
     }
 
     fetchData();
-  }, []);
+  }, [router.query.page]);
 
   useEffect(() => {
     if (productQuantity) {
-      const total = Math.ceil(productQuantity / 8);
+      const total = Math.ceil(productQuantity / 1);
 
       for (let i = 1; i <= total; i++) {
         setTotalPages((prev: number[]) => [...prev, i]);
@@ -36,11 +49,27 @@ export default function Pagination() {
 
   function handlePageChange(page: number) {
     setCurPage(page);
+    router.push({
+      pathname: "/products",
+      query: { page },
+    });
   }
 
   function handlePageInc() {
-    const total = Math.ceil(productQuantity / 8);
+    const total = Math.ceil(productQuantity / 1);
     setCurPage((prev) => prev + 1);
+
+    if (router.query.page && +router.query.page >= totalPages.length) {
+      router.push({
+        pathname: "/products",
+        query: { page: totalPages.length },
+      });
+    } else {
+      router.push({
+        pathname: "/products",
+        query: { page: router.query.page && +router.query.page + 1 },
+      });
+    }
 
     if (curPage >= total) {
       setCurPage(total);
@@ -50,21 +79,33 @@ export default function Pagination() {
   function handlePageDec() {
     setCurPage((prev) => prev - 1);
 
+    if (router.query.page && +router.query.page <= 1) {
+      router.push({
+        pathname: "/products",
+        query: { page: 1 },
+      });
+    } else {
+      router.push({
+        pathname: "/products",
+        query: { page: router.query.page && +router.query.page - 1 },
+      });
+    }
+
     if (curPage === 1) {
       setCurPage(1);
     }
   }
+
   const active =
-    "inline-flex items-center px-4 pt-4 text-sm font-medium text-indigo-600 border-t-2 border-indigo-500";
+    "cursor-pointer inline-flex items-center px-4 pt-4 text-sm font-medium text-indigo-600 border-t-2 border-indigo-500";
   const notActive =
-    "inline-flex items-center px-4 pt-4 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300";
+    "cursor-pointer inline-flex items-center px-4 pt-4 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300";
 
   return (
     <nav className="flex items-center justify-between px-4 border-t border-gray-200 sm:px-0">
       <div className="flex flex-1 w-0 -mt-px">
-        <a
-          href="#"
-          className="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300"
+        <div
+          className="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent cursor-pointer hover:text-gray-700 hover:border-gray-300"
           onClick={handlePageDec}
         >
           <ArrowNarrowLeftIcon
@@ -72,7 +113,7 @@ export default function Pagination() {
             aria-hidden="true"
           />
           Previous
-        </a>
+        </div>
       </div>
       <div className="hidden md:-mt-px md:flex">
         {/* Defualt Navigation */}
@@ -80,13 +121,9 @@ export default function Pagination() {
           <>
             {curPage > 3 && (
               <>
-                <a
-                  href="#"
-                  className={notActive}
-                  onClick={() => handlePageChange(1)}
-                >
+                <div className={notActive} onClick={() => handlePageChange(1)}>
                   1
-                </a>
+                </div>
                 {curPage > PAGE_RANGE && (
                   <span className="inline-flex items-center px-4 pt-4 text-sm font-medium text-gray-500 border-t-2 border-transparent">
                     ...
@@ -97,14 +134,13 @@ export default function Pagination() {
             {totalPages
               .filter((page) => Math.abs(page - curPage) <= PAGE_RANGE)
               .map((page) => (
-                <a
+                <div
                   key={page}
-                  href="#"
                   className={curPage === page ? active : notActive}
                   onClick={() => handlePageChange(page)}
                 >
                   {page}
-                </a>
+                </div>
               ))}
             {totalPages.length - curPage > PAGE_RANGE && (
               <>
@@ -113,22 +149,20 @@ export default function Pagination() {
                     ...
                   </span>
                 )}
-                <a
-                  href="#"
+                <div
                   className={notActive}
                   onClick={() => handlePageChange(totalPages.length)}
                 >
                   {totalPages.length}
-                </a>
+                </div>
               </>
             )}
           </>
         )}
       </div>
       <div className="flex justify-end flex-1 w-0 -mt-px">
-        <a
-          href="#"
-          className="inline-flex items-center pt-4 pl-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300"
+        <div
+          className="inline-flex pt-4 pl-1 text-sm font-medium text-gray-500 border-t-2 border-transparent cursor-pointer itcursor-pointer ems-center hover:text-gray-700 hover:border-gray-300"
           onClick={handlePageInc}
         >
           Next
@@ -136,7 +170,7 @@ export default function Pagination() {
             className="w-5 h-5 ml-3 text-gray-400"
             aria-hidden="true"
           />
-        </a>
+        </div>
       </div>
     </nav>
   );
