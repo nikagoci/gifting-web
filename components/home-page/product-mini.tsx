@@ -19,7 +19,7 @@ export default function ProductMini({products}: {products: ProductInterface[]}) 
                     ))}
                 </div>
                 <div className="flex justify-center mt-16">
-                    <Button full href='/products'>See More</Button>
+                    <Button full href='/products/?page=1'>See More</Button>
                 </div>
             </div>
         </div>

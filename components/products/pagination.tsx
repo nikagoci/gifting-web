@@ -20,21 +20,30 @@ export default function Pagination() {
       const data = await res.json();
 
       setProductQuantity(data.quantity);
-      if (
-        (router.query.page && +router.query.page <= 1) ||
-        (router.query.page && +router.query.page > totalPages.length)
-      ) {
-        setCurPage(1);
-        router.push({
-          pathname: "/products",
-          query: { page: 1 },
-        });
-      } else if (router.query.page) {
-        setCurPage(+router.query.page);
-      }
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!router.query.page) {
+      router.push({
+        pathname: "/products",
+        query: { page: 1 },
+      });
     }
 
-    fetchData();
+    if (
+      (router.query.page && +router.query.page <= 1) ||
+      (router.query.page && +router.query.page > totalPages.length)
+    ) {
+      setCurPage(1);
+      router.push({
+        pathname: "/products",
+        query: { page: 1 },
+      });
+    } else if (router.query.page) {
+      setCurPage(+router.query.page);
+    }
   }, [router.query.page]);
 
   useEffect(() => {

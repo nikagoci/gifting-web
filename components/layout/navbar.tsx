@@ -12,9 +12,6 @@ function classNames(...classes: any) {
 export default function Navbar() {
   const router = useRouter();
 
-  if (router.pathname === "/") {
-  }
-
   const active = "border-indigo-500 text-gray-900";
   const notActive =
     "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700";
@@ -58,7 +55,7 @@ export default function Navbar() {
                     About
                   </Link>
                   <Link
-                    href="/products"
+                    href="/products/?page=1"
                     className={`
                     inline-flex items-center px-1 pt-1 text-sm font-medium  border-b-2 ${
                       router.pathname === "/products" ? active : notActive
@@ -112,7 +109,7 @@ export default function Navbar() {
                 About
               </Link>
               <Link
-                href="/products"
+                href="/products/?page=1"
                 className={`
                     inline-flex items-center px-1 pt-1 text-sm font-medium  border-b-2 ${
                       router.pathname === "/products" ? active : notActive
