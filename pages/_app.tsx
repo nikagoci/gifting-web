@@ -3,8 +3,12 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { ProductContextProvider } from "../context/ProductContext";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   const router = useRouter();
 
   if (router.pathname === "/404") {
@@ -12,10 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <ProductContextProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ProductContextProvider>
+    <SessionProvider session={session}>
+      <ProductContextProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ProductContextProvider>
+    </SessionProvider>
   );
 }
