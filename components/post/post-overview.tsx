@@ -3,25 +3,31 @@ import { AiOutlineUser } from "react-icons/ai";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
 import { StarIcon } from "@heroicons/react/solid";
 import Button from "../shared/ui/button";
+import { useSession } from "next-auth/react";
+import { useContext, useEffect } from "react";
+import { AddProductContext } from "@/context/AddProduct";
+import { useRouter } from "next/router";
 
-const user = {
-  userName: "Zaza",
-  phone: "577-77-99-66",
-};
-
-const product = {
-  id: "11",
-  name: "dog",
-  city: "Kutaisi",
-  imageSrc: "https://picsum.photos/id/237/536/354",
-  description: "A little dog",
-  rating: 5,
-};
-
-export default function PostOverview() {
-  function classNames(...classes: any) {
-    return classes.filter(Boolean).join(" ");
+interface Props {
+  user: {
+    _id: string;
+    email: string;
+    password: string;
+    phoneNumber: string
   }
+}
+
+export default function PostOverview({user}: Props) {
+  const addProductCtx = useContext(AddProductContext)
+  const router = useRouter();
+
+  const userName = user.email.split('@')[0]
+
+  useEffect(() => {
+    if(!addProductCtx?.category || !addProductCtx?.city || !addProductCtx?.image || !addProductCtx?.gender || !addProductCtx?.name ){
+        router.push('/post/add-product')
+    }
+  }, [])
 
   return (
     <div className="bg-white">
@@ -29,40 +35,20 @@ export default function PostOverview() {
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
           {/* Image gallery */}
           <img
-            src={product.imageSrc}
-            alt={product.name}
+            src={addProductCtx?.image}
+            alt={addProductCtx?.name}
             className="object-cover object-center w-full h-full"
           />
 
           {/* Product info */}
           <div className="px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-              {product.name}
+              {addProductCtx?.name}
             </h1>
-
-            {/* Reviews */}
-            <div className="mt-3">
-              <div className="flex items-center">
-                <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
-                    <StarIcon
-                      key={rating}
-                      className={classNames(
-                        product && product.rating > rating
-                          ? "text-indigo-500"
-                          : "text-gray-300",
-                        "h-5 w-5 flex-shrink-0"
-                      )}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
 
             <div className="mt-6">
               <div className="space-y-6 text-base text-gray-700" />
-              <p>{product.description}</p>
+              <p>{addProductCtx?.name}</p>
             </div>
 
             <section aria-labelledby="details-heading" className="mt-12">
@@ -73,15 +59,15 @@ export default function PostOverview() {
                 <div className="px-16 py-6 font-semibold border border-emerald-300 bg-emerald-50 rounded-xl">
                   <div className="flex items-center mb-6 text-xl gap-x-3">
                     <AiOutlineUser className="w-8 h-auto text-emerald-500" />
-                    <h6>{user.userName}</h6>
+                    <h6>{userName}</h6>
                   </div>
                   <div className="flex items-center mb-6 text-xl gap-x-3">
                     <BsPhone className="w-8 h-auto text-emerald-500" />
-                    <h6>{user.phone}</h6>
+                    <h6>{user.phoneNumber}</h6>
                   </div>
                   <div className="flex items-center mb-6 text-xl gap-x-3">
                     <LocationMarkerIcon className="w-8 h-auto text-emerald-500" />
-                    <h6>{product.city}</h6>
+                    <h6>{addProductCtx?.city}</h6>
                   </div>
                 </div>
               </div>

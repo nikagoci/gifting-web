@@ -1,6 +1,7 @@
 import { AddProductContext } from "@/context/AddProduct";
 import { addProductSchema } from "@/utils/formSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -23,13 +24,14 @@ export default function AddPost() {
 
   const onSubmit = handleSubmit((value) => {
     if(addProductCtx) {
-      console.log(value)
       addProductCtx.addCategory(value.category);
       addProductCtx.addCity(value.city);
       addProductCtx.addGender(value.gender);
       addProductCtx.addImage(value.image);
       addProductCtx.addName(value.name);
     }
+
+    router.push('/post/product-overview')
   });
 
   return (

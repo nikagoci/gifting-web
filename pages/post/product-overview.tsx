@@ -1,9 +1,20 @@
 import PostOverview from "@/components/post/post-overview";
 import PostSteps from "@/components/post/post-steps";
-import { GetServerSideProps } from "next";
+import connectToDatabase from "@/database/connectDB";
+import User from "@/database/model/userModel";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { getSession } from "next-auth/react";
 
-export default function ProductOverviewPage() {
+interface Props {
+  user: {
+    _id: string;
+    email: string;
+    password: string;
+    phoneNumber: string
+  }
+}
+
+export default function ProductOverviewPage({user}: Props) {
   return (
     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="py-8">
@@ -20,7 +31,7 @@ export default function ProductOverviewPage() {
       <h1 className="text-2xl font-bold text-center">
           How your post will be shown
       </h1>
-        <PostOverview />
+        <PostOverview user={user} />
       </div>
     </div>
   );
@@ -28,7 +39,6 @@ export default function ProductOverviewPage() {
 
 export const getServerSideProps: GetServerSideProps = async(context) => {
   const session = await getSession({req: context.req})
-
   if(!session){
     return {
       redirect: {
@@ -37,10 +47,13 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
       }
     }
   }
+  await connectToDatabase();
+
+  const user = await User.findOne({email: session.user?.email})
 
   return {
     props: {
-      session: JSON.parse(JSON.stringify(session))
+      user: JSON.parse(JSON.stringify(user))
     }
   }
 }
