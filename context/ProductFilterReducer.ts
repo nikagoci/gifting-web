@@ -1,6 +1,6 @@
-import { productContextInterface } from "@/utils/interfaces";
+import { productFilterContextInterface } from "@/utils/interfaces";
 
-const Reducer = (state: productContextInterface, action: any) => {
+const ProductFilterReducer = (state: productFilterContextInterface, action: any) => {
   switch (action.type) {
     case "CHANGE_CATEGORIES":
       return {
@@ -43,4 +43,4 @@ const Reducer = (state: productContextInterface, action: any) => {
   }
 };
 
-export default Reducer;
+export default ProductFilterReducer;

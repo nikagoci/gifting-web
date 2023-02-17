@@ -14,14 +14,14 @@ export interface ProductInterface {
   condition: "Used" | "Normal";
 }
 
-export interface productContextInterface {
+export interface productFilterContextInterface {
   categories: string[]
   genders: string[]
   conditions: string[]
   city: string;
 }
 
-export interface productValueInterface extends productContextInterface {
+export interface productFilterValueInterface extends productFilterContextInterface {
   changeCategories: (category: string) => void;
   changeCity: (city: string) => void;
   changeGenders: (gender: string) => void;
@@ -29,4 +29,16 @@ export interface productValueInterface extends productContextInterface {
   removeCategory: (value: string) => void;
   removeCondition: (value: string) => void;
   removeGender: (value: string) => void;
+}
+
+export interface addProductContextInterface {
+    name: string;
+    image: string;
+    city: string;
+    category: string;
+    gender: string;
+}
+
+export interface addProductValueInterface extends addProductContextInterface {
+
 }

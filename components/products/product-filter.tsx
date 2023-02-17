@@ -5,7 +5,7 @@ import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
 import Select from "../shared/ui/select";
 import ProductFull from "./product-full";
 import { ProductInterface } from "@/utils/interfaces";
-import { ProductContext } from "@/context/ProductContext";
+import { ProductFilterContext } from "@/context/ProductFilter";
 
 const filters = [
   {
@@ -43,7 +43,7 @@ function classNames(...classes: any) {
 
 export default function ProductFilter({products}: {products: ProductInterface[]}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const productCtx = useContext(ProductContext)
+  const productCtx = useContext(ProductFilterContext)
 
   function handleInputChange(id: string, value: string) {
     if(productCtx && !productCtx.categories.includes(value) && !productCtx.conditions.includes(value) && !productCtx.genders.includes(value)){

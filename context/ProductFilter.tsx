@@ -1,20 +1,18 @@
-import { productContextInterface, productValueInterface } from '@/utils/interfaces';
+import { productFilterContextInterface, productFilterValueInterface } from '@/utils/interfaces';
 import React, {createContext, useReducer, ReactNode} from 'react';
-import Reducer from './Reducer';
+import ProductFilterReducer from './ProductFilterReducer';
 
-export const ProductContext = createContext<productValueInterface | null>(null);
+export const ProductFilterContext = createContext<productFilterContextInterface | null>(null);
 
-const initialState: productContextInterface = {
+const initialState: productFilterContextInterface = {
     categories: [],
     genders: [],
     conditions: [],
     city: ''
 }
 
-
-
-export const ProductContextProvider = ({children}: {children: ReactNode}) => {
-    const [state, dispatch] = useReducer(Reducer, initialState)
+export const ProductFilterContextProvider = ({children}: {children: ReactNode}) => {
+    const [state, dispatch] = useReducer(ProductFilterReducer, initialState)
 
     const changeCategories = (category: string) => {
         dispatch({type: 'CHANGE_CATEGORIES', payload: category})
@@ -43,7 +41,7 @@ export const ProductContextProvider = ({children}: {children: ReactNode}) => {
         dispatch({type: 'REMOVE_CONDITION', payload: value})
     }
 
-    const value: productValueInterface = {
+    const value: productFilterValueInterface = {
         categories: state.categories,
         genders: state.genders,
         conditions: state.conditions,
@@ -58,8 +56,8 @@ export const ProductContextProvider = ({children}: {children: ReactNode}) => {
     }
 
     return (
-        <ProductContext.Provider value={value}>
+        <ProductFilterContext.Provider value={value}>
             {children}
-        </ProductContext.Provider>        
+        </ProductFilterContext.Provider>        
     )
 }
