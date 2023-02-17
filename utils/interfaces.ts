@@ -40,5 +40,9 @@ export interface addProductContextInterface {
 }
 
 export interface addProductValueInterface extends addProductContextInterface {
-
+  addName: (name: string) => void;
+  addCategory: (category: string) => void;
+  addGender: (gender: string) => void;
+  addCity: (city: string) => void;
+  addImage: (image: string) => void;
 }

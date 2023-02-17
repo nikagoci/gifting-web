@@ -20,9 +20,10 @@ interface Props {
   options: string[];
   defaultValue: string;
   id: string;
+  register?: any;
 }
 
-export default function Select({label, options, defaultValue, id } : Props) {
+export default function Select({label, options, defaultValue, id, register } : Props) {
   return (
     <div className="w-full">
       <legend className="block mb-3 text-sm font-medium text-gray-900">
@@ -33,6 +34,7 @@ export default function Select({label, options, defaultValue, id } : Props) {
         name={id}
         className="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         defaultValue={defaultValue}
+        {...register}
       >
         {options.map(option => (
           <option key={option}>{option}</option>

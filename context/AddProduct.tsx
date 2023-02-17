@@ -1,31 +1,63 @@
-import { addProductContextInterface, addProductValueInterface } from "@/utils/interfaces";
-import { createContext, useReducer, ReactNode  } from "react";
+import {
+  addProductContextInterface,
+  addProductValueInterface,
+} from "@/utils/interfaces";
+import { createContext, useReducer, ReactNode } from "react";
 import AddProductReducer from "./AddProductReducer";
 
-export const AddProductContext = createContext<addProductContextInterface | null>(null);
+export const AddProductContext =
+  createContext<addProductValueInterface | null>(null);
 
 const initialState: addProductContextInterface = {
-    name: '',
-    image: '',
-    city: '',
-    category: '',
-    gender: ''
-}
+  name: "",
+  image: "",
+  city: "",
+  category: "",
+  gender: "",
+};
 
+export const AddProductContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [state, dispatch] = useReducer(AddProductReducer, initialState);
 
-export const AddProductContextProvider = ({children}: {children: ReactNode}) => {
-    const [state,dispatch] = useReducer(AddProductReducer, initialState)
+  const addName = (name: string) => {
+    dispatch({ type: "ADD_NAME", payload: name });
+  };
 
-    const value: addProductValueInterface = {
-            name: state.name,
-            image: state.image,
-            city: state.city,
-            category: state.category,
-            gender: state.gender
-    }
-    return (
-        <AddProductContext.Provider value={value}>
-            {children}
-        </AddProductContext.Provider>
-    )
-}
+  const addImage = (image: string) => {
+    dispatch({ type: "ADD_IMAGE", payload: image });
+  };
+
+  const addCity = (city: string) => {
+    dispatch({ type: "ADD_CITY", payload: city });
+  };
+
+  const addCategory = (category: string) => {
+    dispatch({ type: "ADD_CATEGORY", payload: category });
+  };
+
+  const addGender = (gender: string) => {
+    dispatch({ type: "ADD_GENDER", payload: gender });
+  };
+
+  const value: addProductValueInterface = {
+    name: state.name,
+    image: state.image,
+    city: state.city,
+    category: state.category,
+    gender: state.gender,
+    addName,
+    addCategory,
+    addGender,
+    addCity,
+    addImage
+  };
+  return (
+    <AddProductContext.Provider value={value}>
+      {children}
+    </AddProductContext.Provider>
+  );
+};

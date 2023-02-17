@@ -40,3 +40,15 @@ export function loginSchema() {
 
   return schema;
 }
+
+export function addProductSchema() {
+  const schema = yup.object().shape({
+    name: yup.string().required('Product name is required'),
+    image: yup.string().required('Image is required'),
+    city: yup.string().required('City is required'),
+    category: yup.string().required('Category is required'),
+    gender: yup.string().required('Gender is required')
+  })
+
+  return schema
+}

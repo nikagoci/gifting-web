@@ -2,7 +2,7 @@ import { productFilterContextInterface, productFilterValueInterface } from '@/ut
 import React, {createContext, useReducer, ReactNode} from 'react';
 import ProductFilterReducer from './ProductFilterReducer';
 
-export const ProductFilterContext = createContext<productFilterContextInterface | null>(null);
+export const ProductFilterContext = createContext<productFilterValueInterface | null>(null);
 
 const initialState: productFilterContextInterface = {
     categories: [],
