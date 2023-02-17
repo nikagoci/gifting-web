@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect } from "react";
 import Button from "../shared/ui/button";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -22,6 +22,8 @@ export default function Navbar() {
   if (status === "loading") {
     return <h1>Loading...</h1>;
   }
+
+  const userName = session && session.user && session.user.email && session.user.email.split('@')[0];
 
   const active = "border-indigo-500 text-gray-900";
   const notActive =
@@ -102,7 +104,7 @@ export default function Navbar() {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="w-8 h-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src="/user.png"
                           alt=""
                         />
                       </Menu.Button>
@@ -119,41 +121,41 @@ export default function Navbar() {
                       <Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              href="/dashboard"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               Your Profile
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              href="/post/add-product"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Settings
-                            </a>
+                              Add Product
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <div
                               className={classNames(
                                 active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                "block px-4 py-2 cursor-pointer text-sm text-gray-700"
                               )}
+                              onClick={() => signOut()}
                             >
                               Sign out
-                            </a>
+                            </div>
                           )}
                         </Menu.Item>
                       </Menu.Items>
@@ -236,34 +238,34 @@ export default function Navbar() {
                   <div className="flex-shrink-0">
                     <img
                       className="w-10 h-10 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="/user.png"
                       alt=""
                     />
                   </div>
                   <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">Tom Cook</div>
-                    <div className="text-sm font-medium text-gray-500">tom@example.com</div>
+                    <div className="text-base font-medium text-gray-800">{userName}</div>
+                    <div className="text-sm font-medium text-gray-500">{session.user?.email}</div>
                   </div>
                 </div>
                 <div className="mt-3 space-y-1">
-                  <a
-                    href="#"
+                  <Link
+                    href="/dashboard"
                     className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
                   >
                     Your Profile
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    href="/post/add-product"
                     className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
                   >
-                    Settings
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                    Add Product
+                  </Link>
+                  <div
+                    onClick={() => signOut()}
+                    className="block px-4 py-2 text-base font-medium text-gray-500 cursor-pointer hover:text-gray-800 hover:bg-gray-100"
                   >
                     Sign out
-                  </a>
+                  </div>
                 </div>
               </div>
               )}

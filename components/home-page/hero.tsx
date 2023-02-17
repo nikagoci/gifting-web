@@ -1,6 +1,13 @@
 import Button from "../shared/ui/button";
+import { useSession } from "next-auth/react";
 
 export default function Hero() {
+  const {data: session, status} = useSession();
+
+  if(status === 'loading'){
+    return <h1>Loading ...</h1>
+  }
+
   return (
         <header className="flex flex-col items-center justify-center h-full full-height gap-y-6">
             <h1 className="text-4xl font-extrabold tracking-tight text-center text-gray-900 sm:text-5xl md:text-6xl">
@@ -15,7 +22,7 @@ export default function Hero() {
                 <Button full href='/products/?page=1' padding="py-3 px-12">See Products</Button>
               </div>
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <Button href='/post/add-product' padding="py-3 px-12">Add Products</Button>
+                <Button href={`${status === 'unauthenticated' ? 'signup' : '/post/add-product' }`} padding="py-3 px-12">Add Products</Button>
               </div>
             </div>
         </header>
