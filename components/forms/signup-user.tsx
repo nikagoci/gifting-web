@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup';
 import Input from "../shared/ui/input";
 import {signIn, useSession} from 'next-auth/react'
+import { ToastContainer } from "react-toastify";
+import toastError from "@/utils/toastErrors";
+
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from "next/router";
+import { signUpSchema } from "@/utils/formSchema";
 
 async function createUser(email: string, password: string, phoneNumber: string) {
   const response = await fetch('/api/auth/signup', {
@@ -25,17 +30,9 @@ async function createUser(email: string, password: string, phoneNumber: string) 
 
 export default function SignpUser() {
     const {data, status} = useSession()
+  const router = useRouter();
 
-    console.log({
-      data,
-      status
-    })
-  const schema = yup.object().shape({
-    email: yup.string().email("Invalid email format").required("Email is required"),
-    password: yup.string().required("Password is required").min(6, "Password is short").max(20, "Passoword is long"),
-    confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords do not match").required("Confirm password is required"),
-    phoneNumber: yup.string().required('Phone number is required').min(9, "Invalid phone format").max(9, "Invalid phone format")
-  })
+  const schema = signUpSchema()
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: yupResolver(schema)
   });
@@ -44,19 +41,35 @@ export default function SignpUser() {
   
     try{
       const result = await createUser(value.email, value.password, value.phoneNumber);
-      signIn('credentials', {
+      const signInResult = await signIn('credentials', {
         redirect: false,
         email: value.email,
         password: value.password
       })
-      console.log(result);
+
+      if(signInResult && signInResult.error) {
+        toastError(signInResult.error)
+      } else if(signInResult && !signInResult.error && result.status === 'success'){
+        router.push('/')
+      }
+
     } catch (err: any) {
-      console.log(err);
+      toastError(err.message)
     }
     
   })
 
   return (
+    <>
+    <ToastContainer
+    position="top-center"
+    autoClose={3000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    draggable
+    theme="light"
+    />
     <div className="flex flex-col justify-center min-h-screen bg-gray-50 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
@@ -193,5 +206,6 @@ export default function SignpUser() {
         </div>
       </div>
     </div>
+    </>
   );
 }
