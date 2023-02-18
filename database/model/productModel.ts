@@ -36,6 +36,10 @@ const productSchema = new Schema({
       "Other",
     ],
     required: [true, "category is required"],
+  },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 

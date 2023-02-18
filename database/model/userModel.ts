@@ -12,7 +12,11 @@ const userSchema = new Schema({
   phoneNumber: {
     required: true,
     type: String
-  }
+  },
+  products: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Product'
+  }]
 });
 
 const User = models.User || model("User", userSchema);
