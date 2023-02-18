@@ -2,7 +2,7 @@ import ProductFilter from "@/components/products/product-filter";
 import connectToDatabase from "@/database/connectDB";
 import Product from "@/database/model/productModel";
 import { ProductInterface } from "@/utils/interfaces";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 
 export default function ProductsPage({
   products,
@@ -12,16 +12,17 @@ export default function ProductsPage({
   return <ProductFilter products={products} />;
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   let products;
   try {
-    await connectToDatabase();
+    if (context.query.page) {
+      await connectToDatabase();
+      const page = +context.query.page;
+      const limit = 8;
+      const skip = (page - 1) * limit;
 
-    const page = 1;
-    const limit = 8;
-    const skip = (page-1) * limit;
-
-    products = await Product.find().skip(skip).limit(limit);
+      products = await Product.find().skip(skip).limit(limit);
+    }
   } catch (err: any) {
     throw new Error(err);
   }
