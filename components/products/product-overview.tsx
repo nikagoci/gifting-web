@@ -3,6 +3,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
 import { ProductInterface } from "@/utils/interfaces";
 import Image from "next/image";
+import Spinner from "../shared/ui/spinner";
 
 interface Product {
   id: string;
@@ -30,7 +31,7 @@ export default function ProductOverview({
 
   return (
     <>
-      {!product && <h1>Loading...</h1>}
+      {!product && <Spinner size={40} />}
       {product && (
         <div className="bg-white">
           <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

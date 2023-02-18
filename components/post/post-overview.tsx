@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useStoreState } from "@/store/hooks";
 import { useStoreRehydrated } from 'easy-peasy';
 import Image from "next/image";
+import Spinner from "../shared/ui/spinner";
 
 interface Props {
   user: {
@@ -31,11 +32,11 @@ export default function PostOverview({ user }: Props) {
   }, [])
 
   if(!productStore.description || !productStore.gender || !productStore.image || !productStore.name) {
-    return <h1>Loading...</h1>
+    return <Spinner size={60} />
   }
 
   if(!isRehydrated) {
-    return <h1>Loading...</h1>
+    return <Spinner size={60} />
   }
 
 
@@ -47,6 +48,9 @@ export default function PostOverview({ user }: Props) {
 
     return (
     <div className="bg-white">
+      <h1 className="text-2xl font-bold text-center">
+          How your post will be shown
+      </h1>
       <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
           {/* Image gallery */}

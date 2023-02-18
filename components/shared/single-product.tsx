@@ -19,6 +19,7 @@ export default function SingleProduct({ product }: {product: ProductInterface}) 
                     className="object-cover object-fit group-hover:opacity-75"
                     width={100}
                     height={100}
+                    unoptimized
                 />
             </div>
             <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>

@@ -6,6 +6,7 @@ import { Fragment, useEffect } from "react";
 import Button from "../shared/ui/button";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Spinner from "../shared/ui/spinner";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -16,7 +17,9 @@ export default function Navbar() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return <h1>Loading...</h1>;
+    return <div className="mt-4"> 
+    <Spinner size={40} />
+    </div>
   }
 
   const userName = session && session.user && session.user.email && session.user.email.split('@')[0];

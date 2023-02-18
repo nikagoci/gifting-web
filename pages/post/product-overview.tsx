@@ -28,9 +28,6 @@ export default function ProductOverviewPage({user}: Props) {
       </div>
 
       <div className="py-8">
-      <h1 className="text-2xl font-bold text-center">
-          How your post will be shown
-      </h1>
         <PostOverview user={user} />
       </div>
     </div>

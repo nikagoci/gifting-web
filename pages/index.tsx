@@ -21,37 +21,32 @@ export default function HomePage({
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  let plainProducts;
+  // let plainProducts;
+  let products
   try {
     await connectToDatabase();
 
-    // Static Approach:
-    /*const products = await Product.find().limit(4);
-    plainProducts = products.map((product) => {
-      const plainProduct = product.toObject();
-      plainProduct._id = plainProduct._id.toString();
-      plainProduct.createdAt = plainProduct.createdAt.toString();
-      return plainProduct;
-    }); */
 
-    const products = await Product.aggregate([{ $sample: { size: 4 } }]);
+    products = await Product.aggregate([{ $sample: { size: 4 } }]);
 
-    plainProducts = products.map((product) => {
-      const plainProduct = {
-        ...product,
-        _id: product._id.toString(),
-        createdAt: product.createdAt.toString(),
-      };
+    // plainProducts = products.map((product) => {
+    //   const plainProduct = {
+    //     ...product,
+    //     _id: product._id.toString(),
+    //     createdAt: product.createdAt.toString(),
+    //   };
 
-      return plainProduct;
-    });
+    //   return plainProduct;
+    // });
+
+
   } catch (err: any) {
     throw new Error(err);
   }
 
   return {
     props: {
-      products: plainProducts,
+      products: JSON.parse(JSON.stringify(products)),
     },
     revalidate: 21600, // 6hours
   };
