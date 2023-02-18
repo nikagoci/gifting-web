@@ -27,14 +27,14 @@ export default function PostSteps({status}: Props) {
         {steps.map((step, stepIdx) => (
           <li key={step.name} className="relative md:flex-1 md:flex">
             {step.status === 'complete' ? (
-              <div className="flex items-center w-full cursor-pointer group">
+              <Link href={`${step.id=== '01' ? '/post/add-product' : '/post/product-overview'} `} className="flex items-center w-full cursor-pointer group">
                 <span className="flex items-center px-6 py-4 text-sm font-medium">
                   <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-indigo-600 rounded-full group-hover:bg-indigo-800">
                     <CheckIcon className="w-6 h-6 text-white" aria-hidden="true" />
                   </span>
                   <span className="ml-4 text-sm font-medium text-gray-900">{step.name}</span>
                 </span>
-              </div>
+              </Link>
             ) : step.status === 'current' ? (
               <div className="flex items-center px-6 py-4 text-sm font-medium cursor-pointer" aria-current="step">
                 <span className="flex items-center justify-center flex-shrink-0 w-10 h-10 border-2 border-indigo-600 rounded-full">

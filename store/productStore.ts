@@ -34,8 +34,8 @@ export const productStore = createStore<StoreModel>({
   products: persist({
     name: "",
     image: "",
-    city: "",
-    category: "",
+    city: "Tbilisi",
+    category: "All New Arrivals",
     gender: "",
     description: ""
   }),

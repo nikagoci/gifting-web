@@ -19,30 +19,29 @@ interface Props {
 export default function PostOverview({ user }: Props) {
   const isRehydrated = useStoreRehydrated();
   const productStore = useStoreState((state) => state.products)
+  const router = useRouter();
+  
+  useEffect(() => {
+    
+    if(!productStore.description || !productStore.gender || !productStore.image || !productStore.name) {
+      router.push('/post/add-product')
+    }
+
+  }, [])
+
+  if(!productStore.description || !productStore.gender || !productStore.image || !productStore.name) {
+    return <h1>Loading...</h1>
+  }
 
   if(!isRehydrated) {
     return <h1>Loading...</h1>
   }
 
 
-  const router = useRouter();
-
   const userName = user.email.split("@")[0];
 
-  // useEffect(() => {
-  //   if (
-  //     !addProductCtx?.category ||
-  //     !addProductCtx?.city ||
-  //     !addProductCtx?.image ||
-  //     !addProductCtx?.description ||
-  //     !addProductCtx?.gender ||
-  //     !addProductCtx?.name
-  //   ) {
-  //     router.push("/post/add-product");
-  //   }
-  // }, []);
 
-  return (
+    return (
     <div className="bg-white">
       <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
