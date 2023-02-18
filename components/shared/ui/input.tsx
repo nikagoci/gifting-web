@@ -5,7 +5,7 @@ interface Props {
   register: any;
   errors: any;
   value?: string;
-  onChange: (id: string, value: string) => void
+  onChange?: any
 }
 
 export default function Input(props: Props) {

@@ -1,6 +1,6 @@
 import { createStore, action, Action, persist } from "easy-peasy";
 
-interface Products {
+export interface Products {
     name: string;
     image: string;
     city: string;
@@ -28,6 +28,7 @@ export interface StoreModel {
     addCategory: Action<ProductModel, Category>;
     addGender: Action<ProductModel, Gender>;
     addDescription: Action<ProductModel, Description>;
+    clearProducts: Action<ProductModel>
 }
 
 export const productStore = createStore<StoreModel>({
@@ -56,5 +57,15 @@ export const productStore = createStore<StoreModel>({
   }),
   addDescription: action((state, payload) => {
     state.products.description = payload
+  }),
+  clearProducts: action((state) => {
+    state.products = {
+      name: "",
+      image: "",
+      city: "Tbilisi",
+      category: "All New Arrivals",
+      gender: "",
+      description: ""
+    }
   })
 });

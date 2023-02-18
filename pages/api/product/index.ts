@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      const { name, city, imageSrc, description, condition, gender, category } = req.body;
+      const { name, city, imageSrc, description, gender, category } = req.body;
       await connectToDatabase();
 
       const newProduct = await Product.create({
@@ -16,7 +16,6 @@ export default async function handler(
         city,
         imageSrc,
         description,
-        condition,
         gender,
         category
       });

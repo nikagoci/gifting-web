@@ -1,4 +1,12 @@
-export default function CheckboxList() {
+import { Dispatch, SetStateAction } from "react";
+
+interface Props {
+  checked: boolean;
+  setChecked: Dispatch<SetStateAction<boolean>>
+}
+
+export default function CheckboxList({checked, setChecked}: Props) {
+
     return (
       <fieldset className="border-t border-b border-gray-200">
         <legend className="sr-only">Notifications</legend>
@@ -14,11 +22,13 @@ export default function CheckboxList() {
             </div>
             <div className="flex items-center h-5 ml-3">
               <input
-                id="comments"
-                aria-describedby="comments-description"
-                name="comments"
+                id="phone"
+                aria-describedby="phone-number"
+                name="phone"
                 type="checkbox"
                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                checked={checked}
+                onChange={() => setChecked(prev => !prev)}
               />
             </div>
           </div>
@@ -33,9 +43,9 @@ export default function CheckboxList() {
             </div>
             <div className="flex items-center h-5 ml-3">
               <input
-                id="candidates"
-                aria-describedby="candidates-description"
-                name="candidates"
+                id="email"
+                aria-describedby="email-notification"
+                name="email"
                 type="checkbox"
                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
               />
@@ -52,9 +62,9 @@ export default function CheckboxList() {
             </div>
             <div className="flex items-center h-5 ml-3">
               <input
-                id="offers"
-                aria-describedby="offers-description"
-                name="offers"
+                id="news"
+                aria-describedby="news-letter"
+                name="news"
                 type="checkbox"
                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
               />
