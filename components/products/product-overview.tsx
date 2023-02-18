@@ -2,6 +2,7 @@ import { BsPhone } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
 import { ProductInterface } from "@/utils/interfaces";
+import Image from "next/image";
 
 interface Product {
   id: string;
@@ -22,7 +23,11 @@ export default function ProductOverview({
 }: {
   product: ProductInterface;
 }) {
-  console.log(product)
+  
+  function myLoader() {
+    return product.imageSrc;
+  }
+
   return (
     <>
       {!product && <h1>Loading...</h1>}
@@ -30,10 +35,13 @@ export default function ProductOverview({
         <div className="bg-white">
           <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-              <img
+              <Image
+                loader={myLoader}
                 src={product.imageSrc}
                 alt={product.name}
-                className="object-cover object-center w-full h-full"
+                className="object-cover object-center"
+                width={600}
+                height={200}
               />
 
               {/* Product info */}
@@ -44,11 +52,7 @@ export default function ProductOverview({
                 <div className="mt-6">
                   <h3 className="font-serif text-lg">
                     Category:{" "}
-                    <span
-                      className="font-bold"
-                    >
-                      {product.category}
-                    </span>
+                    <span className="font-bold">{product.category}</span>
                   </h3>
                 </div>
                 <div className="mt-6">

@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useStoreState } from "@/store/hooks";
 import { useStoreRehydrated } from 'easy-peasy';
+import Image from "next/image";
 
 interface Props {
   user: {
@@ -40,16 +41,22 @@ export default function PostOverview({ user }: Props) {
 
   const userName = user.email.split("@")[0];
 
+  function myLoader() {
+    return productStore?.image
+  }
 
     return (
     <div className="bg-white">
       <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
           {/* Image gallery */}
-          <img
+          <Image
+            loader={myLoader}
             src={productStore?.image}
             alt={productStore?.name}
-            className="object-cover object-center w-full h-full"
+            className="object-cover object-center h-full"
+            width={1200}
+            height={900}
           />
 
           {/* Product info */}

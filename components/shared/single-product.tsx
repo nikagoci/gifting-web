@@ -1,15 +1,24 @@
 import { ProductInterface } from "@/utils/interfaces";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function SingleProduct({ product }: {product: ProductInterface}) {
+
+    function myLoader() {
+        return product.imageSrc
+    }
+
     return (
         <Link key={product._id} href={`/products/${product._id}`} className="group">
             <div className="w-full overflow-hidden bg-gray-200 rounded-lg aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8">
-                <img
+                <Image
+                    loader={myLoader}
                     src={product.imageSrc}
                     alt={product.name}
-                    className="object-cover object-center w-full h-full group-hover:opacity-75"
+                    className="object-cover object-fit group-hover:opacity-75"
+                    width={100}
+                    height={100}
                 />
             </div>
             <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
