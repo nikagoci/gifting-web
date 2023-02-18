@@ -3,7 +3,9 @@ interface Props {
   label: string;
   type: string;
   register: any;
-  errors: any
+  errors: any;
+  value?: string;
+  onChange: (id: string, value: string) => void
 }
 
 export default function Input(props: Props) {
@@ -22,6 +24,9 @@ export default function Input(props: Props) {
           type={props.type}
           className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           {...props.register}
+          value={props.value}
+          
+          onChange={(e) => props.onChange(props.id, e.target.value)}
         />
         
       </div>

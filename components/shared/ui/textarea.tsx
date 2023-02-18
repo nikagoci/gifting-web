@@ -1,11 +1,19 @@
+import {useStoreRehydrated} from 'easy-peasy'
+
 interface Props {
     id: string;
     label: string;
     register: any;
-    errors: any
+    errors: any;
+    value?: string;
+    onChange: (id: string, value: string) => void
   }
   
   export default function Textarea(props: Props) {
+    const isRehydrated = useStoreRehydrated();
+
+    if(!isRehydrated) return <h1>Loading...</h1>;
+
     return (
       <div>
         <label
@@ -19,8 +27,10 @@ interface Props {
             id={props.id}
             name={props.id}
             rows="4"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+            className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             {...props.register}
+            defaultValue={props.value}
+            onChange={(e) => props.onChange(props.id , e.target.value)}
           />
           
         </div>

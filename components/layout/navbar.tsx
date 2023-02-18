@@ -14,11 +14,6 @@ export default function Navbar() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  console.log({
-    session,
-    status,
-  });
-
   if (status === "loading") {
     return <h1>Loading...</h1>;
   }

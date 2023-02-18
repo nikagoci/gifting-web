@@ -1,19 +1,24 @@
-import { AddProductContext } from "@/context/AddProduct";
+import { useStoreActions, useStoreState } from "@/store/hooks";
 import { addProductSchema } from "@/utils/formSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
 
 import Input from "../shared/ui/input";
-import Radio from "../shared/ui/radio";
 import Select from "../shared/ui/select";
 import Textarea from "../shared/ui/textarea";
 
 export default function AddPost() {
-  const addProductCtx = useContext(AddProductContext)
   const router = useRouter();
   const schema = addProductSchema();
+
+  const productState = useStoreState((state) => state.products);
+  const addCategory = useStoreActions((state) => state.addCategory);
+  const addCity = useStoreActions((state) => state.addCity);
+  const addDescription = useStoreActions((state) => state.addDescription);
+  const addGender = useStoreActions((state) => state.addGender);
+  const addImage = useStoreActions((state) => state.addImage);
+  const addName = useStoreActions((state) => state.addName);
 
   const {
     handleSubmit,
@@ -22,19 +27,26 @@ export default function AddPost() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-console.log(errors)
-  const onSubmit = handleSubmit((value) => {
-    if(addProductCtx) {
-      addProductCtx.addCategory(value.category);
-      addProductCtx.addCity(value.city);
-      addProductCtx.addGender(value.gender);
-      addProductCtx.addImage(value.image);
-      addProductCtx.addName(value.name);
-      addProductCtx.addDescription(value.description);
-    }
 
-    router.push('/post/product-overview')
+  const onSubmit = handleSubmit((value) => {
+    router.push("/post/product-overview");
   });
+
+  function changeHandler(id: string, value: string) {
+    if (id === "product-name") {
+      addName(value);
+    } else if (id === "product-image") {
+      addImage(value);
+    } else if(id=== 'description'){
+      addDescription(value)
+    } else if(id === 'city'){
+      addCity(value)
+    } else if(id=== 'category'){
+      addCategory(value);
+    } else if(id=== 'gender'){
+      addGender(value)
+    }
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -49,6 +61,8 @@ console.log(errors)
           type="text"
           register={register("name")}
           errors={errors.name}
+          value={productState.name}
+          onChange={changeHandler}
         />
         <Input
           id="product-image"
@@ -56,18 +70,27 @@ console.log(errors)
           type="text"
           register={register("image")}
           errors={errors.image}
+          value={productState.image}
+          onChange={changeHandler}
         />
-        <Textarea id='description' label="Description" register={register('description')} errors={errors.description} />
+        <Textarea
+          id="description"
+          label="Description"
+          register={register("description")}
+          errors={errors.description}
+          value={productState.description}
+          onChange={changeHandler}
+        />
         <Select
           id="city"
-          defaultValue="Kutaisi"
           label="City"
-          options={["Kutaisi", "Tbilisi", "Zestafoni"]}
+          options={["Tbilisi", "Kutaisi", "Zestafoni"]}
           register={register("city")}
+          defaultValue={productState.city}
+          onChange={changeHandler}
         />
         <Select
           id="category"
-          defaultValue="All New Arrivals"
           label="Category"
           options={[
             "All New Arrivals",
@@ -77,16 +100,24 @@ console.log(errors)
             "Other",
           ]}
           register={register("category")}
+          defaultValue={productState.category}
+          onChange={changeHandler}
         />
         <div className="flex flex-col">
           <legend className="block mb-3 text-sm font-medium text-gray-700">
             Choose Gender
           </legend>
           <div className="flex gap-x-6 ">
-            <Radio id="male" label="Male" register={register("gender")} />
-            <Radio id="female" label="Female" register={register("gender")} />
+              <div className="flex items-center justify-center" onChange={() => changeHandler('gender', 'male')}> 
+                <label htmlFor='male' className="mr-2">Male</label>
+                <input value='male' type="radio" id='male' {...register("gender")} checked={productState.gender === 'male'} />
+            </div>
+        <div className="flex items-center justify-center" onChange={() => changeHandler('gender', 'female')}> 
+            <label htmlFor="female" className="mr-2">Female</label>
+            <input value="female" type="radio"  id="female" {...register("gender")} checked={productState.gender === 'female'} />
+        </div>
           </div>
-          { errors?.gender?.message && (
+          {errors?.gender?.message && (
             <p className="mt-2 text-sm font-semibold text-rose-600">
               Gender is required
             </p>

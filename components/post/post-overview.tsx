@@ -1,12 +1,11 @@
 import { BsPhone } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
-import { StarIcon } from "@heroicons/react/solid";
 import Button from "../shared/ui/button";
-import { useSession } from "next-auth/react";
-import { useContext, useEffect } from "react";
-import { AddProductContext } from "@/context/AddProduct";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useStoreState } from "@/store/hooks";
+import { useStoreRehydrated } from 'easy-peasy';
 
 interface Props {
   user: {
@@ -18,23 +17,30 @@ interface Props {
 }
 
 export default function PostOverview({ user }: Props) {
-  const addProductCtx = useContext(AddProductContext);
+  const isRehydrated = useStoreRehydrated();
+  const productStore = useStoreState((state) => state.products)
+
+  if(!isRehydrated) {
+    return <h1>Loading...</h1>
+  }
+
+
   const router = useRouter();
 
   const userName = user.email.split("@")[0];
 
-  useEffect(() => {
-    if (
-      !addProductCtx?.category ||
-      !addProductCtx?.city ||
-      !addProductCtx?.image ||
-      !addProductCtx?.description ||
-      !addProductCtx?.gender ||
-      !addProductCtx?.name
-    ) {
-      router.push("/post/add-product");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (
+  //     !addProductCtx?.category ||
+  //     !addProductCtx?.city ||
+  //     !addProductCtx?.image ||
+  //     !addProductCtx?.description ||
+  //     !addProductCtx?.gender ||
+  //     !addProductCtx?.name
+  //   ) {
+  //     router.push("/post/add-product");
+  //   }
+  // }, []);
 
   return (
     <div className="bg-white">
@@ -42,20 +48,20 @@ export default function PostOverview({ user }: Props) {
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
           {/* Image gallery */}
           <img
-            src={addProductCtx?.image}
-            alt={addProductCtx?.name}
+            src={productStore?.image}
+            alt={productStore?.name}
             className="object-cover object-center w-full h-full"
           />
 
           {/* Product info */}
           <div className="px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-              {addProductCtx?.name}
+              {productStore?.name}
             </h1>
 
             <div className="mt-6">
               <div className="space-y-6 text-base text-gray-700" />
-              <p>{addProductCtx?.description}</p>
+              <p>{productStore?.description}</p>
             </div>
 
             <section aria-labelledby="details-heading" className="mt-12">
@@ -74,7 +80,7 @@ export default function PostOverview({ user }: Props) {
                   </div>
                   <div className="flex items-center mb-6 text-xl gap-x-3">
                     <LocationMarkerIcon className="w-8 h-auto text-emerald-500" />
-                    <h6>{addProductCtx?.city}</h6>
+                    <h6>{productStore?.city}</h6>
                   </div>
                 </div>
               </div>
