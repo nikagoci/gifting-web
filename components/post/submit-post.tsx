@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import CheckboxList from "./checkbox-list";
 import { ToastContainer } from "react-toastify";
 import toastError from "@/utils/toastErrors";
@@ -32,10 +32,18 @@ const clearSessionStorage = () => {
 }
 
 export default function SubmitPost() {
-  const productState = useStoreState((state) => state.products);
+  const productStore = useStoreState((state) => state.products);
   const clearProducts = useStoreActions((state) => state.clearProducts)
   const [checked, setChecked] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    
+    if(!productStore.description || !productStore.gender || !productStore.image || !productStore.name) {
+      router.push('/post/add-product')
+    }
+
+  }, [])
 
   async function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,7 +53,7 @@ export default function SubmitPost() {
         "You can not submit post without accept usage of phone number"
       );
     } else {
-      const response = await createProduct(productState);
+      const response = await createProduct(productStore);
 
       if (response.status === "success") {
         clearSessionStorage()

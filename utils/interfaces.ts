@@ -10,8 +10,7 @@ export interface ProductInterface {
     | "Electronics"
     | "Clothes"
     | "Other";
-  gender: "Male" | "Female";
-  condition: "Used" | "Normal";
+  gender: "male" | "female";
 }
 
 export interface productFilterContextInterface {

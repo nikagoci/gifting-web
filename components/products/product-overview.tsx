@@ -22,6 +22,7 @@ export default function ProductOverview({
 }: {
   product: ProductInterface;
 }) {
+  console.log(product)
   return (
     <>
       {!product && <h1>Loading...</h1>}
@@ -41,16 +42,12 @@ export default function ProductOverview({
                   {product.name}
                 </h1>
                 <div className="mt-6">
-                  <h3 className="text-lg font-semibold">
-                    Product Condition:{" "}
+                  <h3 className="font-serif text-lg">
+                    Category:{" "}
                     <span
-                      className={`font-bold tracking-wide ${
-                        product.condition === "Used"
-                          ? "text-red-500"
-                          : "text-emerald-500"
-                      }`}
+                      className="font-bold"
                     >
-                      {product.condition}
+                      {product.category}
                     </span>
                   </h3>
                 </div>

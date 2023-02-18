@@ -1,7 +1,7 @@
 import ProductOverview from "@/components/products/product-overview";
 import Product from "@/database/model/productModel";
 import { ProductInterface } from "@/utils/interfaces";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 
 export default function SingleProductPage({
   product,
