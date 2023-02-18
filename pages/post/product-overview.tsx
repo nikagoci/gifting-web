@@ -2,7 +2,7 @@ import PostOverview from "@/components/post/post-overview";
 import PostSteps from "@/components/post/post-steps";
 import connectToDatabase from "@/database/connectDB";
 import User from "@/database/model/userModel";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 
 interface Props {

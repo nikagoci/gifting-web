@@ -13,21 +13,28 @@ interface Props {
     _id: string;
     email: string;
     password: string;
-    phoneNumber: string
-  }
+    phoneNumber: string;
+  };
 }
 
-export default function PostOverview({user}: Props) {
-  const addProductCtx = useContext(AddProductContext)
+export default function PostOverview({ user }: Props) {
+  const addProductCtx = useContext(AddProductContext);
   const router = useRouter();
 
-  const userName = user.email.split('@')[0]
+  const userName = user.email.split("@")[0];
 
   useEffect(() => {
-    if(!addProductCtx?.category || !addProductCtx?.city || !addProductCtx?.image || !addProductCtx?.gender || !addProductCtx?.name ){
-        router.push('/post/add-product')
+    if (
+      !addProductCtx?.category ||
+      !addProductCtx?.city ||
+      !addProductCtx?.image ||
+      !addProductCtx?.description ||
+      !addProductCtx?.gender ||
+      !addProductCtx?.name
+    ) {
+      router.push("/post/add-product");
     }
-  }, [])
+  }, []);
 
   return (
     <div className="bg-white">
@@ -48,7 +55,7 @@ export default function PostOverview({user}: Props) {
 
             <div className="mt-6">
               <div className="space-y-6 text-base text-gray-700" />
-              <p>{addProductCtx?.name}</p>
+              <p>{addProductCtx?.description}</p>
             </div>
 
             <section aria-labelledby="details-heading" className="mt-12">
@@ -75,7 +82,7 @@ export default function PostOverview({user}: Props) {
           </div>
         </div>
         <div className="flex justify-center mt-12">
-          <Button full href="/post/submit-product" padding='px-16 py-2'>
+          <Button full href="/post/submit-product" padding="px-16 py-2">
             Next
           </Button>
         </div>

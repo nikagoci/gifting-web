@@ -29,6 +29,11 @@ const AddProductReducer = (state: addProductContextInterface, action: any) => {
         ...state,
         category: action.payload,
       };
+      case "ADD_DESCRIPTION" :
+        return {
+          ...state,
+          description: action.payload,
+        }
     default:
       return state;
   }

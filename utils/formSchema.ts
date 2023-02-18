@@ -47,7 +47,8 @@ export function addProductSchema() {
     image: yup.string().required('Image is required'),
     city: yup.string().required('City is required'),
     category: yup.string().required('Category is required'),
-    gender: yup.string().required('Gender is required')
+    gender: yup.string().required('Gender is required'),
+    description: yup.string().required('Description is required'),
   })
 
   return schema

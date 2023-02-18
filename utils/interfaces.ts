@@ -37,6 +37,7 @@ export interface addProductContextInterface {
     city: string;
     category: string;
     gender: string;
+    description: string;
 }
 
 export interface addProductValueInterface extends addProductContextInterface {
@@ -45,4 +46,5 @@ export interface addProductValueInterface extends addProductContextInterface {
   addGender: (gender: string) => void;
   addCity: (city: string) => void;
   addImage: (image: string) => void;
+  addDescription: (description: string) => void;
 }

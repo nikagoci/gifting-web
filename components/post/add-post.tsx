@@ -1,7 +1,6 @@
 import { AddProductContext } from "@/context/AddProduct";
 import { addProductSchema } from "@/utils/formSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -9,11 +8,13 @@ import { useForm } from "react-hook-form";
 import Input from "../shared/ui/input";
 import Radio from "../shared/ui/radio";
 import Select from "../shared/ui/select";
+import Textarea from "../shared/ui/textarea";
 
 export default function AddPost() {
   const addProductCtx = useContext(AddProductContext)
   const router = useRouter();
   const schema = addProductSchema();
+
   const {
     handleSubmit,
     register,
@@ -21,7 +22,7 @@ export default function AddPost() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
+console.log(errors)
   const onSubmit = handleSubmit((value) => {
     if(addProductCtx) {
       addProductCtx.addCategory(value.category);
@@ -29,6 +30,7 @@ export default function AddPost() {
       addProductCtx.addGender(value.gender);
       addProductCtx.addImage(value.image);
       addProductCtx.addName(value.name);
+      addProductCtx.addDescription(value.description);
     }
 
     router.push('/post/product-overview')
@@ -55,6 +57,7 @@ export default function AddPost() {
           register={register("image")}
           errors={errors.image}
         />
+        <Textarea id='description' label="Description" register={register('description')} errors={errors.description} />
         <Select
           id="city"
           defaultValue="Kutaisi"

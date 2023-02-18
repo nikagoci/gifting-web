@@ -14,6 +14,7 @@ const initialState: addProductContextInterface = {
   city: "",
   category: "",
   gender: "",
+  description: ''
 };
 
 export const AddProductContextProvider = ({
@@ -43,17 +44,23 @@ export const AddProductContextProvider = ({
     dispatch({ type: "ADD_GENDER", payload: gender });
   };
 
+  const addDescription = (description: string) => {
+    dispatch({ type: "ADD_DESCRIPTION", payload: description });
+  }
+
   const value: addProductValueInterface = {
     name: state.name,
     image: state.image,
     city: state.city,
     category: state.category,
     gender: state.gender,
+    description: state.description,
     addName,
     addCategory,
     addGender,
     addCity,
-    addImage
+    addImage,
+    addDescription
   };
   return (
     <AddProductContext.Provider value={value}>
