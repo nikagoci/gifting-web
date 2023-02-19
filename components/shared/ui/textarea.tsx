@@ -12,7 +12,7 @@ interface Props {
   export default function Textarea(props: Props) {
     const isRehydrated = useStoreRehydrated();
 
-    if(!isRehydrated) return ;
+    if(!isRehydrated) return <textarea />;
 
     return (
       <div>

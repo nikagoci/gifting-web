@@ -19,7 +19,7 @@ export default function Select({
 }: Props) {
   const isRehydrated = useStoreRehydrated();
 
-  if (!isRehydrated) return;
+  if (!isRehydrated) return <select />;
 
   if (onChange) {
     <div className="w-full">
