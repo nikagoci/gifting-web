@@ -1,17 +1,8 @@
 import Button from "../shared/ui/button";
 import { useSession } from "next-auth/react";
-import Spinner from "../shared/ui/spinner";
 
 export default function Hero() {
-  const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return (
-      <header className="flex flex-col items-center justify-center h-full full-height gap-y-6">
-        <Spinner size={60} />
-      </header>
-    );
-  }
+  const { status } = useSession();
 
   return (
     <header className="flex flex-col items-center justify-center h-full full-height gap-y-6">

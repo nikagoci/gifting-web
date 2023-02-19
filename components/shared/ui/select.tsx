@@ -1,5 +1,4 @@
 import { useStoreRehydrated } from "easy-peasy";
-import Spinner from "./spinner";
 
 interface Props {
   label: string;
@@ -20,7 +19,7 @@ export default function Select({
 }: Props) {
   const isRehydrated = useStoreRehydrated();
 
-  if (!isRehydrated) return <h1><Spinner size={40} /></h1>;
+  if (!isRehydrated) return;
 
   if (onChange) {
     <div className="w-full">

@@ -1,5 +1,4 @@
 import {useStoreRehydrated} from 'easy-peasy'
-import Spinner from './spinner';
 
 interface Props {
     id: string;
@@ -13,7 +12,7 @@ interface Props {
   export default function Textarea(props: Props) {
     const isRehydrated = useStoreRehydrated();
 
-    if(!isRehydrated) return <Spinner size={40} />;
+    if(!isRehydrated) return ;
 
     return (
       <div>
