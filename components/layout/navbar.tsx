@@ -15,6 +15,10 @@ export default function Navbar() {
   const router = useRouter();
   const { data: session, status } = useSession();
 
+  const handleLangClick = (l: string) => {
+    console.log(l)
+  }
+
   const userName = session && session.user && session.user.email && session.user.email.split('@')[0];
 
   const active = "border-indigo-500 text-gray-900";
@@ -81,6 +85,11 @@ export default function Navbar() {
                   </Link>
                 </div>
               </div>
+              {router.locales?.map(l => (
+                <button key={l} onClick={() => handleLangClick(l)}>
+                  {l}
+                </button>
+              ))}
 
               {status === "unauthenticated" && (
                 <div className="hidden sm:ml-6 sm:flex sm:items-center gap-x-4">

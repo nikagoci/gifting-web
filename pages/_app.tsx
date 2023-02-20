@@ -6,8 +6,9 @@ import { ProductFilterContextProvider } from "../context/ProductFilter";
 import { SessionProvider } from "next-auth/react";
 import {StoreProvider} from 'easy-peasy'
 import { productStore } from "@/store/ProductStore";
+import { appWithTranslation } from 'next-i18next'
 
-export default function App({
+function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
@@ -20,7 +21,6 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <StoreProvider store={productStore}>
-
         <ProductFilterContextProvider>
           <Layout>
             <Component {...pageProps} />
@@ -30,3 +30,17 @@ export default function App({
     </SessionProvider>
   );
 }
+
+export default appWithTranslation(App)
+
+// export const getStaticProps: GetStaticProps= async ({locale}) => {
+//   if(locale){
+//     return {
+//       props: {
+//         ...( await serverSideTranslations(locale, ['home']))
+//       }
+//     };
+//   }
+
+//   throw new Error('Local Not Found!')
+// };

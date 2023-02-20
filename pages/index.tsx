@@ -5,12 +5,16 @@ import connectToDatabase from "@/database/connectDB";
 import Product from "@/database/model/productModel";
 import { ProductInterface } from "@/utils/interfaces";
 import { GetStaticProps } from "next";
+import { useTranslation } from "next-i18next";
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import { useRouter } from "next/router";
 
 export default function HomePage({
   products,
 }: {
   products: ProductInterface[];
 }) {
+  const { t } = useTranslation('home')
   return (
     <>
       <Hero />
@@ -20,34 +24,28 @@ export default function HomePage({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async ({locale}) => {
   // let plainProducts;
   let products
   try {
     await connectToDatabase();
 
-
     products = await Product.aggregate([{ $sample: { size: 4 } }]);
-
-    // plainProducts = products.map((product) => {
-    //   const plainProduct = {
-    //     ...product,
-    //     _id: product._id.toString(),
-    //     createdAt: product.createdAt.toString(),
-    //   };
-
-    //   return plainProduct;
-    // });
-
-
   } catch (err: any) {
     throw new Error(err);
   }
 
-  return {
-    props: {
-      products: JSON.parse(JSON.stringify(products)),
-    },
-    revalidate: 21600, // 6hours
-  };
+  if(locale){
+    return {
+      props: {
+        products: JSON.parse(JSON.stringify(products)),
+        ...( await serverSideTranslations(locale, ['home']))
+      },
+      revalidate: 21600, // 6hours
+    };
+  }
+
+
+  throw new Error('Local not found')
+    
 };
