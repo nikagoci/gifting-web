@@ -5,16 +5,13 @@ import connectToDatabase from "@/database/connectDB";
 import Product from "@/database/model/productModel";
 import { ProductInterface } from "@/utils/interfaces";
 import { GetStaticProps } from "next";
-import { useTranslation } from "next-i18next";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
-import { useRouter } from "next/router";
 
 export default function HomePage({
   products,
 }: {
   products: ProductInterface[];
 }) {
-  const { t } = useTranslation('home')
   return (
     <>
       <Hero />

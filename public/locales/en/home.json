@@ -1,10 +1,36 @@
 {
-    "about": {
+    "hero": {
         "title1": "Make people happy",
         "title2": "With Presents",
         "description": "XXXX is a company based in georgia. Our main goal is to help people who can't help themselves. We hope there are many people who thinks like us.",
         "see product": "See Products",
         "add product": "Add Products"
     },
-    "bla": "red"
+    "about": {
+        "title": "TRANSACTIONS",
+        "header": "A better way to help people",
+        "description": "We are doing everything to help poor people. We think kindness should be goal of our lives. Thats why we offer XXXX.",
+        "offers": {
+            "product1": {
+                "title": "Fast and simple",
+                "description": "You can access anyone around the georgia within days and get free stuff or be the one who gives free stuff."
+            },
+            "product2": {
+                "title": "Transfers are instant",
+                "description": "Our sponsors who will receive products will get you as fast as possible. The maximum transfer time will be two days."
+            },
+            "product3": {
+                "title": "No hidden fees",
+                "description": "Usage of XXXXX is completly free. There are no hidden fees or any other payment system. You can use website without acctualy loose anything."
+            },
+            "product4": {
+                "title": "Direct contact",
+                "description": "Our website offers to contact sellers directly through their phones or emails. That's can save a lot of your time."
+            }
+        }
+    },
+    "products": {
+        "title": "Products",
+        "button": "See More"
+    }
 }
