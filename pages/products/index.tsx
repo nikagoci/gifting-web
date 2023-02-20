@@ -3,6 +3,7 @@ import connectToDatabase from "@/database/connectDB";
 import Product from "@/database/model/productModel";
 import { ProductInterface } from "@/utils/interfaces";
 import { GetServerSideProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function ProductsPage({
   products,
@@ -27,9 +28,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     throw new Error(err);
   }
 
-  return {
-    props: {
-      products: JSON.parse(JSON.stringify(products)),
-    },
-  };
+  if(context.locale) {
+    return {
+      props: {
+        products: JSON.parse(JSON.stringify(products)),
+        ...( await serverSideTranslations(context.locale, ['products']))
+      },
+    };
+  }
+
+  throw new Error('Context local not found')
+
+  
 };

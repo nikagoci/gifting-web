@@ -3,6 +3,7 @@ import {
   ArrowNarrowLeftIcon,
   ArrowNarrowRightIcon,
 } from "@heroicons/react/solid";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -16,6 +17,7 @@ export default function Pagination() {
   const [productQuantity, setProductQuantity] = useState(0);
   const [totalPages, setTotalPages] = useState<number[]>([]);
   const router = useRouter();
+  const {t} = useTranslation('products')
 
   useEffect(() => {
     async function fetchData() {
@@ -126,7 +128,7 @@ export default function Pagination() {
             className="w-5 h-5 mr-3 text-gray-400"
             aria-hidden="true"
           />
-          Previous
+          {t('pagination.previous')}
         </div>
       </div>
       <div className="hidden md:-mt-px md:flex">
@@ -179,7 +181,7 @@ export default function Pagination() {
           className="inline-flex pt-4 pl-1 text-sm font-medium text-gray-500 border-t-2 border-transparent cursor-pointer itcursor-pointer ems-center hover:text-gray-700 hover:border-gray-300"
           onClick={handlePageInc}
         >
-          Next
+          {t('pagination.next')}
           <ArrowNarrowRightIcon
             className="w-5 h-5 ml-3 text-gray-400"
             aria-hidden="true"

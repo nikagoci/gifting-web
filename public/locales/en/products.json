@@ -1,0 +1,21 @@
+{
+    "categories": {
+        "gender": {
+            "title": "Gender",
+            "label1": "Male",
+            "label2": "Female"
+        },
+        "category": {
+            "title": "Category",
+            "label1": "All New Arrivals",
+            "label2": "Household Items",
+            "label3": "Electronics",
+            "label4": "Clothes",
+            "label5": "Other"
+        }
+    },
+    "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+    }
+}

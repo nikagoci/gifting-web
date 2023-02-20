@@ -6,36 +6,47 @@ import Select from "../shared/ui/select";
 import ProductFull from "./product-full";
 import { ProductInterface } from "@/utils/interfaces";
 import { ProductFilterContext } from "@/context/ProductFilter";
+import { useTranslation } from "next-i18next";
 
-const filters = [
-  {
-    id: "gender",
-    name: "Gender",
-    options: [
-      { value: "male", label: "Male" },
-      { value: "female", label: "Female" },
-    ],
-  },
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "new-arrivals", label: "All New Arrivals" },
-      { value: "household-items", label: "Household Items" },
-      { value: "electronics", label: "Electronics" },
-      { value: "clothes", label: "Clothes" },
-      { value: "other", label: "Other" },
-    ],
-  },
-  {
-    id: "condition",
-    name: "Condition",
-    options: [
-      { value: "normal", label: "Normal" },
-      { value: "used", label: "Used" },
-    ],
-  },
-];
+interface Filter {
+  gender: {
+    title: string;
+    label1: string;
+    label2: string;
+};
+category: {
+    title: string;
+    label1: string;
+    label2: string;
+    label3: string;
+    label4: string;
+    label5: string;
+};
+}
+
+const filters = (newFilters: Filter ) => {
+  return [
+    {
+      id: "gender",
+      name: newFilters.gender.title,
+      options: [
+        { value: "male", label: newFilters.gender.label1 },
+        { value: "female", label: newFilters.gender.label2 },
+      ],
+    },
+    {
+      id: "category",
+      name: newFilters.category.title,
+      options: [
+        { value: "new-arrivals", label: newFilters.category.label1 },
+        { value: "household-items", label: newFilters.category.label2 },
+        { value: "electronics", label: newFilters.category.label3 },
+        { value: "clothes", label: newFilters.category.label4 },
+        { value: "other", label: newFilters.category.label5 },
+      ],
+    },
+  ];
+} 
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -44,6 +55,24 @@ function classNames(...classes: any) {
 export default function ProductFilter({products}: {products: ProductInterface[]}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const productCtx = useContext(ProductFilterContext)
+
+  const {t} = useTranslation('products')
+
+  const newFilters = {
+    gender: {
+      title: t('categories.gender.title'),
+      label1: t('categories.gender.label1'),
+      label2: t('categories.gender.label2')
+    },
+    category: {
+      title: t('categories.category.title'),
+      label1: t('categories.category.label1'),
+      label2: t('categories.category.label2'),
+      label3: t('categories.category.label3'),
+      label4: t('categories.category.label4'),
+      label5: t('categories.category.label5')
+    }
+  }
 
   function handleInputChange(id: string, value: string) {
     if(productCtx && !productCtx.categories.includes(value) && !productCtx.conditions.includes(value) && !productCtx.genders.includes(value)){
@@ -111,7 +140,7 @@ export default function ProductFilter({products}: {products: ProductInterface[]}
 
                 {/* Filters */}
                 <form className="mt-4">
-                  {filters.map((section) => (
+                  {filters(newFilters).map((section) => (
                     <Disclosure
                       as="div"
                       key={section.name}
@@ -190,7 +219,7 @@ export default function ProductFilter({products}: {products: ProductInterface[]}
 
               <div className="hidden lg:block">
                 <form className="space-y-10 divide-y divide-gray-200">
-                  {filters.map((section, sectionIdx) => (
+                  {filters(newFilters).map((section, sectionIdx) => (
                     <div
                       key={section.name}
                       className={sectionIdx === 0 ? "" : "pt-10"}
