@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         product: JSON.parse(JSON.stringify(product)),
-        ...( await serverSideTranslations(context.locale, ['addproduct']))
+        ...( await serverSideTranslations(context.locale, ['addproduct', 'common']))
       },
     };
   }

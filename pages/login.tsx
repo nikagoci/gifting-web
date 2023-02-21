@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => {
     if(locale) {
       return {
         props: {
-          ...( await serverSideTranslations(locale, ['registration']))
+          ...( await serverSideTranslations(locale, ['registration', 'common']))
         },
       };
     }

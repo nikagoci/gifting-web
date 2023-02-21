@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         products: JSON.parse(JSON.stringify(products)),
-        ...( await serverSideTranslations(context.locale, ['products']))
+        ...( await serverSideTranslations(context.locale, ['products', 'common']))
       },
     };
   }

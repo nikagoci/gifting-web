@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),
-        ...( await serverSideTranslations(context.locale, ['addproduct']))
+        ...( await serverSideTranslations(context.locale, ['addproduct', 'common']))
       }
     }
   }

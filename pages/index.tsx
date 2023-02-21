@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async ({locale}) => {
     return {
       props: {
         products: JSON.parse(JSON.stringify(products)),
-        ...( await serverSideTranslations(locale, ['home']))
+        ...( await serverSideTranslations(locale, ['home', 'common']))
       },
       revalidate: 21600, // 6hours
     };
