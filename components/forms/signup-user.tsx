@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { signUpSchema } from "@/utils/formSchema";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 async function createUser(
   email: string,
@@ -34,7 +35,7 @@ async function createUser(
 }
 
 export default function SignpUser() {
-  const { data, status } = useSession();
+  const {t} = useTranslation('registration')
   const router = useRouter();
 
   const schema = signUpSchema();
@@ -94,7 +95,7 @@ export default function SignpUser() {
             height={48}
           />
           <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            Create new account
+            {t('signup.title')}
           </h2>
         </div>
 
@@ -103,28 +104,28 @@ export default function SignpUser() {
             <form className="space-y-6" onSubmit={onSubmit}>
               <Input
                 id="email"
-                label="Email address"
+                label={t('signup.email')}
                 type="text"
                 register={register("email")}
                 errors={errors.email}
               />
               <Input
                 id="password"
-                label="Password"
+                label={t('signup.password')}
                 type="password"
                 register={register("password")}
                 errors={errors.password}
               />
               <Input
                 id="passwordConfirm"
-                label="Confirm Password"
+                label={t('signup.confirm password')}
                 type="password"
                 register={register("confirmPassword")}
                 errors={errors.confirmPassword}
               />
               <Input
                 id="phone"
-                label="Phone number"
+                label={t('signup.phone number')}
                 type="text"
                 register={register("phoneNumber")}
                 errors={errors.phoneNumber}
@@ -135,12 +136,12 @@ export default function SignpUser() {
                   type="submit"
                   className="flex justify-center w-full px-4 py-2 mb-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Sign up
+                  {t('signup.sign up')}
                 </button>
                 <div className="text-center">
-                  Already have an account?{" "}
+                  {t('signup.account')}{" "}
                   <Link href="/login" className="text-indigo-600 underline">
-                    sing in here
+                    {t('signup.sign in')}
                   </Link>
                 </div>
               </div>
@@ -153,7 +154,7 @@ export default function SignpUser() {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 text-gray-500 bg-white">
-                    Or continue with
+                    {t('signup.continue')}
                   </span>
                 </div>
               </div>

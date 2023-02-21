@@ -11,10 +11,13 @@ import toastError from "@/utils/toastErrors";
 import { loginSchema } from "@/utils/formSchema";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 export default function LoginUser() {
   const router = useRouter();
   const schema = loginSchema();
+  const {t} = useTranslation('registration')
+
   const {
     register,
     handleSubmit,
@@ -62,7 +65,7 @@ export default function LoginUser() {
             height={48}
           />
           <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            Sign in to your account
+            {t('login.title')}
           </h2>
         </div>
 
@@ -72,7 +75,7 @@ export default function LoginUser() {
               <Input
                 id="email"
                 errors={errors.email}
-                label="Email address"
+                label={t('login.email')}
                 register={register("email")}
                 type="text"
               />
@@ -80,7 +83,7 @@ export default function LoginUser() {
               <Input
                 id="password"
                 errors={errors.password}
-                label="Password"
+                label={t('login.password')}
                 register={register("password")}
                 type="password"
               />
@@ -97,7 +100,7 @@ export default function LoginUser() {
                     htmlFor="remember-me"
                     className="block ml-2 text-sm text-gray-900"
                   >
-                    Remember me
+                   {t('login.remember')}
                   </label>
                 </div>
 
@@ -106,7 +109,7 @@ export default function LoginUser() {
                     href="#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    Forgot your password?
+                    {t('login.forgot')}
                   </a>
                 </div>
               </div>
@@ -116,12 +119,12 @@ export default function LoginUser() {
                   type="submit"
                   className="flex justify-center w-full px-4 py-2 mb-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Sign in
+                  {t('login.sign in')}
                 </button>
                 <div className="text-center">
-                  Don't have an account?{" "}
+                  {t('login.account')}{" "}
                   <Link href="/signup" className="text-indigo-600 underline">
-                    sing up here
+                    {t('login.sign up')}
                   </Link>
                 </div>
               </div>
@@ -134,7 +137,7 @@ export default function LoginUser() {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 text-gray-500 bg-white">
-                    Or continue with
+                    {t('login.continue')}
                   </span>
                 </div>
               </div>

@@ -1,0 +1,16 @@
+{
+    "links": {
+        "home": "Home",
+        "about": "About",
+        "products": "Products"
+    },
+    "users": {
+        "profile": "Your Profile",
+        "add product": "Add Product",
+        "signout": "Sign out"
+    },
+    "buttons": {
+        "signup": "signup",
+        "login": "Login"
+    }
+}

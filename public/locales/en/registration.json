@@ -1,0 +1,24 @@
+{
+    "signup": {
+        "title": "Create new account",
+        "email": "Email address",
+        "password": "Password",
+        "confirm password": "Confirm password",
+        "phone number": "Phone number",
+        "sign up": "Sign up",
+        "account": "Already have an account?",
+        "sign in": "Sign in here",
+        "continue": "Or continue with"
+    },
+    "login": {
+        "title": "Sign in to your account",
+        "email": "Email address",
+        "password": "Password",
+        "remember": "Remember me",
+        "forgot": "Forgot your password?",
+        "sign in": "Sing in",
+        "account": "Already have an account?",
+        "sign up": "Sign up here",
+        "continue": "Or continue with"
+    }
+}
