@@ -4,6 +4,7 @@ import { LocationMarkerIcon } from "@heroicons/react/outline";
 import { ProductInterface } from "@/utils/interfaces";
 import Image from "next/image";
 import Spinner from "../shared/ui/spinner";
+import { useTranslation } from "next-i18next";
 
 interface Product {
   id: string;
@@ -24,6 +25,8 @@ export default function ProductOverview({
 }: {
   product: ProductInterface;
 }) {
+
+  const {t} = useTranslation('addproduct')
   
   function myLoader() {
     return product.imageSrc;
@@ -52,7 +55,7 @@ export default function ProductOverview({
                 </h1>
                 <div className="mt-6">
                   <h3 className="font-serif text-lg">
-                    Category:{" "}
+                    {t('add-product.category')}:{" "}
                     <span className="font-bold">{product.category}</span>
                   </h3>
                 </div>
@@ -63,7 +66,7 @@ export default function ProductOverview({
 
                 <section aria-labelledby="details-heading" className="mt-12">
                   <h2 id="details-heading" className="mb-8 text-xl font-bold">
-                    Author Contact
+                    {t('product-overview.author')}
                   </h2>
                   <div className="flex flex-col">
                     <div className="px-16 py-6 font-semibold border border-emerald-300 bg-emerald-50 rounded-xl">
