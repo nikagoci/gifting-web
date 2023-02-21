@@ -7,6 +7,7 @@ import Button from "../shared/ui/button";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import LangSwitcher from "../shared/langSwitcher";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -19,7 +20,7 @@ export default function Navbar() {
   const {t} = useTranslation('common');
 
   const handleLangClick = (l: string) => {
-    console.log(l)
+    router.push(router.asPath, undefined, {locale: l})
   }
 
   const userName = session && session.user && session.user.email && session.user.email.split('@')[0];
@@ -89,14 +90,17 @@ export default function Navbar() {
                   </Link>
                 </div>
               </div>
+
+{/*               
               {router.locales?.map(l => (
                 <button key={l} onClick={() => handleLangClick(l)}>
                   {l}
                 </button>
-              ))}
+              ))} */}
 
               {status === "unauthenticated" && (
                 <div className="hidden sm:ml-6 sm:flex sm:items-center gap-x-4">
+                  <LangSwitcher />
                   <Button href="/signup">{t('buttons.signup')}</Button>
                   <Button full href="/login">
                   {t('buttons.login')}
