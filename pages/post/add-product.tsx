@@ -2,6 +2,7 @@ import AddPost from "@/components/post/add-post";
 import PostSteps from "@/components/post/post-steps";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function AddProductPage() {
   return (
@@ -34,9 +35,15 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
     }
   }
 
-  return {
-    props: {
-      session: JSON.parse(JSON.stringify(session))
+  if(context.locale){
+    return {
+      props: {
+        session: JSON.parse(JSON.stringify(session)),
+        ...( await serverSideTranslations(context.locale, ['addproduct']))
+      }
     }
   }
+
+  throw new Error('Locale not found')
+
 }

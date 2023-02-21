@@ -8,6 +8,7 @@ import { useStoreState } from "@/store/hooks";
 import { useStoreRehydrated } from 'easy-peasy';
 import Image from "next/image";
 import Spinner from "../shared/ui/spinner";
+import { useTranslation } from "next-i18next";
 
 interface Props {
   user: {
@@ -22,6 +23,7 @@ export default function PostOverview({ user }: Props) {
   const isRehydrated = useStoreRehydrated();
   const productStore = useStoreState((state) => state.products)
   const router = useRouter();
+  const {t}= useTranslation('addproduct') 
   
   useEffect(() => {
     
@@ -49,7 +51,7 @@ export default function PostOverview({ user }: Props) {
     return (
     <div className="bg-white">
       <h1 className="text-2xl font-bold text-center">
-          How your post will be shown
+          {t('product-overview.header')}
       </h1>
       <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
@@ -76,7 +78,7 @@ export default function PostOverview({ user }: Props) {
 
             <section aria-labelledby="details-heading" className="mt-12">
               <h2 id="details-heading" className="mb-8 text-xl font-bold">
-                Author Contact
+                {t('product-overview.author')}
               </h2>
               <div className="flex flex-col">
                 <div className="px-16 py-6 font-semibold border border-emerald-300 bg-emerald-50 rounded-xl">
@@ -99,7 +101,7 @@ export default function PostOverview({ user }: Props) {
         </div>
         <div className="flex justify-center mt-12">
           <Button full href="/post/submit-product" padding="px-16 py-2">
-            Next
+            {t('product-overview.button')}
           </Button>
         </div>
       </div>

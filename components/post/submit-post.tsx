@@ -15,6 +15,7 @@ import { Products } from "@/store/ProductStore";
 import { useRouter } from "next/router";
 import Spinner from "../shared/ui/spinner";
 import Modal from "../shared/modal";
+import { useTranslation } from "next-i18next";
 
 const createProduct = async (
   productState: Products,
@@ -49,6 +50,7 @@ export default function SubmitPost() {
   const [isLoading, setIsLoading] = useState(false);
   const [productId, setProductId] = useState('');
   const router = useRouter();
+  const {t} = useTranslation('addproduct');
 
   useEffect(() => {
     if (
@@ -112,11 +114,11 @@ export default function SubmitPost() {
         theme="light"
       />
       <div>
-        <h3 className="text-2xl font-bold text-center">Submit your product</h3>
+        <h3 className="text-2xl font-bold text-center">{t('submit-product.header')}</h3>
         <div className="flex flex-col items-center py-16">
           <h3 className="text-lg">
-            Please read below conditions{" "}
-            <span className="font-bold underline">CAREFULLY</span>
+            {t('submit-product.warning')}{" "}
+            <span className="font-bold underline">{t('submit-product.carefully')}!</span>
           </h3>
           <form onSubmit={submitHandler} className="flex flex-col items-center">
             <div className="py-12">
@@ -126,7 +128,7 @@ export default function SubmitPost() {
               type="submit"
               className="inline-flex items-center px-16 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Submit
+              {t('submit-product.button')}
             </button>
           </form>
         </div>

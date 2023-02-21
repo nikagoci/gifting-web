@@ -4,6 +4,7 @@ import connectToDatabase from "@/database/connectDB";
 import User from "@/database/model/userModel";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 interface Props {
   user: {
@@ -48,9 +49,15 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
 
   const user = await User.findOne({email: session.user?.email})
 
-  return {
-    props: {
-      user: JSON.parse(JSON.stringify(user))
+  if(context.locale){
+    return {
+      props: {
+        user: JSON.parse(JSON.stringify(user)),
+        ...( await serverSideTranslations(context.locale, ['addproduct']))
+      }
     }
   }
+
+  throw new Error('Locale not found')
+
 }

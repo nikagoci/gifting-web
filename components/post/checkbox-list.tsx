@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
@@ -6,6 +7,7 @@ interface Props {
 }
 
 export default function CheckboxList({checked, setChecked}: Props) {
+  const {t} = useTranslation('addproduct');
 
     return (
       <fieldset className="border-t border-b border-gray-200">
@@ -14,10 +16,10 @@ export default function CheckboxList({checked, setChecked}: Props) {
           <div className="relative flex items-start py-4">
             <div className="flex-1 min-w-0 text-sm">
               <label htmlFor="comments" className="font-medium text-gray-700">
-                Phone Number
+              {t('submit-product.phone.title')}
               </label>
               <p id="comments-description" className="text-gray-500">
-                After posting product your phone number will become public.
+              {t('submit-product.phone.description')}
               </p>
             </div>
             <div className="flex items-center h-5 ml-3">
@@ -35,10 +37,10 @@ export default function CheckboxList({checked, setChecked}: Props) {
           <div className="relative flex items-start py-4">
             <div className="flex-1 min-w-0 text-sm">
               <label htmlFor="candidates" className="font-medium text-gray-700">
-                Email notification
+              {t('submit-product.email.title')}
               </label>
               <p id="candidates-description" className="text-gray-500">
-                Get notified if user will interest with your product.
+              {t('submit-product.email.description')}
               </p>
             </div>
             <div className="flex items-center h-5 ml-3">
@@ -54,10 +56,10 @@ export default function CheckboxList({checked, setChecked}: Props) {
           <div className="relative flex items-start py-4">
             <div className="flex-1 min-w-0 text-sm">
               <label htmlFor="offers" className="font-medium text-gray-700">
-                Newsletter
+              {t('submit-product.newsletter.title')}
               </label>
               <p id="offers-description" className="text-gray-500">
-                Get notified to any news within seconds.
+              {t('submit-product.newsletter.description')}
               </p>
             </div>
             <div className="flex items-center h-5 ml-3">

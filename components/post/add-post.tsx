@@ -1,6 +1,7 @@
 import { useStoreActions, useStoreState } from "@/store/hooks";
 import { addProductSchema } from "@/utils/formSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
@@ -11,6 +12,7 @@ import Textarea from "../shared/ui/textarea";
 export default function AddPost() {
   const router = useRouter();
   const schema = addProductSchema();
+  const {t}= useTranslation('addproduct') 
 
   const productState = useStoreState((state) => state.products);
   const addCategory = useStoreActions((state) => state.addCategory);
@@ -57,7 +59,7 @@ export default function AddPost() {
       >
         <Input
           id="product-name"
-          label="Product name"
+          label={t('add-product.name')}
           type="text"
           register={register("name")}
           errors={errors.name}
@@ -66,7 +68,7 @@ export default function AddPost() {
         />
         <Input
           id="product-image"
-          label="Product image"
+          label={t('add-product.image')}
           type="text"
           register={register("image")}
           errors={errors.image}
@@ -75,7 +77,7 @@ export default function AddPost() {
         />
         <Textarea
           id="description"
-          label="Description"
+          label={t('add-product.description')}
           register={register("description")}
           errors={errors.description}
           value={productState.description}
@@ -83,7 +85,7 @@ export default function AddPost() {
         />
         <Select
           id="city"
-          label="City"
+          label={t('add-product.city')}
           options={["Tbilisi", "Kutaisi", "Zestafoni"]}
           register={register("city")}
           defaultValue={productState.city}
@@ -91,13 +93,13 @@ export default function AddPost() {
         />
         <Select
           id="category"
-          label="Category"
+          label={t('add-product.category')}
           options={[
-            "All New Arrivals",
-            "Household Items",
-            "Electronics",
-            "Clothes",
-            "Other",
+            t('add-product.values.category.label1'),
+            t('add-product.values.category.label2'),
+            t('add-product.values.category.label3'),
+            t('add-product.values.category.label4'),
+            t('add-product.values.category.label5'),
           ]}
           register={register("category")}
           defaultValue={productState.category}
@@ -105,15 +107,15 @@ export default function AddPost() {
         />
         <div className="flex flex-col">
           <legend className="block mb-3 text-sm font-medium text-gray-700">
-            Choose Gender
+            {t('add-product.gender')}
           </legend>
           <div className="flex gap-x-6 ">
               <div className="flex items-center justify-center" onChange={() => changeHandler('gender', 'male')}> 
-                <label htmlFor='male' className="mr-2">Male</label>
+                <label htmlFor='male' className="mr-2">{t('add-product.values.gender.label1')}</label>
                 <input value='male' type="radio" id='male' {...register("gender")} checked={productState.gender === 'male'} />
             </div>
         <div className="flex items-center justify-center" onChange={() => changeHandler('gender', 'female')}> 
-            <label htmlFor="female" className="mr-2">Female</label>
+            <label htmlFor="female" className="mr-2">{t('add-product.values.gender.label2')}</label>
             <input value="female" type="radio"  id="female" {...register("gender")} checked={productState.gender === 'female'} />
         </div>
           </div>

@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { CheckIcon } from '@heroicons/react/solid'
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 
 // statuses: complete, current, upcoming 
@@ -14,10 +15,12 @@ interface Props {
 }
 
 export default function PostSteps({status}: Props) {
+  const {t} = useTranslation('addproduct')
+
   const steps = [
-    { id: '01', name: 'Add Product', status: status.addProduct },
-    { id: '02', name: 'Product Overview', status: status.productOverview },
-    { id: '03', name: 'Submit Product',  status: status.submitProduct },
+    { id: '01', name: t('add-product.title'), status: status.addProduct },
+    { id: '02', name: t('product-overview.title'), status: status.productOverview },
+    { id: '03', name: t('submit-product.title'),  status: status.submitProduct },
   ]
 
 

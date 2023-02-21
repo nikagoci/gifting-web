@@ -1,0 +1,50 @@
+{
+    "add-product": {
+        "title": "Add Product",
+        "name": "Product name",
+        "image": "Product image",
+        "description": "Description",
+        "city": "City",
+        "category": "Category",
+        "gender": "Choose gender",
+        "values": {
+            "gender": {
+                "label1": "Male",
+                "label2": "Female"
+            },
+            "category": {
+                "label1": "All New Arrivals",
+                "label2": "Household Items",
+                "label3": "Electronics",
+                "label4": "Clothes",
+                "label5": "Other"
+            }
+        },
+        "button": "Next"
+    },
+    "product-overview": {
+        "title": "Product Overview",
+        "header": "How your post will be shown",
+        "author": "ავტორის საკონტაქო",
+        "button": "Next"
+    },
+    "submit-product": {
+        "title": "Submit Product",
+        "header": "Submit your product",
+        "warning": "Please read below conditions",
+        "carefully": "CAREFULLY",
+        "phone": {
+            "title": "Phone Number",
+            "description": "After posting product your phone number will become public."
+        },
+        "email": {
+            "title": "Email notification",
+            "description": "Get notified if user will interest with your product."
+        },
+        "newsletter": {
+            "title": "Newsletter",
+            "description": "Get notified to any news within seconds."
+        },
+        "button": "Submit"
+    }
+}
