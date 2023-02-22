@@ -19,10 +19,6 @@ export default function Navbar() {
 
   const {t} = useTranslation('common');
 
-  const handleLangClick = (l: string) => {
-    router.push(router.asPath, undefined, {locale: l})
-  }
-
   const userName = session && session.user && session.user.email && session.user.email.split('@')[0];
 
   const active = "border-indigo-500 text-gray-900";
@@ -111,6 +107,7 @@ export default function Navbar() {
               {status === "authenticated" && (
                 <div className="hidden sm:ml-6 sm:flex sm:items-center">
                   {/* Profile dropdown */}
+                  <LangSwitcher />
                   <Menu as="div" className="relative ml-3">
                     <div>
                       <Menu.Button className="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -181,6 +178,7 @@ export default function Navbar() {
 
               <div className="flex items-center -mr-2 sm:hidden">
                 {/* Mobile menu button */}
+                <LangSwitcher />
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
