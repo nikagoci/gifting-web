@@ -66,37 +66,6 @@ export default function SubmitPost() {
   async function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (
-      productStore.category === "ახალი ჩამოსული" ||
-      productStore.category === "All New Arrivals"
-    ) {
-      productStore.category = "new-arrivals";
-    } else if (
-      productStore.category === "სახლის ნივთები" ||
-      productStore.category === "Household Items"
-    ) {
-      productStore.category = "household-items";
-    } else if (
-      productStore.category === "ელექტრონიკა" ||
-      productStore.category === "Electronics"
-    ) {
-      productStore.category = "electronics";
-    } else if (
-      productStore.category === "ტანსაცმელები" ||
-      productStore.category === "Clothes"
-    ) {
-      productStore.category = "clothes";
-    } else if (
-      productStore.category === "სხვა" ||
-      productStore.category === "Other"
-    ) {
-      productStore.category = "other";
-    } else if (productStore.category === "new-arrivals") {
-      productStore.category = "new-arrivals";
-    } else {
-      router.push("/post/add-product");
-    }
-
     if (!checked) {
       toastError(
         "You can not submit post without accept usage of phone number"

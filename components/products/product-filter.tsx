@@ -13,18 +13,18 @@ interface Filter {
     title: string;
     label1: string;
     label2: string;
-};
-category: {
+  };
+  category: {
     title: string;
     label1: string;
     label2: string;
     label3: string;
     label4: string;
     label5: string;
-};
+  };
 }
 
-const filters = (newFilters: Filter ) => {
+const filters = (newFilters: Filter) => {
   return [
     {
       id: "gender",
@@ -46,50 +46,59 @@ const filters = (newFilters: Filter ) => {
       ],
     },
   ];
-} 
+};
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductFilter({products}: {products: ProductInterface[]}) {
+export default function ProductFilter({
+  products,
+}: {
+  products: ProductInterface[];
+}) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const productCtx = useContext(ProductFilterContext)
+  const productCtx = useContext(ProductFilterContext);
 
-  const {t} = useTranslation('products')
+  const { t } = useTranslation("products");
 
   const newFilters = {
     gender: {
-      title: t('categories.gender.title'),
-      label1: t('categories.gender.label1'),
-      label2: t('categories.gender.label2')
+      title: t("categories.gender.title"),
+      label1: t("categories.gender.label1"),
+      label2: t("categories.gender.label2"),
     },
     category: {
-      title: t('categories.category.title'),
-      label1: t('categories.category.label1'),
-      label2: t('categories.category.label2'),
-      label3: t('categories.category.label3'),
-      label4: t('categories.category.label4'),
-      label5: t('categories.category.label5')
-    }
-  }
+      title: t("categories.category.title"),
+      label1: t("categories.category.label1"),
+      label2: t("categories.category.label2"),
+      label3: t("categories.category.label3"),
+      label4: t("categories.category.label4"),
+      label5: t("categories.category.label5"),
+    },
+  };
 
   function handleInputChange(id: string, value: string) {
-    if(productCtx && !productCtx.categories.includes(value) && !productCtx.conditions.includes(value) && !productCtx.genders.includes(value)){
-      if(id === 'category' ){
-        productCtx?.changeCategories(value)
-      } else if(id === 'condition'){
-        productCtx?.changeConditions(value)
-      } else if(id === 'gender'){
-        productCtx?.changeGenders(value)
+    if (
+      productCtx &&
+      !productCtx.categories.includes(value) &&
+      !productCtx.conditions.includes(value) &&
+      !productCtx.genders.includes(value)
+    ) {
+      if (id === "category") {
+        productCtx?.changeCategories(value);
+      } else if (id === "condition") {
+        productCtx?.changeConditions(value);
+      } else if (id === "gender") {
+        productCtx?.changeGenders(value);
       }
-    } else if(productCtx){
-      if(id === 'category') {
-        productCtx.removeCategory(value)
-      } else if(id === 'condition'){
-        productCtx.removeCondition(value)
-      } else if(id === 'gender'){
-        productCtx.removeGender(value)
+    } else if (productCtx) {
+      if (id === "category") {
+        productCtx.removeCategory(value);
+      } else if (id === "condition") {
+        productCtx.removeCondition(value);
+      } else if (id === "gender") {
+        productCtx.removeGender(value);
       }
     }
   }
@@ -241,7 +250,9 @@ export default function ProductFilter({products}: {products: ProductInterface[]}
                                 defaultValue={option.value}
                                 type="checkbox"
                                 className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                                onClick={() => handleInputChange(section.id, option.value)}
+                                onClick={() =>
+                                  handleInputChange(section.id, option.value)
+                                }
                               />
                               <label
                                 htmlFor={`${section.id}-${optionIdx}`}
@@ -256,7 +267,25 @@ export default function ProductFilter({products}: {products: ProductInterface[]}
                     </div>
                   ))}
                   <div className="flex flex-col items-start w-full pt-10">
-                    <Select id="city" defaultValue="Kutaisi" label="City" options={['Kutaisi', 'Tbilisi', 'Zestafoni']} />
+                    <Select
+                      id="city"
+                      defaultValue="Kutaisi"
+                      label="City"
+                      options={[
+                        {
+                          content: "Tbilisi",
+                          value: "tbilisi",
+                        },
+                        {
+                          content: "Kutaisi",
+                          value: "kutaisi",
+                        },
+                        {
+                          content: "Zestafoni",
+                          value: "zestafoni",
+                        },
+                      ]}
+                    />
                   </div>
                 </form>
               </div>

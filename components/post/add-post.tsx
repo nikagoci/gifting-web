@@ -86,7 +86,20 @@ export default function AddPost() {
         <Select
           id="city"
           label={t('add-product.city')}
-          options={["Tbilisi", "Kutaisi", "Zestafoni"]}
+          options={[
+            {
+              content: "Tbilisi",
+              value: "tbilisi"
+            },
+            {
+              content: "Kutaisi",
+              value: "kutaisi"
+            },
+            { 
+              content: "Zestafoni",
+              value: "zestafoni"
+            }
+          ]}
           register={register("city")}
           defaultValue={productState.city}
           onChange={changeHandler}
@@ -94,13 +107,37 @@ export default function AddPost() {
         <Select
           id="category"
           label={t('add-product.category')}
-          options={[
-            t('add-product.values.category.label1'),
-            t('add-product.values.category.label2'),
-            t('add-product.values.category.label3'),
-            t('add-product.values.category.label4'),
-            t('add-product.values.category.label5'),
-          ]}
+          // options={[
+          //   t('add-product.values.category.label1'),
+          //   t('add-product.values.category.label2'),
+          //   t('add-product.values.category.label3'),
+          //   t('add-product.values.category.label4'),
+          //   t('add-product.values.category.label5'),
+          // ]}
+          options={
+            [
+              {
+                content: t('add-product.values.category.label1'),
+                value: 'new-arrivals'
+              },
+              {
+                content: t('add-product.values.category.label2'),
+                value: 'household-items'
+              },
+              {
+                content: t('add-product.values.category.label3'),
+                value: 'electronics'
+              },
+              {
+                content: t('add-product.values.category.label4'),
+                value: 'clothes'
+              },
+              {
+                content: t('add-product.values.category.label5'),
+                value: 'other'
+              },
+            ]
+          }
           register={register("category")}
           defaultValue={productState.category}
           onChange={changeHandler}

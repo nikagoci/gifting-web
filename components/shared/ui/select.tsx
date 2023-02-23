@@ -2,12 +2,13 @@ import { useStoreRehydrated } from "easy-peasy";
 
 interface Props {
   label: string;
-  options: string[];
+  options: { content: string, value: string} [];
   defaultValue: string;
   id: string;
   withChange?: boolean;
   register?: any;
   onChange?: any;
+  value?: string[]
 }
 
 export default function Select({
@@ -37,7 +38,7 @@ export default function Select({
           onChange={(e) => onChange(id, e.target.value)}
         >
           {options.map((option) => (
-            <option key={option} value={option}>{option}</option>
+            <option key={option.value} value={option.value}>{option.content}</option>
           ))}
         </select>
       </div>
@@ -56,7 +57,7 @@ export default function Select({
         {...register}
       >
         {options.map((option) => (
-          <option key={option}>{option}</option>
+          <option key={option.value} value={option.value}>{option.content}</option>
         ))}
       </select>
     </div>
