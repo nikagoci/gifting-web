@@ -34,7 +34,7 @@ export default function Pagination ({getNewProducts}: Props) {
   const {t} = useTranslation('products')
 
   useEffect(() => {
-    fetchData(setProductQuantity, 'quantity', 1)
+    fetchData(setProductQuantity, 'totalQuantity', 1)
   }, []);
 
   useEffect(() => {
