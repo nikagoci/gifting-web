@@ -24,11 +24,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             const {skip, limit} = pagination(req)
             
+            const allProducts = await Product.find();
             const products = await Product.find().skip(skip).limit(limit);
 
             res.status(200).json({
                 status: 'success',
-                quantity: products.length,
+                quantity: allProducts.length,
                 products
             })
         } catch(err: any){

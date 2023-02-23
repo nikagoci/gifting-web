@@ -5,29 +5,41 @@ import {
 } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {ProductInterface} from '@/utils/interfaces'
 
 const PAGE_RANGE = 2;
 const totalPageCalc = (productQuantity: number): number => {
   return Math.ceil(productQuantity / 8);
 };
 
-export default function Pagination() {
-  const [curPage, setCurPage] = useState(1);
+async function fetchData(setProductQuantity: Dispatch<SetStateAction<number>> | Dispatch<SetStateAction<ProductInterface[]>> , information: string, page: number) {
+  const res = await fetch(`/api/products?page=${page}&limit=8`);
+  const data = await res.json();
+
+  setProductQuantity(data[information])
+}
+
+interface Props {
+  getNewProducts: (products: ProductInterface[]) => void
+}
+
+export default function Pagination ({getNewProducts}: Props) {
+  const [curPage, setCurPage] = useState(1); 
   const [productQuantity, setProductQuantity] = useState(0);
   const [totalPages, setTotalPages] = useState<number[]>([]);
+  const [products, setProducts] = useState<ProductInterface[]>([]);
+
   const router = useRouter();
   const {t} = useTranslation('products')
 
   useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("/api/products");
-      const data = await res.json();
-
-      setProductQuantity(data.quantity);
-    }
-    fetchData();
+    fetchData(setProductQuantity, 'quantity', 1)
   }, []);
+
+  useEffect(() => {
+    getNewProducts(products)
+  }, [products])
 
   useEffect(() => {
     if (!router.query.page) {
@@ -65,6 +77,9 @@ export default function Pagination() {
 
   function handlePageChange(page: number) {
     setCurPage(page);
+
+    fetchData(setProducts, 'products', page)
+    
     router.push({
       pathname: "/products",
       query: { page },
@@ -74,6 +89,7 @@ export default function Pagination() {
   function handlePageInc() {
     const total = totalPageCalc(productQuantity);
     setCurPage((prev) => prev + 1);
+
 
     if (router.query.page && +router.query.page >= totalPages.length) {
       router.push({
@@ -85,6 +101,9 @@ export default function Pagination() {
         pathname: "/products",
         query: { page: router.query.page && +router.query.page + 1 },
       });
+
+    fetchData(setProducts, 'products', curPage+1)
+
     }
 
     if (curPage >= total) {
@@ -105,6 +124,7 @@ export default function Pagination() {
         pathname: "/products",
         query: { page: router.query.page && +router.query.page - 1 },
       });
+      fetchData(setProducts, 'products', curPage-1)
     }
 
     if (curPage === 1) {

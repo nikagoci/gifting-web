@@ -1,5 +1,6 @@
 import { ProductInterface } from "@/utils/interfaces"
 import Link from "next/link"
+import { useState } from "react"
 import SingleProduct from "../shared/single-product"
 import Pagination from "./pagination"
 
@@ -71,16 +72,25 @@ import Pagination from "./pagination"
 //   ]
   
   export default function ProductFull({products}: {products: ProductInterface[]}) {
+    const [allProduct, setAllProduct] = useState(products)
+
+
+    const getNewProducts = (products: ProductInterface[]) => {
+      if(products.length > 0) {
+        setAllProduct(products)
+      }
+    }
+
     return (
       <div className="bg-white">
         <div className="max-w-2xl px-4 py-12 mx-auto sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
   
           <div className="grid grid-cols-1 mb-8 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {products.map((product) => (
+            {allProduct.map((product) => (
               <SingleProduct key={product._id} product={product} />
             ))}
           </div>
-          <Pagination />
+          <Pagination getNewProducts={getNewProducts} />
         </div>
       </div>
     )
