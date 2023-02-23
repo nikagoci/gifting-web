@@ -43,10 +43,10 @@ export default function AddPost() {
       addDescription(value)
     } else if(id === 'city'){
       addCity(value)
-    } else if(id=== 'category'){
-      addCategory(value);
-    } else if(id=== 'gender'){
+    }  else if(id=== 'gender'){
       addGender(value)
+    } else if(id=== 'category'){
+      addCategory(value)
     }
   }
 

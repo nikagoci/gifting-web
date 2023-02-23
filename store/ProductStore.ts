@@ -62,8 +62,8 @@ export const productStore = createStore<StoreModel>({
     state.products = {
       name: "",
       image: "",
-      city: "Tbilisi",
-      category: "All New Arrivals",
+      city: "tbilisi",
+      category: "new-arrivals",
       gender: "",
       description: ""
     }

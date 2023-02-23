@@ -29,11 +29,11 @@ const productSchema = new Schema({
   category: {
     type: String,
     enum: [
-      "All New Arrivals",
-      "Household Items",
-      "Electronics",
-      "Clothes",
-      "Other",
+      "new-arrivals",
+      "household-items",
+      "electronics",
+      "clothes",
+      "other",
     ],
     required: [true, "category is required"],
   },
