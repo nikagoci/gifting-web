@@ -5,7 +5,6 @@ import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
 import Select from "../shared/ui/select";
 import ProductFull from "./product-full";
 import { ProductInterface } from "@/utils/interfaces";
-import { ProductFilterContext } from "@/context/ProductFilter";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 

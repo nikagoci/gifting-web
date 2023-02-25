@@ -22,7 +22,6 @@ async function fetchData(
   const res = await fetch(url);
   const data = await res.json();
 
-  console.log(data);
   setProductQuantity(data.totalQuantity);
   setAllProduct(data.products);
 }
@@ -40,7 +39,7 @@ export default function ProductFull({ products, filters }: Props) {
   }, [curPage, filters]);
 
   useEffect(() => {
-    if (!productQuantity) {
+    if (allProduct.length === 0) {
       setError(true);
     } else {
       setError(false);
@@ -55,7 +54,9 @@ export default function ProductFull({ products, filters }: Props) {
     return (
       <div className="bg-white">
         <div className="flex justify-center max-w-2xl px-4 py-12 mx-auto sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h1 className="text-lg font-bold text-rose-600">No Product Found! Please try again with different filters</h1>
+          <h1 className="text-lg font-bold text-rose-600">
+            No Product Found! Please try again with different filters
+          </h1>
         </div>
       </div>
     );

@@ -2,7 +2,6 @@ import Layout from "@/components/layout/layout";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { ProductFilterContextProvider } from "../context/ProductFilter";
 import { SessionProvider } from "next-auth/react";
 import {StoreProvider} from 'easy-peasy'
 import { productStore } from "@/store/ProductStore";
@@ -21,11 +20,9 @@ function App({
   return (
     <SessionProvider session={session}>
       <StoreProvider store={productStore}>
-        <ProductFilterContextProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </ProductFilterContextProvider>
       </StoreProvider>
     </SessionProvider>
   );
