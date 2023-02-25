@@ -1,0 +1,9 @@
+{
+    "email": "Email",
+    "phone": "Phone Number",
+    "remove": "Remove Account",
+    "add": "Add Product",
+    "active": "Currently Active",
+    "created": "Created on",
+    "no-product": "You Have Not Added Product Yet"
+}

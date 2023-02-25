@@ -4,30 +4,39 @@ import Link from "next/link";
 
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import { BsTrash } from "react-icons/bs";
-import {GrUpdate} from 'react-icons/gr'
+import { GrUpdate } from "react-icons/gr";
 import { Dispatch, SetStateAction } from "react";
+import { useTranslation } from "next-i18next";
 
-const removeProductFromDB = async (id: string, setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>) => {
+const removeProductFromDB = async (
+  id: string,
+  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>
+) => {
   const res = await fetch(`http://localhost:3000/api/product/${id}`, {
     method: "DELETE",
-  })
+  });
 
-  if(res.ok){
-    setAllProduct(prev => prev.filter(product => product._id !== id))
+  if (res.ok) {
+    setAllProduct((prev) => prev.filter((product) => product._id !== id));
   }
-}
+};
 
-const MinifiedProduct = ({ product, setAllProduct }: { product: ProductInterface, setAllProduct: Dispatch<SetStateAction<ProductInterface[]>> }) => {
-
+const MinifiedProduct = ({
+  product,
+  setAllProduct,
+}: {
+  product: ProductInterface;
+  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>;
+}) => {
+  const {t} = useTranslation('dashboard')
 
   const formattedDate = new Date(product.createdAt).toLocaleString();
-  const humanReadableDate = new Date(formattedDate).toLocaleString('en-us', {
-    month: 'long', day: 'numeric', year: 'numeric' 
-  })
-  
-  console.log(humanReadableDate)
+  const humanReadableDate = new Date(formattedDate).toLocaleString("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
-  console.log(formattedDate)
 
   const capitalizedCity =
     product.city.charAt(0).toUpperCase() +
@@ -40,7 +49,6 @@ const MinifiedProduct = ({ product, setAllProduct }: { product: ProductInterface
   function myLoader() {
     return product.imageSrc;
   }
-
 
   return (
     <li className="relative">
@@ -68,15 +76,16 @@ const MinifiedProduct = ({ product, setAllProduct }: { product: ProductInterface
               </div>
               <div className="hidden md:block">
                 <div>
-                <p className="text-sm text-gray-900">
-                              Created on <time dateTime={formattedDate}>{humanReadableDate}</time>
-                            </p>
+                  <p className="text-sm text-gray-900">
+                    {t('created')}{" "}
+                    <time dateTime={formattedDate}>{humanReadableDate}</time>
+                  </p>
                   <p className="flex items-center mt-2 text-sm text-gray-500">
                     <CheckCircleIcon
                       className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
                       aria-hidden="true"
                     />
-                    Currently Active
+                     {t('active')}
                   </p>
                 </div>
               </div>
@@ -84,12 +93,15 @@ const MinifiedProduct = ({ product, setAllProduct }: { product: ProductInterface
           </div>
         </div>
       </Link>
-      <div className="absolute right-0 flex -translate-y-1/2 gap-x-4 top-1/2"> 
+      <div className="absolute right-0 flex -translate-y-1/2 gap-x-4 top-1/2">
         <div className="p-2 bg-gray-100 rounded cursor-pointer">
-          <GrUpdate size={20}  />
+          <GrUpdate size={20} />
         </div>
-        <div className="p-2 bg-gray-100 rounded cursor-pointer" onClick={handleRemoveProduct}>
-          <BsTrash size={20} color="red"  />
+        <div
+          className="p-2 bg-gray-100 rounded cursor-pointer"
+          onClick={handleRemoveProduct}
+        >
+          <BsTrash size={20} color="red" />
         </div>
       </div>
     </li>

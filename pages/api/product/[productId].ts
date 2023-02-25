@@ -1,5 +1,6 @@
 import connectToDatabase from "@/database/connectDB";
 import Product from "@/database/model/productModel";
+import User from "@/database/model/userModel";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -12,10 +13,10 @@ export default async function handler(
 
       const product = await Product.findById(req.query.productId);
 
-      if(!product){
+      if (!product) {
         res.status(400).json({
-            message: "Product not found"
-        })
+          message: "Product not found",
+        });
       }
 
       res.status(200).json({
@@ -31,20 +32,21 @@ export default async function handler(
   } else if (req.method === "DELETE") {
     await connectToDatabase();
 
-    const deletedProduct = await Product.findByIdAndDelete(req.query.productId)
+    const deletedProduct = await Product.findByIdAndDelete(req.query.productId);
+
+    await User.updateOne(
+      { products: deletedProduct._id },
+      { $pull: { products: deletedProduct._id } }
+    );
 
     res.status(200).json({
       message: "Success",
-      deletedProduct
+      deletedProduct,
     });
-
   } else {
-    res
-      .status(404)
-      .json({
-        status: "fail",
-        message: "The request response only GET/DELETE Method",
-      });
+    res.status(404).json({
+      status: "fail",
+      message: "The request response only GET/DELETE Method",
+    });
   }
 }
-// 63ef4a64e257a15ea3bf1e00
