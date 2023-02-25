@@ -20,5 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 message: err.message,
               });
         }
+    } else {
+        res.status(404).json({status: 'fail', message: "The request response only GET Method"})
     }
 }

@@ -33,11 +33,14 @@ export default async function handler(
         creator: user._id
       });
 
+      user.products.push(newProduct._id)
+      await user.save();
 
       res.status(201).json({
         status: "success",
         product: newProduct,
       });
+  
     } catch (err: any) {
       res.status(400).json({
         status: "fail",
