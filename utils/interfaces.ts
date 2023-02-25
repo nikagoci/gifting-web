@@ -47,3 +47,11 @@ export interface addProductValueInterface extends addProductContextInterface {
   addImage: (image: string) => void;
   addDescription: (description: string) => void;
 }
+
+export interface UserInterface {  
+    _id: string;
+    email: string;
+    password: string;
+    phoneNumber: string
+    products?: string[]
+}

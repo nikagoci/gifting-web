@@ -9,14 +9,10 @@ import { useStoreRehydrated } from 'easy-peasy';
 import Image from "next/image";
 import Spinner from "../shared/ui/spinner";
 import { useTranslation } from "next-i18next";
+import { UserInterface } from "@/utils/interfaces";
 
 interface Props {
-  user: {
-    _id: string;
-    email: string;
-    password: string;
-    phoneNumber: string;
-  };
+  user: UserInterface
 }
 
 export default function PostOverview({ user }: Props) {

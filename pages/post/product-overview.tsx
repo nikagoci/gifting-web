@@ -2,17 +2,13 @@ import PostOverview from "@/components/post/post-overview";
 import PostSteps from "@/components/post/post-steps";
 import connectToDatabase from "@/database/connectDB";
 import User from "@/database/model/userModel";
+import { UserInterface } from "@/utils/interfaces";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 interface Props {
-  user: {
-    _id: string;
-    email: string;
-    password: string;
-    phoneNumber: string
-  }
+  user: UserInterface
 }
 
 export default function ProductOverviewPage({user}: Props) {
