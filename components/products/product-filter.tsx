@@ -7,6 +7,7 @@ import ProductFull from "./product-full";
 import { ProductInterface } from "@/utils/interfaces";
 import { ProductFilterContext } from "@/context/ProductFilter";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 interface Filter {
   gender: {
@@ -58,7 +59,10 @@ export default function ProductFilter({
   products: ProductInterface[];
 }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const productCtx = useContext(ProductFilterContext);
+  const [allFilter, setAllFilter] = useState<{ id: string; value: string }[]>(
+    []
+  );
+  const router = useRouter()
 
   const { t } = useTranslation("products");
 
@@ -79,28 +83,23 @@ export default function ProductFilter({
   };
 
   function handleInputChange(id: string, value: string) {
-    if (
-      productCtx &&
-      !productCtx.categories.includes(value) &&
-      !productCtx.conditions.includes(value) &&
-      !productCtx.genders.includes(value)
-    ) {
-      if (id === "category") {
-        productCtx?.changeCategories(value);
-      } else if (id === "condition") {
-        productCtx?.changeConditions(value);
-      } else if (id === "gender") {
-        productCtx?.changeGenders(value);
-      }
-    } else if (productCtx) {
-      if (id === "category") {
-        productCtx.removeCategory(value);
-      } else if (id === "condition") {
-        productCtx.removeCondition(value);
-      } else if (id === "gender") {
-        productCtx.removeGender(value);
-      }
+    const curIndex: number = allFilter.findIndex((filter) => filter.value === value);
+
+    if (curIndex === -1) {
+      setAllFilter((prev) => [
+        ...prev,
+        {
+          id,
+          value,
+        },
+      ]);
+    } else {
+      setAllFilter(prev => 
+        prev.filter(filter => filter.value !== value)
+      )
     }
+
+    router.push({pathname: '/products', query: {page: 1}})
   }
 
   return (
@@ -294,7 +293,7 @@ export default function ProductFilter({
             {/* Product grid */}
             <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
               {/* Replace with your content */}
-              <ProductFull products={products} />
+              <ProductFull products={products} filters={allFilter} />
             </div>
           </div>
         </main>

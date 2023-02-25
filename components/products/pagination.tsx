@@ -13,33 +13,37 @@ const totalPageCalc = (productQuantity: number): number => {
   return Math.ceil(productQuantity / 8);
 };
 
-async function fetchData(setProductQuantity: Dispatch<SetStateAction<number>> | Dispatch<SetStateAction<ProductInterface[]>> , information: string, page: number) {
-  const res = await fetch(`/api/products?page=${page}&limit=8`);
-  const data = await res.json();
+// async function fetchData(setProductQuantity: Dispatch<SetStateAction<number>> | Dispatch<SetStateAction<ProductInterface[]>> , information: string, page: number) {
+//   const res = await fetch(`/api/products?page=${page}&limit=8`);
+//   const data = await res.json();
 
-  setProductQuantity(data[information])
-}
+//   setProductQuantity(data[information])
+// }
 
 interface Props {
-  getNewProducts: (products: ProductInterface[]) => void
+  getCurrentPage: (currentPage: number) => void
+  totalQuantity: number
 }
 
-export default function Pagination ({getNewProducts}: Props) {
+export default function Pagination ({getCurrentPage, totalQuantity}: Props) {
   const [curPage, setCurPage] = useState(1); 
   const [productQuantity, setProductQuantity] = useState(0);
   const [totalPages, setTotalPages] = useState<number[]>([]);
-  const [products, setProducts] = useState<ProductInterface[]>([]);
 
   const router = useRouter();
   const {t} = useTranslation('products')
 
   useEffect(() => {
-    fetchData(setProductQuantity, 'totalQuantity', 1)
-  }, []);
+    setTotalPages([])
+    if(totalQuantity) {
+
+      setProductQuantity(totalQuantity)
+    }
+  }, [totalQuantity]);
 
   useEffect(() => {
-    getNewProducts(products)
-  }, [products])
+    getCurrentPage(curPage)
+  }, [curPage])
 
   useEffect(() => {
     if (!router.query.page) {
@@ -78,8 +82,6 @@ export default function Pagination ({getNewProducts}: Props) {
   function handlePageChange(page: number) {
     setCurPage(page);
 
-    fetchData(setProducts, 'products', page)
-    
     router.push({
       pathname: "/products",
       query: { page },
@@ -101,9 +103,6 @@ export default function Pagination ({getNewProducts}: Props) {
         pathname: "/products",
         query: { page: router.query.page && +router.query.page + 1 },
       });
-
-    fetchData(setProducts, 'products', curPage+1)
-
     }
 
     if (curPage >= total) {
@@ -124,7 +123,6 @@ export default function Pagination ({getNewProducts}: Props) {
         pathname: "/products",
         query: { page: router.query.page && +router.query.page - 1 },
       });
-      fetchData(setProducts, 'products', curPage-1)
     }
 
     if (curPage === 1) {

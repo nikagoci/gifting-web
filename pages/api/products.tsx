@@ -26,10 +26,10 @@ export default async function handler(
 
       const { skip, limit } = pagination(req);
 
-      const allProducts = await Product.find();
       let categories: string[] = [];
       let genders: string[] = [];
       let products;
+      let allProducts;
 
       if (
         req.query.category &&
@@ -45,18 +45,28 @@ export default async function handler(
         })
           .skip(skip)
           .limit(limit);
+
+          allProducts = await Product.find({
+            category: { $in: categories },
+            gender: { $in: genders },
+          })
       } else if (req.query.gender && typeof req.query.gender === "string") {
         genders = req.query.gender.split(".");
         products = await Product.find({ gender: { $in: genders } })
           .skip(skip)
           .limit(limit);
+
+          allProducts = await Product.find({ gender: { $in: genders } })
       } else if (req.query.category && typeof req.query.category === "string") {
         categories = req.query.category.split(".");
         products = await Product.find({ category: { $in: categories } })
           .skip(skip)
           .limit(limit);
+          allProducts = await Product.find({ category: { $in: categories } })
+
       } else {
         products = await Product.find().skip(skip).limit(limit);
+        allProducts = await Product.find()
       }
 
       res.status(200).json({

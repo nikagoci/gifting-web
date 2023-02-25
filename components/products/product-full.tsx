@@ -1,98 +1,79 @@
-import { ProductInterface } from "@/utils/interfaces"
-import Link from "next/link"
-import { useState } from "react"
-import SingleProduct from "../shared/single-product"
-import Pagination from "./pagination"
+import { getValuesFromFilter } from "@/utils/getValuesFromFilter";
+import { ProductInterface } from "@/utils/interfaces";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import SingleProduct from "../shared/single-product";
+import Pagination from "./pagination";
 
-// const products = [
-//     {
-//       id: '1',
-//       rating: 4,
-//       name: 'Earthen Bottle',
-//       city: 'Zestafoni',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//     {
-//       id: '2',
-//       rating: 4,
-//       name: 'Nomad Tumbler',
-//       city: 'Batumi',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//     {
-//       id: '3',
-//       rating: 4,
-//       name: 'Focus Paper Refill',
-//       city: 'Kutaisi',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//     {
-//       id: '4',
-//       rating: 4,
-//       name: 'Machined Mechanical Pencil',
-//       city: 'Tbilisi',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//     {
-//       id: '5',
-//       rating: 4,
-//       name: 'Machined Mechanical Pencil',
-//       city: 'Tbilisi',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//     {
-//       id: '6',
-//       rating: 4,
-//       name: 'Machined Mechanical Pencil',
-//       city: 'Tbilisi',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//     {
-//       id: '7',
-//       rating: 4,
-//       name: 'Machined Mechanical Pencil',
-//       city: 'Tbilisi',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//     {
-//       id: '8',
-//       rating: 4,
-//       name: 'Machined Mechanical Pencil',
-//       city: 'Tbilisi',
-//       imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-//       description: 'The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.'
-//     },
-//   ]
-  
-  export default function ProductFull({products}: {products: ProductInterface[]}) {
-    const [allProduct, setAllProduct] = useState(products)
+interface Props {
+  products: ProductInterface[];
+  filters: { id: string; value: string }[];
+}
 
+async function fetchData(
+  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>,
+  setProductQuantity: Dispatch<SetStateAction<number>>,
+  page: number,
+  categories: string,
+  genders: string
+) {
+  const url = `/api/products?page=${page}&limit=8${
+    categories && "&category=" + categories
+  }${genders && "&gender=" + genders}`;
+  const res = await fetch(url);
+  const data = await res.json();
 
-    const getNewProducts = (products: ProductInterface[]) => {
-      if(products.length > 0) {
-        setAllProduct(products)
-      }
+  console.log(data);
+  setProductQuantity(data.totalQuantity);
+  setAllProduct(data.products);
+}
+
+export default function ProductFull({ products, filters }: Props) {
+  const [allProduct, setAllProduct] = useState(products);
+  const [productQuantity, setProductQuantity] = useState<number>(0);
+  const [error, setError] = useState(false);
+  const [curPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const category = getValuesFromFilter(filters).strCategories;
+    const gender = getValuesFromFilter(filters).strGenders;
+    fetchData(setAllProduct, setProductQuantity, curPage, category, gender);
+  }, [curPage, filters]);
+
+  useEffect(() => {
+    if (!productQuantity) {
+      setError(true);
+    } else {
+      setError(false);
     }
+  }, [productQuantity]);
 
+  const getCurrentPage = (currentPage: number) => {
+    setCurrentPage(currentPage);
+  };
+
+  if (error) {
     return (
       <div className="bg-white">
-        <div className="max-w-2xl px-4 py-12 mx-auto sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
-  
-          <div className="grid grid-cols-1 mb-8 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {allProduct.map((product) => (
-              <SingleProduct key={product._id} product={product} />
-            ))}
-          </div>
-          <Pagination getNewProducts={getNewProducts} />
+        <div className="flex justify-center max-w-2xl px-4 py-12 mx-auto sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h1 className="text-lg font-bold text-rose-600">No Product Found! Please try again with different filters</h1>
         </div>
       </div>
-    )
+    );
   }
-  
+
+  return (
+    <div className="bg-white">
+      <div className="max-w-2xl px-4 py-12 mx-auto sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="grid grid-cols-1 mb-8 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {allProduct.map((product) => (
+            <SingleProduct key={product._id} product={product} />
+          ))}
+        </div>
+        <Pagination
+          getCurrentPage={getCurrentPage}
+          totalQuantity={productQuantity}
+        />
+      </div>
+    </div>
+  );
+}
