@@ -77,10 +77,6 @@ export default function SubmitPost() {
         clearSessionStorage();
         clearProducts();
         setProductId(response.product._id);
-
-        setTimeout(() => {
-          router.push("/");
-        }, 5000);
       } else {
         toastError("Something went wrong. try again later");
       }
