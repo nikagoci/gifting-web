@@ -11,6 +11,7 @@ export interface ProductInterface {
     | "Clothes"
     | "Other";
   gender: "male" | "female";
+  createdAt: Date
 }
 
 export interface productFilterContextInterface {

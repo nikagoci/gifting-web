@@ -18,9 +18,16 @@ const removeProductFromDB = async (id: string, setAllProduct: Dispatch<SetStateA
 }
 
 const MinifiedProduct = ({ product, setAllProduct }: { product: ProductInterface, setAllProduct: Dispatch<SetStateAction<ProductInterface[]>> }) => {
-  function myLoader() {
-    return product.imageSrc;
-  }
+
+
+  const formattedDate = new Date(product.createdAt).toLocaleString();
+  const humanReadableDate = new Date(formattedDate).toLocaleString('en-us', {
+    month: 'long', day: 'numeric', year: 'numeric' 
+  })
+  
+  console.log(humanReadableDate)
+
+  console.log(formattedDate)
 
   const capitalizedCity =
     product.city.charAt(0).toUpperCase() +
@@ -29,6 +36,11 @@ const MinifiedProduct = ({ product, setAllProduct }: { product: ProductInterface
   const handleRemoveProduct = () => {
     removeProductFromDB(product._id, setAllProduct);
   };
+
+  function myLoader() {
+    return product.imageSrc;
+  }
+
 
   return (
     <li className="relative">
@@ -56,6 +68,9 @@ const MinifiedProduct = ({ product, setAllProduct }: { product: ProductInterface
               </div>
               <div className="hidden md:block">
                 <div>
+                <p className="text-sm text-gray-900">
+                              Created on <time dateTime={formattedDate}>{humanReadableDate}</time>
+                            </p>
                   <p className="flex items-center mt-2 text-sm text-gray-500">
                     <CheckCircleIcon
                       className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
