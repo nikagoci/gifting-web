@@ -23,7 +23,7 @@ export default function LangSwitcher() {
   };
 
   return (
-    <div className="relative z-50 p-2 rounded bg-slate-50">
+    <div className="relative z-30 p-2 rounded bg-slate-50">
       <div
         className="flex items-center justify-center space-x-1 cursor-pointer"
         onClick={() => setShowMenu((prev) => !prev)}

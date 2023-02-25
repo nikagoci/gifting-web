@@ -101,9 +101,9 @@ export default function Navbar() {
                 <div className="hidden sm:ml-6 sm:flex sm:items-center">
                   {/* Profile dropdown */}
                   <LangSwitcher />
-                  <Menu as="div" className="relative z-50 ml-3">
+                  <Menu as="div" className="relative z-30 ml-3">
                     <div>
-                      <Menu.Button className="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      <Menu.Button className="flex text-sm bg-white rounded-full  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <span className="sr-only">Open user menu</span>
                         <Image
                           className="w-8 h-8 rounded-full"
