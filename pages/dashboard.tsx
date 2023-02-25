@@ -6,6 +6,7 @@ import Image from "next/image";
 import User from "@/database/model/userModel";
 import { ProductInterface, UserInterface } from "@/utils/interfaces";
 import Product from "@/database/model/productModel";
+import { useState } from "react";
 
 const candidates = [
   {
@@ -34,9 +35,9 @@ interface Props {
 }
 
 export default function DashboardPage({ user, products }: Props) {
+  const [allProduct,setAllProduct] = useState<ProductInterface[]>(products)
   const userName = user.email.split("@")[0];
 
-  console.log(products);
   return (
     <div className="relative min-h-screen bg-white">
       <div className="max-w-3xl px-4 mx-auto sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
@@ -90,8 +91,8 @@ export default function DashboardPage({ user, products }: Props) {
             role="list"
             className="mt-5 border-t border-gray-200 divide-y divide-gray-200 sm:mt-0 sm:border-t-0"
           >
-            {products.map((product) => (
-              <MinifiedProduct key={product._id} product={product} />
+            {allProduct.map((product) => (
+              <MinifiedProduct key={product._id} product={product} setAllProduct={setAllProduct} />
             ))}
           </ul>
         </div>
