@@ -15,7 +15,7 @@ const removeProductFromDB = async (
   id: string,
   router: NextRouter
 ) => {
-  const res = await fetch(`http://localhost:3000/api/product/${id}`, {
+  const res = await fetch(`/api/product/${id}`, {
     method: "DELETE",
   });
 

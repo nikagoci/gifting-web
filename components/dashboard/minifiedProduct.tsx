@@ -13,7 +13,7 @@ const removeProductFromDB = async (
   id: string,
   setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>
 ) => {
-  const res = await fetch(`http://localhost:3000/api/product/${id}`, {
+  const res = await fetch(`/api/product/${id}`, {
     method: "DELETE",
   });
 
