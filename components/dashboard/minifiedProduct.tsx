@@ -7,6 +7,7 @@ import { BsTrash } from "react-icons/bs";
 import { GrUpdate } from "react-icons/gr";
 import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "next-i18next";
+import capitalizeWord from "@/utils/capitalizeWord";
 
 const removeProductFromDB = async (
   id: string,
@@ -38,10 +39,6 @@ const MinifiedProduct = ({
   });
 
 
-  const capitalizedCity =
-    product.city.charAt(0).toUpperCase() +
-    product.city.slice(1, product.city.length);
-
   const handleRemoveProduct = () => {
     removeProductFromDB(product._id, setAllProduct);
   };
@@ -71,7 +68,7 @@ const MinifiedProduct = ({
                   {product.name}
                 </p>
                 <p className="flex items-center mt-2 text-sm text-gray-500">
-                  <span className="truncate">{capitalizedCity}</span>
+                  <span className="truncate">{capitalizeWord(product.city)}</span>
                 </p>
               </div>
               <div className="hidden md:block">

@@ -36,8 +36,6 @@ export default NextAuth({
             throw new Error("Could not log you in!")
         }
 
-        console.log(credentials);
-
         return {
           id: "1234",
           email: email,
