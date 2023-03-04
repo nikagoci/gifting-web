@@ -16,7 +16,7 @@ import { useTranslation } from "next-i18next";
 export default function LoginUser() {
   const router = useRouter();
   const schema = loginSchema();
-  const {t} = useTranslation('registration')
+  const { t } = useTranslation("registration");
 
   const {
     register,
@@ -59,13 +59,13 @@ export default function LoginUser() {
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Image
             className="mx-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+            src="/logo.png"
             alt="Workflow"
-            width={48}
-            height={48}
+            width={100}
+            height={70}
           />
           <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            {t('login.title')}
+            {t("login.title")}
           </h2>
         </div>
 
@@ -75,7 +75,7 @@ export default function LoginUser() {
               <Input
                 id="email"
                 errors={errors.email}
-                label={t('login.email')}
+                label={t("login.email")}
                 register={register("email")}
                 type="text"
               />
@@ -83,7 +83,7 @@ export default function LoginUser() {
               <Input
                 id="password"
                 errors={errors.password}
-                label={t('login.password')}
+                label={t("login.password")}
                 register={register("password")}
                 type="password"
               />
@@ -100,7 +100,7 @@ export default function LoginUser() {
                     htmlFor="remember-me"
                     className="block ml-2 text-sm text-gray-900"
                   >
-                   {t('login.remember')}
+                    {t("login.remember")}
                   </label>
                 </div>
 
@@ -109,7 +109,7 @@ export default function LoginUser() {
                     href="#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    {t('login.forgot')}
+                    {t("login.forgot")}
                   </a>
                 </div>
               </div>
@@ -119,12 +119,12 @@ export default function LoginUser() {
                   type="submit"
                   className="flex justify-center w-full px-4 py-2 mb-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  {t('login.sign in')}
+                  {t("login.sign in")}
                 </button>
                 <div className="text-center">
-                  {t('login.account')}{" "}
+                  {t("login.account")}{" "}
                   <Link href="/signup" className="text-indigo-600 underline">
-                    {t('login.sign up')}
+                    {t("login.sign up")}
                   </Link>
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function LoginUser() {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 text-gray-500 bg-white">
-                    {t('login.continue')}
+                    {t("login.continue")}
                   </span>
                 </div>
               </div>

@@ -42,7 +42,7 @@ export default function Hero() {
         <div className="flex-1 mt-2 xl:mt-0 xl:h-full ">
           <div className="flex items-center w-full xl:h-full xl:ml-10">
             <Image
-              src="https://images.unsplash.com/photo-1647221598398-934ed5cb0e4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
+              src="/present.avif"
               alt="present"
               className="rounded-3xl"
               width={605}

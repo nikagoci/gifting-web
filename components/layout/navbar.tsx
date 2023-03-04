@@ -28,7 +28,6 @@ export default function Navbar() {
   const activeMobile = "bg-indigo-50 border-indigo-500 text-indigo-700";
   const notActiveMobile =
     "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700";
-
     
   return (
     <Disclosure as="nav" className="bg-white shadow">
@@ -39,20 +38,11 @@ export default function Navbar() {
               <div className="flex">
                 <Link href="/" className="flex items-center flex-shrink-0">
                   <Image
-                    className="block lg:hidden"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                    alt="Workflow"
+                    src="/logo.png"
+                    alt="Logo"
                     onClick={() => close()}
-                    width={32}
-                    height={32}
-                  />
-                  <Image
-                    className="hidden lg:block"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-                    alt="Workflow"
-                    onClick={() => close()}
-                    width={140}
-                    height={100}
+                    width={60}
+                    height={60}
                   />
                 </Link>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -103,7 +93,7 @@ export default function Navbar() {
                   <LangSwitcher />
                   <Menu as="div" className="relative z-30 ml-3">
                     <div>
-                      <Menu.Button className="flex text-sm bg-white rounded-full  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      <Menu.Button className="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <span className="sr-only">Open user menu</span>
                         <Image
                           className="w-8 h-8 rounded-full"

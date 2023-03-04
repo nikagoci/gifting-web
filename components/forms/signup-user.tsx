@@ -35,7 +35,7 @@ async function createUser(
 }
 
 export default function SignpUser() {
-  const {t} = useTranslation('registration')
+  const { t } = useTranslation("registration");
   const router = useRouter();
 
   const schema = signUpSchema();
@@ -89,13 +89,13 @@ export default function SignpUser() {
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <Image
             className="mx-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+            src="/logo.png"
             alt="Workflow"
-            width={48}
-            height={48}
+            width={100}
+            height={70}
           />
           <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            {t('signup.title')}
+            {t("signup.title")}
           </h2>
         </div>
 
@@ -104,28 +104,28 @@ export default function SignpUser() {
             <form className="space-y-6" onSubmit={onSubmit}>
               <Input
                 id="email"
-                label={t('signup.email')}
+                label={t("signup.email")}
                 type="text"
                 register={register("email")}
                 errors={errors.email}
               />
               <Input
                 id="password"
-                label={t('signup.password')}
+                label={t("signup.password")}
                 type="password"
                 register={register("password")}
                 errors={errors.password}
               />
               <Input
                 id="passwordConfirm"
-                label={t('signup.confirm password')}
+                label={t("signup.confirm password")}
                 type="password"
                 register={register("confirmPassword")}
                 errors={errors.confirmPassword}
               />
               <Input
                 id="phone"
-                label={t('signup.phone number')}
+                label={t("signup.phone number")}
                 type="text"
                 register={register("phoneNumber")}
                 errors={errors.phoneNumber}
@@ -136,12 +136,12 @@ export default function SignpUser() {
                   type="submit"
                   className="flex justify-center w-full px-4 py-2 mb-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  {t('signup.sign up')}
+                  {t("signup.sign up")}
                 </button>
                 <div className="text-center">
-                  {t('signup.account')}{" "}
+                  {t("signup.account")}{" "}
                   <Link href="/login" className="text-indigo-600 underline">
-                    {t('signup.sign in')}
+                    {t("signup.sign in")}
                   </Link>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function SignpUser() {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 text-gray-500 bg-white">
-                    {t('signup.continue')}
+                    {t("signup.continue")}
                   </span>
                 </div>
               </div>
