@@ -75,17 +75,21 @@ export default function About() {
     },
   };
 
+  // const background = 'bg-[url("https://images.unsplash.com/photo-1513885535751-8b9238bd345a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")]'
+  const background = 'bg-[url("https://images.unsplash.com/photo-1480618757544-81c31930008e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1127&q=80")]'
+
   return (
-    <div className="py-20 bg-gray-100" id="about">
+    <div className={`py-20 bg-no-repeat bg-cover bg-left relative z-10 ${background}`} id="about">
+      <div className='absolute top-0 left-0 w-full h-full bg-black/50 -z-10' />
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="lg:text-center">
-          <h2 className="text-base font-semibold tracking-wide text-indigo-600 uppercase">
+        <div className=" lg:text-center">
+          <h2 className="text-lg font-semibold tracking-wide uppercase text-sky-500">
             {t("about.title")}
           </h2>
-          <p className="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
+          <p className="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-white sm:text-4xl">
             {t("about.header")}
           </p>
-          <p className="max-w-2xl mt-4 text-xl text-gray-500 lg:mx-auto">
+          <p className="max-w-2xl mt-4 text-xl text-gray-100 lg:mx-auto">
             {t("about.description")}
           </p>
         </div>
@@ -98,11 +102,11 @@ export default function About() {
                   <div className="absolute flex items-center justify-center w-12 h-12 text-white bg-indigo-500 rounded-md">
                     <feature.icon className="w-6 h-6" aria-hidden="true" />
                   </div>
-                  <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
+                  <p className="ml-16 text-lg font-medium leading-6 text-sky-300">
                     {feature.name}
                   </p>
                 </dt>
-                <dd className="mt-2 ml-16 text-base text-gray-500">
+                <dd className="mt-2 ml-16 text-base text-gray-100">
                   {feature.description}
                 </dd>
               </div>
