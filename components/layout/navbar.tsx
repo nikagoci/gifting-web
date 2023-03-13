@@ -7,7 +7,7 @@ import Button from "../shared/ui/button";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import LangSwitcher from "../shared/langSwitcher";
+import LangSwitcher from "../shared/lang-switcher";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");

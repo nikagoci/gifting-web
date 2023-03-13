@@ -12,13 +12,6 @@ export default function LangSwitcher() {
   const router = useRouter();
   const langSwitcherRef = useRef<HTMLDivElement>(null);
 
-  const usa = (
-    <Image src="/usa.svg" width={24} height={24} alt="United States" />
-  );
-  const georgia = (
-    <Image src="/georgia.png" width={24} height={24} alt="Georgia" />
-  );
-
   const handleChangeLang = (locale: string) => {
     setActive(locale);
     setShowMenu(false);
