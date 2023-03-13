@@ -29,8 +29,7 @@ const MinifiedProduct = ({
   });
 
   const handleRemoveProduct = () => {
-    // removeProductFromDB(product._id, setAllProduct);
-    setShowModal(true);
+    setShowModal(!showModal);
   };
 
   function myLoader() {
@@ -49,6 +48,7 @@ const MinifiedProduct = ({
           icon={<AiFillWarning className="w-6 h-6 text-rose-600" aria-hidden="true" />}
           theme={themeEnum.red}
           setAllProduct={setAllProduct}
+          setShowModal={setShowModal}
         />
       )}
       <li className="relative">

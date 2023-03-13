@@ -24,7 +24,8 @@ interface Props {
   option2: string;
   icon: ReactNode;
   theme: themeEnum;
-  setAllProduct?: Dispatch<SetStateAction<ProductInterface[]>>
+  setAllProduct?: Dispatch<SetStateAction<ProductInterface[]>>;
+  setShowModal?: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Modal({
@@ -35,11 +36,19 @@ export default function Modal({
   option2,
   icon,
   theme,
-  setAllProduct
+  setAllProduct,
+  setShowModal
 }: Props) {
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
+
+  const handleModalClose = () => {
+    setOpen(false)
+    if(setShowModal){
+      setShowModal(false)
+    }
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -47,8 +56,8 @@ export default function Modal({
         as="div"
         className="fixed inset-0 z-40 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
-      >
+        onClose={handleModalClose}
+        >
         <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
@@ -106,6 +115,7 @@ export default function Modal({
                 option1={option1}
                 option2={option2}
                 setAllProduct={setAllProduct}
+                setShowModal={setShowModal}
               />
             </div>
           </Transition.Child>
