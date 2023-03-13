@@ -1,10 +1,42 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useRef, useState } from "react";
+import {
+  Dispatch,
+  Fragment,
+  ReactNode,
+  SetStateAction,
+  useRef,
+  useState,
+} from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/outline";
-import Link from "next/link";
+import ModalButtons from "./modal-buttons";
+import { ProductInterface } from "@/utils/interfaces";
 
-export default function Modal({id}: {id: string}) {
+export enum themeEnum {
+  "green",
+  "red",
+}
+
+interface Props {
+  id: string;
+  header: string;
+  description: string;
+  option1: string;
+  option2: string;
+  icon: ReactNode;
+  theme: themeEnum;
+  setAllProduct?: Dispatch<SetStateAction<ProductInterface[]>>
+}
+
+export default function Modal({
+  id,
+  header,
+  description,
+  option1,
+  option2,
+  icon,
+  theme,
+  setAllProduct
+}: Props) {
   const [open, setOpen] = useState(true);
 
   const cancelButtonRef = useRef(null);
@@ -30,7 +62,6 @@ export default function Modal({id}: {id: string}) {
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -48,43 +79,34 @@ export default function Modal({id}: {id: string}) {
           >
             <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
-                <div className="flex items-center justify-center w-12 h-12 mx-auto bg-green-100 rounded-full">
-                  <CheckIcon
-                    className="w-6 h-6 text-green-600"
-                    aria-hidden="true"
-                  />
+                <div
+                  className={`flex items-center justify-center w-12 h-12 mx-auto ${
+                    theme == themeEnum.green ? "bg-green-100" : "bg-rose-100"
+                  } rounded-full`}
+                >
+                  {icon}
                 </div>
                 <div className="text-center mt-7 sm:mt-5">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Product successfully added
+                    {header}
                   </Dialog.Title>
                   <div className="mt-6">
-                    <p className="text-sm text-gray-500">
-                      Do you want to see your product or go back to home page?
-                    </p>
+                    <p className="text-sm text-gray-500">{description}</p>
                   </div>
                 </div>
               </div>
-              <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
-                <Link
-                  href={`/products/${id}`}
-                  className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
-                  onClick={() => setOpen(false)}
-                >
-                  See Product
-                </Link>
-                <Link
-                  href="/"
-                  className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm"
-                  onClick={() => setOpen(false)}
-                  ref={cancelButtonRef}
-                >
-                  Go back to home
-                </Link>
-              </div>
+              <ModalButtons
+                theme={theme}
+                id={id}
+                setOpen={setOpen}
+                cancelButtonRef={cancelButtonRef}
+                option1={option1}
+                option2={option2}
+                setAllProduct={setAllProduct}
+              />
             </div>
           </Transition.Child>
         </div>

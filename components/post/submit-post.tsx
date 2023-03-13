@@ -8,13 +8,14 @@ import {
 import CheckboxList from "./checkbox-list";
 import { ToastContainer } from "react-toastify";
 import toastError from "@/utils/toastErrors";
+import { CheckIcon } from "@heroicons/react/outline";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useStoreActions, useStoreState } from "@/store/hooks";
 import { Products } from "@/store/ProductStore";
 import { useRouter } from "next/router";
 import Spinner from "../shared/ui/spinner";
-import Modal from "../shared/modal";
+import Modal, { themeEnum } from "../shared/modal";
 import { useTranslation } from "next-i18next";
 
 const createProduct = async (
@@ -102,7 +103,17 @@ export default function SubmitPost() {
 
   return (
     <>
-      {productId && <Modal id={productId} />}
+      {productId && (
+        <Modal
+          id={productId}
+          header="Product successfully added"
+          description="Do you want to see your product or go back to home page?"
+          option1='See Product'
+          option2='Go back to home'
+          icon={<CheckIcon className="w-6 h-6 text-green-600" aria-hidden="true" />}
+          theme={themeEnum.green}
+        />
+      )}
       <ToastContainer
         position="top-center"
         autoClose={3000}

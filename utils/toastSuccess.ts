@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export default function toastError(message: string) {
+export default function toastSuccess(message: string) {
     toast.success(message, {
         position: "top-center",
         autoClose: 3000,
