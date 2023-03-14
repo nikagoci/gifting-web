@@ -24,7 +24,7 @@ export default function DashboardPage({ user, products }: Props) {
   return (
     <div className="relative min-h-screen bg-white">
       <UserProfile user={user} />
-      <MultipleDelete allProduct={allProduct} />
+      {/* <MultipleDelete allProduct={allProduct} /> */}
       <main className="pt-8 pb-16">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           {products.length === 0 ? (

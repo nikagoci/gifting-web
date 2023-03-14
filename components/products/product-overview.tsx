@@ -9,6 +9,7 @@ import capitalizeWord from "@/utils/capitalizeWord";
 import { BsTrash } from "react-icons/bs";
 import { GrUpdate } from "react-icons/gr";
 import { NextRouter, useRouter } from "next/router";
+import Link from "next/link";
 
 
 const removeProductFromDB = async (
@@ -103,9 +104,9 @@ export default function ProductOverview({
                 </section>
                 {isAuthor && (
                   <div className="absolute top-0 right-0 flex gap-x-2">
-                    <div className="p-2 bg-gray-100 rounded cursor-pointer">
+                    <Link href={`/products/update/${product._id}`} className="p-2 bg-gray-100 rounded cursor-pointer">
                       <GrUpdate size={20} />
-                    </div>
+                    </Link>
                     <div
                       className="p-2 bg-gray-100 rounded cursor-pointer"
                       onClick={handleRemoveProduct}

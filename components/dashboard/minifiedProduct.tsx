@@ -96,9 +96,9 @@ const MinifiedProduct = ({
           </div>
         </Link>
         <div className="absolute right-0 flex -translate-y-1/2 gap-x-4 top-1/2">
-          <div className="p-2 bg-gray-100 rounded cursor-pointer">
+          <Link href={`products/update/${product._id}`} className="p-2 bg-gray-100 rounded cursor-pointer">
             <GrUpdate size={20} />
-          </div>
+          </Link>
           <div
             className="p-2 bg-gray-100 rounded cursor-pointer"
             onClick={handleRemoveProduct}

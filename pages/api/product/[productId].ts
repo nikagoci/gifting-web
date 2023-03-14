@@ -30,19 +30,48 @@ export default async function handler(
       });
     }
   } else if (req.method === "DELETE") {
-    await connectToDatabase();
+    try {
+      await connectToDatabase();
 
-    const deletedProduct = await Product.findByIdAndDelete(req.query.productId);
+      const deletedProduct = await Product.findByIdAndDelete(
+        req.query.productId
+      );
 
-    await User.updateOne(
-      { products: deletedProduct._id },
-      { $pull: { products: deletedProduct._id } }
-    );
+      await User.updateOne(
+        { products: deletedProduct._id },
+        { $pull: { products: deletedProduct._id } }
+      );
 
-    res.status(200).json({
-      message: "Success",
-      deletedProduct,
-    });
+      res.status(200).json({
+        message: "Success",
+        deletedProduct,
+      });
+    } catch (err: any) {
+      res.status(400).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  } else if (req.method === "PATCH") {
+    try {
+      await connectToDatabase();
+
+      const updatedProduct = await Product.findByIdAndUpdate(req.query.productId, req.body, {
+        new: true,
+        runValidators: true
+      });
+
+      console.log(updatedProduct)
+      res.status(200).json({
+        message: "Success",
+        updatedProduct,
+      });
+    } catch (err: any) {
+      res.status(400).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
   } else {
     res.status(404).json({
       status: "fail",
