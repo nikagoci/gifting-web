@@ -11,12 +11,12 @@ export default function Hero() {
     <header className="flex items-center bg-[#fbfbfb] full-height gap-y-6">
       <div className="flex flex-col items-center w-full h-full px-4 mx-auto xl:flex-row max-w-7xl sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-center flex-1 h-full xl:items-start gap-y-4">
-          <h1 className="text-4xl tracking-tight text-center text-gray-900 xl:text-start sm:text-5xl md:text-6xl">
-            <span className="block mb-2 font-bold">{t("hero.title1")}</span>{" "}
+          <div className="text-3xl tracking-tight text-center text-gray-900 xl:text-start md:text-5xl">
+            <span className="block mb-2 font-semibold">{t("hero.title1")}</span>{" "}
             <span className="font-extrabold text-indigo-600">
               {t("hero.title2")}
             </span>
-          </h1>
+          </div>
           <p className="max-w-md mx-auto mt-3 text-base text-center xl:text-start sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
             {t("hero.description")}
           </p>
