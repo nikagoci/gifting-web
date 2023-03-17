@@ -40,12 +40,12 @@ export default function Hero() {
         </div>
 
         <div className="flex-1 mt-2 xl:mt-0 xl:h-full ">
-          <div className="flex items-center w-full xl:h-full xl:ml-10">
+          <div className="flex items-center justify-end w-full xl:h-full xl:ml-10">
             <Image
-              src="/present.avif"
+              src="/header.png"
               alt="present"
               className="rounded-3xl"
-              width={605}
+              width={505}
               height={600}
             />
           </div>
