@@ -5,6 +5,7 @@ import {BsFacebook} from 'react-icons/bs'
 import {AiOutlineInstagram} from 'react-icons/ai'
 import {AiFillYoutube} from 'react-icons/ai'
 import {AiFillGithub} from 'react-icons/ai'
+import { useTranslation } from 'next-i18next'
 
 const navigation = [
   {
@@ -36,6 +37,8 @@ const navigation = [
 ]
 
 export default function FooterPage() {
+  const {t} = useTranslation('common');
+
   return (
     <footer className="bg-white">
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
@@ -48,7 +51,7 @@ export default function FooterPage() {
           ))}
         </div>
         <div className="mt-8 md:mt-0 md:order-1">
-          <p className="text-base text-center text-gray-400">&copy; 2020 Workflow, Inc. All rights reserved.</p>
+          <p className="text-base text-center text-gray-400">&copy; {t('copyright')}</p>
         </div>
       </div>
     </footer>

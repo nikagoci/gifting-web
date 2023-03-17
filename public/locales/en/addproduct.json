@@ -46,5 +46,11 @@
             "description": "Get notified to any news within seconds."
         },
         "button": "Submit"
+    },
+    "modify-product": {
+        "name": "Product name",
+        "category": "Category",
+        "description": "Description",
+        "save": "Save" 
     }
 }

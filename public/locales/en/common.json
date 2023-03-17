@@ -12,5 +12,6 @@
     "buttons": {
         "signup": "Signup",
         "login": "Login"
-    }
+    },
+    "copyright": "2023 All rights reserved."
 }

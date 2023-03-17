@@ -125,7 +125,7 @@ export default function ModifyProduct({
                 {/* Product info */}
                 <div className="relative flex flex-col justify-center h-full px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
                   <div className="space-y-4 font-bold tracking-tight text-gray-900">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">{t('modify-product.name')}</label>
                     <input
                       id="name"
                       name="name"
@@ -139,7 +139,7 @@ export default function ModifyProduct({
                   </div>
                   <div className="mt-6">
                     <div className="space-y-4 text-lg font-semibold">
-                      {t("add-product.category")}:{" "}
+                      {t('modify-product.category')}:{" "}
                       <span className="font-bold">
                         {capitalizeWord(inputState.category)}
                       </span>
@@ -163,7 +163,7 @@ export default function ModifyProduct({
                   <div className="mt-6">
                     <div className="space-y-6 text-base text-gray-700" />
                     <div className="space-y-4 font-bold tracking-tight text-gray-900">
-                      <label htmlFor="description">Description</label>
+                      <label htmlFor="description">{t('modify-product.description')}</label>
                       <textarea
                         id="description"
                         name="description"
@@ -206,7 +206,7 @@ export default function ModifyProduct({
                   className="px-12 py-2 mb-2 text-xl font-bold text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={updateProduct}
                 >
-                  Save
+                  {t('modify-product.save')}
                 </button>
               </div>
             </div>
