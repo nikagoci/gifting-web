@@ -3,15 +3,18 @@ import { addProductSchema } from "@/utils/formSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Input from "../shared/ui/input";
 import Select from "../shared/ui/select";
 import Textarea from "../shared/ui/textarea";
+import UploadImage from "./upload-image";
 
 export default function AddPost() {
   const router = useRouter();
   const schema = addProductSchema();
+  const [imageUrl, setImageUrl] = useState('') 
   const {t}= useTranslation('addproduct') 
 
   const productState = useStoreState((state) => state.products);
@@ -30,6 +33,12 @@ export default function AddPost() {
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    if(imageUrl){
+      addImage(imageUrl)
+    }
+  }, [imageUrl])
+
   const onSubmit = handleSubmit((value) => {
     router.push("/post/product-overview");
   });
@@ -37,8 +46,6 @@ export default function AddPost() {
   function changeHandler(id: string, value: string) {
     if (id === "product-name") {
       addName(value);
-    } else if (id === "product-image") {
-      addImage(value);
     } else if(id=== 'description'){
       addDescription(value)
     } else if(id === 'city'){
@@ -64,15 +71,6 @@ export default function AddPost() {
           register={register("name")}
           errors={errors.name}
           value={productState.name}
-          onChange={changeHandler}
-        />
-        <Input
-          id="product-image"
-          label={t('add-product.image')}
-          type="text"
-          register={register("image")}
-          errors={errors.image}
-          value={productState.image}
           onChange={changeHandler}
         />
         <Textarea
@@ -107,13 +105,6 @@ export default function AddPost() {
         <Select
           id="category"
           label={t('add-product.category')}
-          // options={[
-          //   t('add-product.values.category.label1'),
-          //   t('add-product.values.category.label2'),
-          //   t('add-product.values.category.label3'),
-          //   t('add-product.values.category.label4'),
-          //   t('add-product.values.category.label5'),
-          // ]}
           options={
             [
               {
@@ -142,6 +133,7 @@ export default function AddPost() {
           defaultValue={productState.category}
           onChange={changeHandler}
         />
+        <UploadImage setImageUrl={setImageUrl} />
         <div className="flex flex-col">
           <legend className="block mb-3 text-sm font-medium text-gray-700">
             {t('add-product.gender')}

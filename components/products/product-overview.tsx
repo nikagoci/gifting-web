@@ -11,17 +11,13 @@ import { GrUpdate } from "react-icons/gr";
 import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 
-
-const removeProductFromDB = async (
-  id: string,
-  router: NextRouter
-) => {
+const removeProductFromDB = async (id: string, router: NextRouter) => {
   const res = await fetch(`/api/product/${id}`, {
     method: "DELETE",
   });
 
   if (res.ok) {
-    router.push('/dashboard')
+    router.push("/dashboard");
   }
 };
 
@@ -34,7 +30,7 @@ export default function ProductOverview({
   isAuthor: boolean;
   user: UserInterface;
 }) {
-  const router = useRouter()
+  const router = useRouter();
   const { t } = useTranslation("addproduct");
 
   function myLoader() {
@@ -45,7 +41,7 @@ export default function ProductOverview({
 
   const handleRemoveProduct = () => {
     removeProductFromDB(product._id, router);
-  }
+  };
 
   return (
     <>
@@ -54,14 +50,16 @@ export default function ProductOverview({
         <div className="bg-white">
           <div className="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
-              <Image
-                loader={myLoader}
-                src={product.imageSrc}
-                alt={product.name}
-                className="object-cover object-center"
-                width={600}
-                height={200}
-              />
+              <div className="flex items-center w-full h-full">
+                <Image
+                  loader={myLoader}
+                  src={product.imageSrc}
+                  alt={product.name}
+                  className="object-cover object-center"
+                  width={600}
+                  height={600}
+                />
+              </div>
 
               {/* Product info */}
               <div className="relative flex flex-col justify-center h-full px-4 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
@@ -104,7 +102,10 @@ export default function ProductOverview({
                 </section>
                 {isAuthor && (
                   <div className="absolute top-0 right-0 flex gap-x-2">
-                    <Link href={`/products/update/${product._id}`} className="p-2 bg-gray-100 rounded cursor-pointer">
+                    <Link
+                      href={`/products/update/${product._id}`}
+                      className="p-2 bg-gray-100 rounded cursor-pointer"
+                    >
                       <GrUpdate size={20} />
                     </Link>
                     <div
