@@ -17,7 +17,7 @@ export enum themeEnum {
 }
 
 interface Props {
-  id: string;
+  id: string | String[];
   header: string;
   description: string;
   option1: string;

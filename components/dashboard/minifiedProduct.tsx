@@ -5,20 +5,25 @@ import Link from "next/link";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import { BsTrash } from "react-icons/bs";
 import { GrUpdate } from "react-icons/gr";
-import {AiFillWarning} from 'react-icons/ai'
-import { Dispatch, SetStateAction, useState } from "react";
+import { AiFillWarning } from "react-icons/ai";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import capitalizeWord from "@/utils/capitalizeWord";
 import Modal, { themeEnum } from "../shared/modal";
 
+interface Props {
+  product: ProductInterface;
+  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>;
+  selectedIds: String[];
+  setSelectedIds: Dispatch<SetStateAction<String[]>>;
+}
+
 const MinifiedProduct = ({
   product,
   setAllProduct,
-}: {
-  product: ProductInterface;
-  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>;
-}) => {
-  const [showModal, setShowModal] = useState(false);
+  selectedIds,
+  setSelectedIds,
+}: Props) => {
   const { t } = useTranslation("dashboard");
 
   const formattedDate = new Date(product.createdAt).toLocaleString();
@@ -28,8 +33,12 @@ const MinifiedProduct = ({
     year: "numeric",
   });
 
-  const handleRemoveProduct = () => {
-    setShowModal(!showModal);
+  const handleCheckboxChange = (productId: string) => {
+    if (selectedIds.includes(productId)) {
+      setSelectedIds(selectedIds.filter((id) => id !== productId));
+    } else {
+      setSelectedIds([...selectedIds, productId]);
+    }
   };
 
   function myLoader() {
@@ -38,19 +47,7 @@ const MinifiedProduct = ({
 
   return (
     <>
-      {showModal && (
-        <Modal
-          header="Remove product"
-          description="Do you wish to remove product? It can not be restored later."
-          option1="Remove"
-          option2="Cancel"
-          id={product._id}
-          icon={<AiFillWarning className="w-6 h-6 text-rose-600" aria-hidden="true" />}
-          theme={themeEnum.red}
-          setAllProduct={setAllProduct}
-          setShowModal={setShowModal}
-        />
-      )}
+      
       <li className="relative">
         <Link href={`products/${product._id}`} className="block group">
           <div className="flex items-center px-4 py-5 sm:py-6 sm:px-0">
@@ -95,15 +92,21 @@ const MinifiedProduct = ({
             </div>
           </div>
         </Link>
-        <div className="absolute right-0 flex -translate-y-1/2 gap-x-4 top-1/2">
-          <Link href={`products/update/${product._id}`} className="p-2 bg-gray-100 rounded cursor-pointer">
+        <div className="absolute right-0 flex items-center -translate-y-1/2 gap-x-4 top-1/2">
+          <Link
+            href={`products/update/${product._id}`}
+            className="p-2 bg-gray-100 rounded cursor-pointer"
+          >
             <GrUpdate size={20} />
           </Link>
-          <div
-            className="p-2 bg-gray-100 rounded cursor-pointer"
-            onClick={handleRemoveProduct}
-          >
-            <BsTrash size={20} color="red" />
+          <div>
+            <input
+              id="remember-me"
+              name="remember-me"
+              type="checkbox"
+              className="w-6 h-6 text-indigo-600 border-gray-300 rounded cursor-pointer focus:ring-indigo-500"
+              onChange={() => handleCheckboxChange(product._id)}
+            />
           </div>
         </div>
       </li>

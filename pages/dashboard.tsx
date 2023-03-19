@@ -19,12 +19,14 @@ interface Props {
 
 export default function DashboardPage({ user, products }: Props) {
   const [allProduct, setAllProduct] = useState<ProductInterface[]>(products);
+  const [selectedIds, setSelectedIds] = useState<String[]>([])
   const { t } = useTranslation("dashboard");
-  
+  console.log(selectedIds)
+
   return (
     <div className="relative min-h-screen bg-white">
       <UserProfile user={user} />
-      {/* <MultipleDelete allProduct={allProduct} /> */}
+      {selectedIds.length > 0 && <MultipleDelete setAllProduct={setAllProduct} selectedIds={selectedIds} />}
       <main className="pt-8 pb-16">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           {products.length === 0 ? (
@@ -43,6 +45,8 @@ export default function DashboardPage({ user, products }: Props) {
                   key={product._id}
                   product={product}
                   setAllProduct={setAllProduct}
+                  selectedIds={selectedIds}
+                  setSelectedIds={setSelectedIds}
                 />
               ))}
             </ul>

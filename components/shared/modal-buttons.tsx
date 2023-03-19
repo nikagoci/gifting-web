@@ -6,7 +6,7 @@ import { themeEnum } from "./modal";
 
 interface Props {
   theme: themeEnum;
-  id: string;
+  id: string | String[];
   setOpen: Dispatch<SetStateAction<boolean>>;
   option1: string;
   option2: string;
@@ -16,16 +16,33 @@ interface Props {
 }
 
 const removeProductFromDB = async (
-  id: string,
-  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>
+  id: string | String[],
+  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>,
+  handleModalClose: () => void
 ) => {
   try {
-    const res = await fetch(`/api/product/${id}`, {
-      method: "DELETE",
-    });
+    if (Array.isArray(id)) {
+      await Promise.all(
+        id.map(async (productId) => {
+          const res = await fetch(`/api/product/${productId}`, {
+            method: "DELETE",
+          });
+          if (!res.ok) {
+            toastError(`Failed to delete product with ID ${productId}`);
+          } else {
+            setAllProduct((prev) => prev.filter((product) => !id.includes(product._id)));
+            window.location.reload();
+          }
+        })
+      );
+    } else {
+      const res = await fetch(`/api/product/${id}`, {
+        method: "DELETE",
+      });
 
-    if (res.ok) {
-      setAllProduct((prev) => prev.filter((product) => product._id !== id));
+      if (res.ok) {
+        setAllProduct((prev) => prev.filter((product) => product._id !== id));
+      }
     }
   } catch (err: any) {
     toastError(err);
@@ -40,21 +57,21 @@ export default function ModalButtons({
   option2,
   cancelButtonRef,
   setAllProduct,
-  setShowModal
+  setShowModal,
 }: Props) {
   const handleModalClose = () => {
-    setOpen(false)
-    if(setShowModal){
-      setShowModal(false)
+    setOpen(false);
+    if (setShowModal) {
+      setShowModal(false);
     }
-  }
+  };
 
   if (setAllProduct && theme === themeEnum.red) {
     return (
       <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
         <button
           className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 sm:col-start-2 sm:text-sm"
-          onClick={() => removeProductFromDB(id, setAllProduct)}
+          onClick={() => removeProductFromDB(id, setAllProduct, handleModalClose)}
         >
           {option1}
         </button>
