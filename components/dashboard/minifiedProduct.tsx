@@ -61,8 +61,8 @@ const MinifiedProduct = ({
                   className="rounded-full group-hover:opacity-75"
                   src={product.imageSrc}
                   alt={product.name}
-                  width={24}
-                  height={24}
+                  width={44}
+                  height={44}
                 />
               </div>
               <div className="flex-1 min-w-0 px-4 md:grid md:grid-cols-2 md:gap-4">
