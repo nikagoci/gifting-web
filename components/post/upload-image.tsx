@@ -49,13 +49,15 @@ export default function UploadImage({
         type="text/javascript"
       />
       <div>
-        <button
-          type="button"
-          className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
-          onClick={openUploadWidget}
-        >
-          Upload Image
-        </button>
+
+
+          <button
+            className="block w-full py-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            type='button'
+            onClick={openUploadWidget}
+          >
+            Upload Image
+            </button>
         {productState.image && (
           <Image
             className="my-4 rounded-xl"
