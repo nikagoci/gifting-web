@@ -59,7 +59,7 @@ export default function AddPost() {
 
   return (
     <div className="flex flex-col items-center">
-      <h3 className="mb-8 text-3xl font-bold">Add Product</h3>
+      <h3 className="mb-8 text-3xl font-bold">{t('add-product.title')}</h3>
       <form
         onSubmit={onSubmit}
         className="flex flex-col w-4/5 md:w-3/5 xl:w-2/5 gap-y-10"
