@@ -3,14 +3,12 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { SessionProvider } from "next-auth/react";
-import {StoreProvider} from 'easy-peasy'
+import { StoreProvider } from "easy-peasy";
 import { productStore } from "@/store/ProductStore";
-import { appWithTranslation } from 'next-i18next'
+import { appWithTranslation } from "next-i18next";
+import Head from "next/head";
 
-function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter();
 
   if (router.pathname === "/404") {
@@ -18,26 +16,29 @@ function App({
   }
 
   return (
-    <SessionProvider session={session}>
-      <StoreProvider store={productStore}>
+    <>
+      <Head>
+        <title>Charma</title>
+        <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          href="/svgs/tab-logo.svg"
+        />
+        <meta
+          name="description"
+          content="Charity website which helps people with different products."
+        />
+        <meta name="keywords" content="Charity, Free, Products" />
+      </Head>
+      <SessionProvider session={session}>
+        <StoreProvider store={productStore}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-      </StoreProvider>
-    </SessionProvider>
+        </StoreProvider>
+      </SessionProvider>
+    </>
   );
 }
 
-export default appWithTranslation(App)
-
-// export const getStaticProps: GetStaticProps= async ({locale}) => {
-//   if(locale){
-//     return {
-//       props: {
-//         ...( await serverSideTranslations(locale, ['home']))
-//       }
-//     };
-//   }
-
-//   throw new Error('Local Not Found!')
-// };
+export default appWithTranslation(App);
