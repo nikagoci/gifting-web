@@ -209,7 +209,7 @@ export default function ProductFilter({
 
         <main className="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
-            <aside>
+            <aside >
               <button
                 type="button"
                 className="inline-flex items-center lg:hidden"
@@ -264,27 +264,7 @@ export default function ProductFilter({
                       </fieldset>
                     </div>
                   ))}
-                  <div className="flex flex-col items-start w-full pt-10">
-                    <Select
-                      id="city"
-                      defaultValue="Kutaisi"
-                      label="City"
-                      options={[
-                        {
-                          content: "Tbilisi",
-                          value: "tbilisi",
-                        },
-                        {
-                          content: "Kutaisi",
-                          value: "kutaisi",
-                        },
-                        {
-                          content: "Zestafoni",
-                          value: "zestafoni",
-                        },
-                      ]}
-                    />
-                  </div>
+
                 </form>
               </div>
             </aside>

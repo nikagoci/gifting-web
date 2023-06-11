@@ -2,7 +2,7 @@ import ProductFilter from "@/components/products/product-filter";
 import connectToDatabase from "@/database/connectDB";
 import Product from "@/database/model/productModel";
 import { ProductInterface } from "@/utils/interfaces";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function ProductsPage({
