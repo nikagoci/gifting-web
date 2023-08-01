@@ -33,9 +33,10 @@ export default function ProductOverview({
   const router = useRouter();
   const { t } = useTranslation("addproduct");
 
-  function myLoader() {
-    return product.imageSrc;
-  }
+  // function myLoader() {
+  //   console.log(product.imageSrc)
+  //   return product.imageSrc;
+  // }
 
   const username = user.email.split("@")[0];
 
@@ -52,12 +53,12 @@ export default function ProductOverview({
             <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
               <div className="flex items-center w-full h-full">
                 <Image
-                  loader={myLoader}
                   src={product.imageSrc}
                   alt={product.name}
-                  className="object-cover object-center"
-                  width={600}
-                  height={600}
+                  className="object-cover object-center w-[550px] h-[450px]"
+                  width={550}
+                  height={450}
+                  priority
                 />
               </div>
 
