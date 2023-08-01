@@ -118,7 +118,7 @@ export default function ModifyProduct({
                     loader={myLoader}
                     src={product.imageSrc}
                     alt={product.name}
-                    className="object-cover object-center"
+                    className="object-cover object-center w-[400px] h-[350px]"
                     width={600}
                     height={200}
                   />

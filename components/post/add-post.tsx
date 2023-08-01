@@ -10,11 +10,13 @@ import Input from "../shared/ui/input";
 import Select from "../shared/ui/select";
 import Textarea from "../shared/ui/textarea";
 import UploadImage from "./upload-image";
+import { City, translateCities } from '@/utils/georgian-cities'
 
 export default function AddPost() {
   const router = useRouter();
   const schema = addProductSchema();
   const [imageUrl, setImageUrl] = useState('') 
+  const [cities, setCities] = useState<City[]>([])
   const {t}= useTranslation('addproduct') 
 
   const productState = useStoreState((state) => state.products);
@@ -38,6 +40,14 @@ export default function AddPost() {
       addImage(imageUrl)
     }
   }, [imageUrl])
+
+  useEffect(() => {
+    if(router.locale){
+      const translatedCities: City[] = translateCities(router.locale)
+
+      setCities(translatedCities)
+    }
+  }, [router.locale])
 
   const onSubmit = handleSubmit((value) => {
     router.push("/post/product-overview");
@@ -84,20 +94,7 @@ export default function AddPost() {
         <Select
           id="city"
           label={t('add-product.city')}
-          options={[
-            {
-              content: "Tbilisi",
-              value: "tbilisi"
-            },
-            {
-              content: "Kutaisi",
-              value: "kutaisi"
-            },
-            { 
-              content: "Zestafoni",
-              value: "zestafoni"
-            }
-          ]}
+          options={cities}
           register={register("city")}
           defaultValue={productState.city}
           onChange={changeHandler}
