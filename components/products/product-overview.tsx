@@ -1,15 +1,16 @@
+import { NextRouter, useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
+import { useTranslation } from "next-i18next";
 import { BsPhone } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
-import { ProductInterface, UserInterface } from "@/utils/interfaces";
-import Image from "next/image";
-import Spinner from "../shared/ui/spinner";
-import { useTranslation } from "next-i18next";
-import capitalizeWord from "@/utils/capitalizeWord";
 import { BsTrash } from "react-icons/bs";
 import { GrUpdate } from "react-icons/gr";
-import { NextRouter, useRouter } from "next/router";
-import Link from "next/link";
+
+import { ProductInterface, UserInterface } from "@/utils/interfaces";
+import Spinner from "../shared/ui/spinner";
+import capitalizeWord from "@/utils/capitalizeWord";
 
 const removeProductFromDB = async (id: string, router: NextRouter) => {
   const res = await fetch(`/api/product/${id}`, {
@@ -32,11 +33,6 @@ export default function ProductOverview({
 }) {
   const router = useRouter();
   const { t } = useTranslation("addproduct");
-
-  // function myLoader() {
-  //   console.log(product.imageSrc)
-  //   return product.imageSrc;
-  // }
 
   const username = user.email.split("@")[0];
 

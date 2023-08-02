@@ -1,12 +1,12 @@
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState } from "react";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon, PlusSmIcon } from "@heroicons/react/solid";
-import Select from "../shared/ui/select";
+
 import ProductFull from "./product-full";
 import { ProductInterface } from "@/utils/interfaces";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
 
 interface Filter {
   gender: {
@@ -134,7 +134,7 @@ export default function ProductFilter({
             >
               <div className="relative flex flex-col w-full h-full max-w-xs py-4 pb-6 ml-auto overflow-y-auto bg-white shadow-xl">
                 <div className="flex items-center justify-between px-4">
-                  <h2 className="text-lg font-medium text-gray-900">Filters</h2>
+                  <h2 className="text-lg font-medium text-gray-900">{t('filters')}</h2>
                   <button
                     type="button"
                     className="flex items-center justify-center w-10 h-10 p-2 -mr-2 text-gray-400 hover:text-gray-500"
@@ -185,6 +185,9 @@ export default function ProductFilter({
                                       defaultValue={option.value}
                                       type="checkbox"
                                       className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                                      onClick={() =>
+                                        handleInputChange(section.id, option.value)
+                                      }
                                     />
                                     <label
                                       htmlFor={`${section.id}-${optionIdx}-mobile`}
@@ -216,7 +219,7 @@ export default function ProductFilter({
                 onClick={() => setMobileFiltersOpen(true)}
               >
                 <span className="text-sm font-medium text-gray-700">
-                  Filters
+                  {t('filters')}
                 </span>
                 <PlusSmIcon
                   className="flex-shrink-0 w-5 h-5 ml-1 text-gray-400"

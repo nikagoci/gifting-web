@@ -1,3 +1,5 @@
+import capitalizeWord from "./capitalizeWord";
+
 export interface City {
   content: string;
   value: string;
@@ -80,6 +82,14 @@ export function translateCities(lang: string): City[] {
   } else {
     return cities;
   }
+}
+
+export function translateCity(city: string, lang?: string): string {
+  if(lang === 'ka'){
+    return getGeorgianTranslation(city)
+  }
+
+  return capitalizeWord(city)
 }
 
 function getGeorgianTranslation(cityValue: string): string {

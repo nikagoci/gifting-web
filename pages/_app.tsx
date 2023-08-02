@@ -22,7 +22,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <link
           rel="shortcut icon"
           type="image/x-icon"
-          href="/svgs/tab-logo.svg"
+          href="/logo.png"
         />
         <meta
           name="description"

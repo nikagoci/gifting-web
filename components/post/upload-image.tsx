@@ -1,8 +1,9 @@
-import { useStoreState } from "@/store/hooks";
-import { useStoreRehydrated } from "easy-peasy";
+import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import Script from "next/script";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useStoreRehydrated } from "easy-peasy";
+
+import { useStoreState } from "@/store/hooks";
 
 export default function UploadImage({
   setImageUrl,
@@ -49,23 +50,24 @@ export default function UploadImage({
         type="text/javascript"
       />
       <div>
-
-
-          <button
-            className="block w-full py-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            type='button'
-            onClick={openUploadWidget}
-          >
-            Upload Image
-            </button>
+        <button
+          className="block w-full py-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          type='button'
+          onClick={openUploadWidget}
+        >
+          Upload Image
+        </button>
         {productState.image && (
-          <Image
-            className="my-4 rounded-xl"
-            width={220}
-            height={150}
-            src={productState.image}
-            alt={productState.image}
-          />
+          <div className="w-[400px] h-[200px]">
+
+            <Image
+              className="w-full h-full my-4 rounded-xl"
+              width={400}
+              height={200}
+              src={productState.image}
+              alt={productState.image}
+            />
+          </div>
         )}
         {error && <p>{error}</p>}
       </div>
