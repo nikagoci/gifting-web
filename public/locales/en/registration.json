@@ -7,8 +7,7 @@
         "phone number": "Phone number",
         "sign up": "Sign up",
         "account": "Already have an account?",
-        "sign in": "Sign in here",
-        "continue": "Or continue with"
+        "sign in": "Sign in here"
     },
     "login": {
         "title": "Sign in to your account",
@@ -18,7 +17,6 @@
         "forgot": "Forgot your password?",
         "sign in": "Sing in",
         "account": "Already have an account?",
-        "sign up": "Sign up here",
-        "continue": "Or continue with"
+        "sign up": "Sign up here"
     }
 }
