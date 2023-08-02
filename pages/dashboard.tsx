@@ -1,14 +1,13 @@
+import { useState } from "react";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import MinifiedProduct from "@/components/dashboard/minifiedProduct";
 import { getSession } from "next-auth/react";
-import Image from "next/image";
+import { useTranslation } from "next-i18next";
+
+import MinifiedProduct from "@/components/dashboard/minifiedProduct";
 import User from "@/database/model/userModel";
 import { ProductInterface, UserInterface } from "@/utils/interfaces";
 import Product from "@/database/model/productModel";
-import { useState } from "react";
-import { useTranslation } from "next-i18next";
-import Link from "next/link";
 import MultipleDelete from "@/components/dashboard/multiple-delete";
 import UserProfile from "@/components/dashboard/user-profile";
 
@@ -21,7 +20,6 @@ export default function DashboardPage({ user, products }: Props) {
   const [allProduct, setAllProduct] = useState<ProductInterface[]>(products);
   const [selectedIds, setSelectedIds] = useState<String[]>([])
   const { t } = useTranslation("dashboard");
-  console.log(selectedIds)
 
   return (
     <div className="relative min-h-screen bg-white">
@@ -44,7 +42,6 @@ export default function DashboardPage({ user, products }: Props) {
                 <MinifiedProduct
                   key={product._id}
                   product={product}
-                  setAllProduct={setAllProduct}
                   selectedIds={selectedIds}
                   setSelectedIds={setSelectedIds}
                 />

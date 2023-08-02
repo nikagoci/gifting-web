@@ -1,30 +1,27 @@
-import { ProductInterface } from "@/utils/interfaces";
+import { Dispatch, SetStateAction  } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-import { CheckCircleIcon } from "@heroicons/react/solid";
-import { BsTrash } from "react-icons/bs";
-import { GrUpdate } from "react-icons/gr";
-import { AiFillWarning } from "react-icons/ai";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import capitalizeWord from "@/utils/capitalizeWord";
-import Modal, { themeEnum } from "../shared/modal";
+import { CheckCircleIcon } from "@heroicons/react/solid";
+import { GrUpdate } from "react-icons/gr";
+
+import { ProductInterface } from "@/utils/interfaces";
+import { translateCity } from "@/utils/georgian-cities";
 
 interface Props {
   product: ProductInterface;
-  setAllProduct: Dispatch<SetStateAction<ProductInterface[]>>;
   selectedIds: String[];
   setSelectedIds: Dispatch<SetStateAction<String[]>>;
 }
 
 const MinifiedProduct = ({
   product,
-  setAllProduct,
   selectedIds,
   setSelectedIds,
 }: Props) => {
   const { t } = useTranslation("dashboard");
+  const router = useRouter()
 
   const formattedDate = new Date(product.createdAt).toLocaleString();
   const humanReadableDate = new Date(formattedDate).toLocaleString("en-us", {
@@ -41,10 +38,6 @@ const MinifiedProduct = ({
     }
   };
 
-  function myLoader() {
-    return product.imageSrc;
-  }
-
   return (
     <>
       
@@ -52,14 +45,13 @@ const MinifiedProduct = ({
         <Link href={`products/${product._id}`} className="block group">
           <div className="flex items-center px-4 py-5 sm:py-6 sm:px-0">
             <div className="flex items-center flex-1 min-w-0">
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 w-[44px] h-[44px]">
                 <Image
-                  loader={myLoader}
-                  className="rounded-full group-hover:opacity-75"
+                  className="w-full h-full rounded-full group-hover:opacity-75"
                   src={product.imageSrc}
                   alt={product.name}
-                  width={44}
-                  height={44}
+                  width={50}
+                  height={50}
                 />
               </div>
               <div className="flex-1 min-w-0 px-4 md:grid md:grid-cols-2 md:gap-4">
@@ -69,7 +61,7 @@ const MinifiedProduct = ({
                   </p>
                   <p className="flex items-center mt-2 text-sm text-gray-500">
                     <span className="truncate">
-                      {capitalizeWord(product.city)}
+                      {translateCity(product.city, router?.locale)}
                     </span>
                   </p>
                 </div>
