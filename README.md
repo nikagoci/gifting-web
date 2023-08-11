@@ -1,4 +1,4 @@
-## Gifting web(Charma) / Full Stack Project
+## Gifting Web (Charma) / Full Stack Project
 
 The gifting web is an open-source, full-stack, next.js project which allows users to gift unused things for charity. The website has two modes for the user and for the administrator. [https://gifting-web.vercel.app](https://gifting-web.vercel.app).
 
