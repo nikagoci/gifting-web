@@ -11,6 +11,8 @@ import { GrUpdate } from "react-icons/gr";
 import { ProductInterface, UserInterface } from "@/utils/interfaces";
 import Spinner from "../shared/ui/spinner";
 import capitalizeWord from "@/utils/capitalizeWord";
+import { translateCategory } from "@/utils/georgian-categories";
+import { translateCity } from "@/utils/georgian-cities";
 
 const removeProductFromDB = async (id: string, router: NextRouter) => {
   const res = await fetch(`/api/product/${id}`, {
@@ -67,7 +69,7 @@ export default function ProductOverview({
                   <h3 className="font-serif text-lg">
                     {t("add-product.category")}:{" "}
                     <span className="font-bold">
-                      {capitalizeWord(product.category)}
+                      {translateCategory(product.category, router.locale)}
                     </span>
                   </h3>
                 </div>
@@ -92,7 +94,7 @@ export default function ProductOverview({
                       </div>
                       <div className="flex items-center mb-6 text-xl gap-x-3">
                         <LocationMarkerIcon className="w-8 h-auto text-emerald-500" />
-                        <h6>{capitalizeWord(product.city)}</h6>
+                        <h6>{translateCity(product.city, router.locale)}</h6>
                       </div>
                     </div>
                   </div>

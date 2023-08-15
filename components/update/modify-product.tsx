@@ -1,17 +1,18 @@
+import { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { ToastContainer } from "react-toastify";
 import { BsPhone } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { LocationMarkerIcon } from "@heroicons/react/outline";
-import { UserInterface } from "@/utils/interfaces";
-import Image from "next/image";
+
 import Spinner from "../shared/ui/spinner";
-import { useTranslation } from "next-i18next";
 import capitalizeWord from "@/utils/capitalizeWord";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { ToastContainer } from "react-toastify";
+import { UserInterface } from "@/utils/interfaces";
+import toastError from "@/utils/toastErrors";
 
 import "react-toastify/dist/ReactToastify.css";
-import toastError from "@/utils/toastErrors";
 
 interface ProductInterface {
   _id: string;

@@ -58,16 +58,19 @@ export default function UploadImage({
           Upload Image
         </button>
         {productState.image && (
-          <div className="w-[400px] h-[200px]">
+          <div className="flex justify-center">
+
+          <div className="w-[400px] h-[400px]">
 
             <Image
-              className="w-full h-full my-4 rounded-xl"
+              className="object-cover w-full h-full my-4 rounded-xl"
               width={400}
-              height={200}
+              height={400}
               src={productState.image}
               alt={productState.image}
-            />
+              />
           </div>
+              </div>
         )}
         {error && <p>{error}</p>}
       </div>
